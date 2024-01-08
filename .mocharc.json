@@ -1,0 +1,10 @@
+{
+    "diff": true,
+    "exit": true,
+    "recursive": true,
+    "require": [
+      "@babel/register",
+      "source-map-support/register",
+      "./src/setup.test.ts"
+    ]
+  }
