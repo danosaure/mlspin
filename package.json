@@ -7,7 +7,7 @@
     "build": "tsc",
     "check": "run-s eslint prettier",
     "clean": "rimraf docs",
-    "cp": "cp src/index.html docs/",
+    "cp": "cp -r src/docs/* docs/",
     "eslint": "eslint --fix \"src/**/*.ts\"",
     "prettier": "prettier 'src/**/*.ts' --write",
     "test": "echo \"Error: no test specified\" && exit 1",
