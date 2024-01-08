@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "check": "run-s eslint prettier",
-    "clean": "rimraf docs",
+    "clean": "rimraf build docs",
     "cp": "cp -r src/docs/* docs/",
     "eslint": "eslint --fix \"src/**/*.ts\"",
     "prettier": "prettier 'src/**/*.ts' --write",
