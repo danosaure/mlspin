@@ -3,14 +3,14 @@ import Grid from '@mui/material/Grid';
 import ThemeToggler from '../theme-toggler';
 
 export default () => (
-  <Grid container className="dano-header">
-    <Grid item xs={8} md={10}>
-      <h1>
+  <Grid container className="dano-header" alignItems="center" justifyContent="center">
+    <Grid item>
         <img className="dano-logo" src="assets/danosaure-logo.png" />
-        MLSpin App
-      </h1>
     </Grid>
-    <Grid item xs={4} md={2}>
+    <Grid item>
+      <h1>MLSpin App</h1>
+    </Grid>
+    <Grid item>
       <ThemeToggler />
     </Grid>
   </Grid>
