@@ -1,6 +1,16 @@
-html {
+.dano-header .dano-logo {
+  vertical-align: middle;
+  height: 60px;
+  margin-right: 20px;
+}
+
+body {
   background-color: #202124;
   color: #f3eda7;
+}
+body[data-theme=light] {
+  background-color: #f3eda7;
+  color: #202124;
 }
 
 /*# sourceMappingURL=index.css.map */

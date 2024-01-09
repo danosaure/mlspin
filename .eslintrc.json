@@ -16,7 +16,7 @@
       "prettier/prettier": "error"
     },
     "overrides": [{
-      "files": ["*.test.js"],
+      "files": ["*.test.ts"],
       "env": {
         "mocha": true
       },

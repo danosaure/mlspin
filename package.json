@@ -10,7 +10,7 @@
     "cp": "cp -r src/docs/* docs/",
     "predocs": "run-s clean",
     "docs": "run-s webpack cp sass",
-    "eslint": "eslint --fix \"src/**/*.ts\"",
+    "eslint": "eslint --fix --ext=.js,.ts,.tsx src",
     "prettier": "prettier 'src/**/*.ts' --write",
     "sass": "sass src/index.scss docs/index.css",
     "test": "echo \"Error: no test specified\" && exit 1",

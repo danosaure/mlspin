@@ -1,8 +1,18 @@
 $bg-color: #202124;
 $fg-color: #f3eda7;
 
-html {
+$bg-color-light: $fg-color;
+$fg-color-light: $bg-color;
+
+@use './components/app/style';
+
+body {
     background-color: $bg-color;
     color: $fg-color;
+
+    &[data-theme="light"] {
+        background-color: $bg-color-light;
+        color: $fg-color-light;
+    }
 }
 
