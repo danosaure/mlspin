@@ -12,7 +12,7 @@
     "docs": "run-s webpack cp sass",
     "eslint": "eslint --fix --ext=.js,.ts,.tsx src",
     "prettier": "prettier 'src/**/*.ts' --write",
-    "sass": "sass src/index.scss docs/index.css",
+    "sass": "sass src/index.scss docs/style.css",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack"
   },

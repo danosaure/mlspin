@@ -4,15 +4,14 @@ $fg-color: #f3eda7;
 $bg-color-light: $fg-color;
 $fg-color-light: $bg-color;
 
-@use './components/app/style';
+@use "./components/style.scss";
 
 body {
-    background-color: $bg-color;
-    color: $fg-color;
+  background-color: $bg-color;
+  color: $fg-color;
 
-    &[data-theme="light"] {
-        background-color: $bg-color-light;
-        color: $fg-color-light;
-    }
+  &[data-theme='light'] {
+    background-color: $bg-color-light;
+    color: $fg-color-light;
+  }
 }
-
