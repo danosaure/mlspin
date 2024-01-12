@@ -6,7 +6,9 @@
   "scripts": {
     "build": "tsc",
     "check": "run-s eslint prettier",
-    "clean": "rimraf build docs",
+    "clean:build": "rimraf build",
+    "clean:docs": "rimraf docs",
+    "clean": "run-s clean:build clean:docs",
     "cp": "cp -r src/docs/* docs/",
     "predocs": "run-s clean",
     "docs": "run-s webpack cp sass",
@@ -14,6 +16,8 @@
     "prettier": "prettier 'src/**/*.ts' --write",
     "sass": "sass src/index.scss docs/style.css",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "pretsc": "run-s clean:build",
+    "tsc": "tsc",
     "webpack": "webpack"
   },
   "repository": {
