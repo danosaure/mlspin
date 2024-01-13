@@ -1,52 +1,46 @@
-.dano-app {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-}
-
-.dano-footer {
-  line-height: 3em;
-}
-
 .da-theme-toggler {
   /* */
 }
 
-.dano-header .dano-logo {
+.dano-header header .dano-logo {
   vertical-align: middle;
   height: 60px;
   margin-right: 20px;
 }
-
-.dano-tabs-container {
-  display: flex;
-  flex-grow: 1;
-}
-.dano-tabs-container .dano-tabs .dano-tabs-item {
-  color: inherit;
-}
-.dano-tabs-container .dano-tabpanel {
+.dano-header header .dano-title {
   flex-grow: 1;
 }
 
-body {
-  height: 100vh;
-  margin: 0;
-}
-
-#react-app-placeholder {
-  height: 100vh;
+.dano-main {
   display: flex;
-  flex-direction: column;
+  flex-grow: 1;
+}
+.dano-main .dano-tabpanel {
+  flex-grow: 1;
 }
 
+/*
+:root {
+    body[data-theme="dark"] {
+        --dano-bg-primary-color: $dano-bg-primary-color;
+        --dano-bg-secondary-color: $dano-bg-secondary-color;
+        --dano-fg-primary-color: $dano-fg-primary-color;
+        --dano-fg-secondary-color: $dano-fg-secondary-color;
+    }
+
+    body[data-theme="light"] {
+        --dano-bg-primary-color: $dano-fg-primary-color;
+        --dano-bg-secondary-color: $dano-fg-secondary-color;
+        --dano-fg-primary-color: $dano-bg-primary-color;
+        --dano-fg-secondary-color: $dano-bg-secondary-color;    
+    }
+}
+
+
 body {
-  background-color: #202124;
-  color: #f3eda7;
+  background-color: var(--dano-bg-primary-color);
+  color: var(--dano-fg-primary-color);
 }
-body[data-theme=light] {
-  background-color: #f3eda7;
-  color: #202124;
-}
+*/
 
 /*# sourceMappingURL=style.css.map */
