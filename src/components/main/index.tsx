@@ -14,15 +14,8 @@ export default () => {
   const changeTab = (event: SyntheticEvent, newTabId: number) => setTabId(newTabId);
 
   return (
-    <Box className="dano-tabs-container">
-      <Tabs
-        className="dano-tabs"
-        orientation="vertical"
-        value={tabId}
-        onChange={changeTab}
-        aria-label="Navigation tabs"
-        color="inherit"
-      >
+    <Box component="main" className="dano-main">
+      <Tabs className="dano-tabs" orientation="vertical" value={tabId} onChange={changeTab} aria-label="Navigation tabs">
         <Tab className="dano-tabs-item" label="Agents" {...a11yProps(0)} />
         <Tab className="dano-tabs-item" label="Offices" {...a11yProps(1)} />
       </Tabs>

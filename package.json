@@ -14,7 +14,7 @@
     "docs": "run-s webpack cp sass",
     "eslint": "eslint --fix --ext=.js,.ts,.tsx src",
     "prettier": "prettier 'src/**/*.ts' --write",
-    "sass": "sass src/index.scss docs/style.css",
+    "sass": "sass src/components/style.scss docs/style.css",
     "test": "echo \"Error: no test specified\" && exit 1",
     "pretsc": "run-s clean:build",
     "tsc": "tsc",

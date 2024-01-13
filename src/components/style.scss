@@ -1,15 +1,32 @@
-@use "./app/style" as appStyle;
-@use "./footer/style" as footerStyle;
-@use "./header/style" as headerStyle;
-@use './tabs/style' as tabsStyle;
+$dano-bg-primary-color: #202124;
+$dano-bg-secondary-color: #494b52;
+$dano-fg-primary-color: #f3eda7;
+$dano-fg-secondary-color: #a6a172;
+
+
+@use "header/style" as header;
+@use "main/style" as tabs;
+
+/*
+:root {
+    body[data-theme="dark"] {
+        --dano-bg-primary-color: $dano-bg-primary-color;
+        --dano-bg-secondary-color: $dano-bg-secondary-color;
+        --dano-fg-primary-color: $dano-fg-primary-color;
+        --dano-fg-secondary-color: $dano-fg-secondary-color;
+    }
+
+    body[data-theme="light"] {
+        --dano-bg-primary-color: $dano-fg-primary-color;
+        --dano-bg-secondary-color: $dano-fg-secondary-color;
+        --dano-fg-primary-color: $dano-bg-primary-color;
+        --dano-fg-secondary-color: $dano-bg-secondary-color;    
+    }
+}
+
 
 body {
-    height: 100vh;
-    margin: 0;
+  background-color: var(--dano-bg-primary-color);
+  color: var(--dano-fg-primary-color);
 }
-
-#react-app-placeholder {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
+*/
