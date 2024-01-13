@@ -1,3 +1,3 @@
-type AgentRoleType = "Office Contacts" | "Subscribers" | "Teams";
+type AgentRoleType = 'Office Contacts' | 'Subscribers' | 'Teams';
 
 export default AgentRoleType;

@@ -1,6 +1,7 @@
-@use './theme-toggler/style';
+@use './theme-toggler/style' as themeTogglerStyle;
 
 .dano-header {
+
     .dano-logo {
         vertical-align: middle;
         height: 60px;

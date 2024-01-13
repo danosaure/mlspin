@@ -1,2 +1,15 @@
 @use "./app/style" as appStyle;
+@use "./footer/style" as footerStyle;
 @use "./header/style" as headerStyle;
+@use './tabs/style' as tabsStyle;
+
+body {
+    height: 100vh;
+    margin: 0;
+}
+
+#react-app-placeholder {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}

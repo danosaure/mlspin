@@ -1,3 +1,13 @@
+.dano-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.dano-footer {
+  line-height: 3em;
+}
+
 .da-theme-toggler {
   /* */
 }
@@ -6,6 +16,28 @@
   vertical-align: middle;
   height: 60px;
   margin-right: 20px;
+}
+
+.dano-tabs-container {
+  display: flex;
+  flex-grow: 1;
+}
+.dano-tabs-container .dano-tabs .dano-tabs-item {
+  color: inherit;
+}
+.dano-tabs-container .dano-tabpanel {
+  flex-grow: 1;
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+#react-app-placeholder {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 body {

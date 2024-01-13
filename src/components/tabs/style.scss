@@ -1,0 +1,14 @@
+.dano-tabs-container {
+    display: flex;
+    flex-grow: 1;
+
+    .dano-tabs {
+        .dano-tabs-item {
+            color: inherit;
+        }
+    }
+
+    .dano-tabpanel {
+        flex-grow: 1;
+    }
+}
