@@ -2,10 +2,8 @@ import AgentType from '../types/agent';
 
 import Base from './base';
 
-
 export default class Agent extends Base {
   static readonly STORE = 'agents';
-  static readonly PRIMARY_KEY = 'id';
   static readonly INDICES: Record<string, boolean> = {
     name: false,
     email: false,

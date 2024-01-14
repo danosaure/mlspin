@@ -1,11 +1,15 @@
-export default class Base {
-    data: Record<string,any>;
+import PersistenceBaseType from '../types/persistence-base';
 
-    constructor(data: Record<string,any>) {
-        this.data = { ...data };
-    }
+export default abstract class Base {
+  static readonly PRIMARY_KEY = 'id';
 
-    toJSON() {
-        return { ...this.data};
-    }
+  data: PersistenceBaseType;
+
+  constructor(data: PersistenceBaseType) {
+    this.data = { ...data };
+  }
+
+  toJSON() {
+    return { ...this.data };
+  }
 }

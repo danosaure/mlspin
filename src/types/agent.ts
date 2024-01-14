@@ -1,7 +1,7 @@
 import AgentRoleType from './agent-role';
+import PersistenceBaseType from './persistence-base';
 
-type AgentType = {
-  id: string;
+type AgentType = PersistenceBaseType & {
   email: string;
   name: string;
   phone: string;

@@ -1,7 +1,6 @@
 import migrate from './migrate';
 
-
-export default (dbName: string, dbVersion: number, onchangeversion?: () => void) =>
+export default async (dbName: string, dbVersion: number, onchangeversion?: () => void): Promise<IDBDatabase> =>
   new Promise((resolve, reject) => {
     const request = indexedDB.open(dbName, dbVersion);
 
@@ -17,7 +16,7 @@ export default (dbName: string, dbVersion: number, onchangeversion?: () => void)
         db.onversionchange = () => {
           db.close();
           onchangeversion();
-        }
+        };
       }
       resolve(db);
     };
@@ -25,5 +24,5 @@ export default (dbName: string, dbVersion: number, onchangeversion?: () => void)
     request.onupgradeneeded = () => {
       console.log(`onupgradeneeded()...`);
       migrate(request.result);
-    }
+    };
   });

@@ -28,7 +28,7 @@ export default () => {
     setAlertMessage('Import in progress...');
 
     try {
-        await saveContent(content);
+      await saveContent(content);
 
       setTimeout(() => {
         setSeverity('success');
@@ -62,7 +62,7 @@ export default () => {
       <Box className="dano-importer-section" component="section">
         <TextField
           className="dano-importer-textarea"
-          sx={{fontSize: '12px'}}
+          sx={{ fontSize: '12px' }}
           multiline
           rows={10}
           fullWidth
@@ -75,8 +75,12 @@ export default () => {
 
       <Box className="dano-importer-section" component="section">
         <Stack className="dano-importer-buttons" spacing={2} direction="row">
-            <Button onClick={importContent} disabled={!content || inProgress} variant="contained">Import</Button>
-            <Button onClick={clearContent} disabled={!content || inProgress} variant="outlined">Clear</Button>
+          <Button onClick={importContent} disabled={!content || inProgress} variant="contained">
+            Import
+          </Button>
+          <Button onClick={clearContent} disabled={!content || inProgress} variant="outlined">
+            Clear
+          </Button>
         </Stack>
       </Box>
 

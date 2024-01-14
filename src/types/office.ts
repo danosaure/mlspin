@@ -1,5 +1,6 @@
-type OfficeType = {
-  id: string;
+import PersistenceBaseType from './persistence-base';
+
+type OfficeType = PersistenceBaseType & {
   name: string;
   address: string;
   city: string;
