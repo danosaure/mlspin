@@ -23,6 +23,7 @@ export default async (content: string): Promise<void> => {
             if (transaction) {
                 const objectStore: IDBObjectStore = transaction.objectStore(storeName as string);
                 // TODO: #1 - async
+                // TODO: #2 - only update fields and keep non-mls data.
                 Object.values(items).forEach((item) => objectStore.put(item));
             }
         });
