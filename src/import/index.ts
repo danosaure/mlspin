@@ -22,7 +22,7 @@ export default async (content: string): Promise<void> => {
             const transaction: IDBTransaction | undefined = persistence.transaction(storeName, 'readwrite');
             if (transaction) {
                 const objectStore: IDBObjectStore = transaction.objectStore(storeName as string);
-                // TODO: Need to validate if item exists first, so we don't delete added info.
+                // TODO: #1 - async
                 Object.values(items).forEach((item) => objectStore.put(item));
             }
         });
