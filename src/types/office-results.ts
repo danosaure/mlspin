@@ -1,9 +1,9 @@
-import Agent from '../models/agent';
-import Office from '../models/office';
+import AgentType from '../types/agent';
+import OfficeType from '../types/office';
 
 type OfficeResults = {
-  agents: Record<string, Agent>;
-  offices: Record<string, Office>;
+  agents: Record<string, AgentType>;
+  offices: Record<string, OfficeType>;
 };
 
 export default OfficeResults;

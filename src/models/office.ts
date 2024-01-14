@@ -1,19 +1,20 @@
 import OfficeType from '../types/office';
 
-export default class Office {
-  id: string;
-  name: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
+import Base from './base';
 
+export default class Office extends Base {
+  static readonly STORE = 'offices';
+  static readonly PRIMARY_KEY = 'id';
+  static readonly INDICES: Record<string, boolean> = {
+    name: false,
+    city: false,
+    zip: false,
+};
   constructor(data: OfficeType) {
-    this.id = data.id;
-    this.name = data.name;
-    this.address = data.address;
-    this.city = data.city;
-    this.state = data.state;
-    this.zip = data.zip;
+    super(data);
+  }
+
+  toJSON(): OfficeType {
+    return this.toJSON() as OfficeType;
   }
 }

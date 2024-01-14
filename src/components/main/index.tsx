@@ -6,7 +6,9 @@ import Tabs from '@mui/material/Tabs';
 
 import TabPanel from './tab-panel';
 import { a11yProps } from './utils';
+
 import Offices from '../offices';
+import Importer from '../importer';
 
 export default () => {
   const [tabId, setTabId] = useState(0);
@@ -15,9 +17,11 @@ export default () => {
 
   return (
     <Box component="main" className="dano-main">
-      <Tabs className="dano-tabs" orientation="vertical" value={tabId} onChange={changeTab} aria-label="Navigation tabs">
+      <Tabs className="dano-tabs" value={tabId} onChange={changeTab} aria-label="Navigation tabs">
         <Tab className="dano-tabs-item" label="Agents" {...a11yProps(0)} />
         <Tab className="dano-tabs-item" label="Offices" {...a11yProps(1)} />
+        <Tab className="dano-tabs-item dano-tabs-divider" label="" disabled /> {/* counted as 2 */}
+        <Tab className="dano-tabs-item" label="Import" {...a11yProps(3)} />
       </Tabs>
 
       <TabPanel tabId={0} selectedTabId={tabId}>
@@ -26,6 +30,10 @@ export default () => {
 
       <TabPanel tabId={1} selectedTabId={tabId}>
         <Offices />
+      </TabPanel>
+
+      <TabPanel tabId={3} selectedTabId={tabId}>
+        <Importer />
       </TabPanel>
     </Box>
   );
