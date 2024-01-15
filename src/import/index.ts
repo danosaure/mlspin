@@ -5,6 +5,7 @@ import Agent from '../models/agent';
 import PersistenceHistoryType from '../types/persistence-history';
 
 import parse from './office-results-parser';
+import MLSPinPersistenceError from '../persistence/error';
 
 export default async (content: string): Promise<void> => {
   const data = parse(content);
@@ -18,31 +19,36 @@ export default async (content: string): Promise<void> => {
 
   let persistence: Persistence | undefined;
 
-  try {
-    persistence = new Persistence(DB_NAME, DB_VERSION);
-    await persistence.open();
+  return new Promise(async (resolve, reject) => {
+    try {
+      persistence = new Persistence(DB_NAME, DB_VERSION);
+      await persistence.open();
 
-    [
-      [Office, data.offices],
-      [Agent, data.agents],
-    ].forEach(async ([Model, items]): Promise<void> => {
+      const transaction: IDBTransaction = await persistence.transaction([Office.STORE, Agent.STORE], 'readwrite');
+
+      transaction.onabort = () => {
+        throw new MLSPinPersistenceError('Transaction aborted.');
+      };
+
+      transaction.oncomplete = () => {
+        console.log(`transaction.oncomplete...`);
+        resolve();
+      };
+
+      const officeStore = transaction.objectStore(Office.STORE);
+      await persistence.putMany(officeStore, Object.values(data.offices), newHistory);
+
+      const agentStore = transaction.objectStore(Agent.STORE);
+      await persistence.putMany(agentStore, Object.values(data.agents), newHistory);
+
+      transaction.commit();
+    } catch (e) {
+      const message = e instanceof Error ? e.message : 'Unknown';
+      reject(new MLSPinPersistenceError(`Error importing: ${message}`));
+    } finally {
       if (persistence) {
-        const transaction: IDBTransaction | undefined = persistence.transaction(Model.STORE as string, 'readwrite');
-        if (transaction) {
-          const objectStore: IDBObjectStore = transaction.objectStore(Model.STORE as string);
-          // TODO: #1 - async
-          // TODO: #2 - only update fields and keep non-mls data.
-          Object.values(items).forEach(async (item): Promise<void> => {
-            if (persistence) {
-              persistence.put(objectStore, item, newHistory);
-            }
-          });
-        }
+        persistence.close();
       }
-    });
-  } finally {
-    if (persistence) {
-      persistence.close();
     }
-  }
+  });
 };

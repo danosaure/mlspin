@@ -1,5 +1,7 @@
+import get from './get';
 import open from './open';
 import put from './put';
+import transaction from './transaction';
 import PersistenceBaseType from '../types/persistence-base';
 import PersistenceHistoryType from '../types/persistence-history';
 
@@ -35,14 +37,20 @@ export default class Persistence {
     }
   }
 
-  transaction(storeName: string, mode?: IDBTransactionMode): IDBTransaction {
-    if (this.db) {
-      return this.db.transaction(storeName, mode);
-    }
-    throw new MLSPinPersistenceError(`Persistence.transaction() error: call 'open()' first.`);
+  async transaction(storeNames: string | string[], mode?: IDBTransactionMode): Promise<IDBTransaction> {
+    return transaction(this.db, storeNames, mode);
   }
 
   async put(objectStore: IDBObjectStore, item: PersistenceBaseType, newHistory: PersistenceHistoryType): Promise<void> {
-    return put(objectStore, item, newHistory);
+    await put(objectStore, item, newHistory);
   }
+
+  async putMany(objectStore: IDBObjectStore, items: PersistenceBaseType[], newHistory: PersistenceHistoryType): Promise<void> {
+    await Promise.all(items.map((item) => this.put(objectStore, item, newHistory)));
+  }
+
+  async get(objectStore: IDBObjectStore, key: IDBValidKey): Promise<PersistenceBaseType> {
+    return get(objectStore, key);
+  }
+
 }

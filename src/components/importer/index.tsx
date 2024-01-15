@@ -29,13 +29,10 @@ export default () => {
 
     try {
       await saveContent(content);
-
-      setTimeout(() => {
-        setSeverity('success');
-        setAlertMessage('Data imported successfully');
-        setInProgress(false);
-        setTimeout(() => setAlertMessage(''), 1000);
-      }, 1000);
+      setSeverity('success');
+      setAlertMessage('Data imported successfully');
+      setInProgress(false);
+      setTimeout(() => setAlertMessage(''), 2000);
     } catch (e) {
       setSeverity('error');
       setAlertMessage(e instanceof Error ? e.message : String(e));
@@ -62,6 +59,7 @@ export default () => {
       <Box className="dano-importer-section" component="section">
         <TextField
           className="dano-importer-textarea"
+          name="dano-importer-textarea"
           sx={{ fontSize: '12px' }}
           multiline
           rows={10}

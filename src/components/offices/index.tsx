@@ -1,5 +1,7 @@
-export default () => (
-  <>
-    <p>This is the Offices page.</p>
-  </>
-);
+export default () => {
+  return (
+    <>
+      <p>This is the Offices page.</p>
+    </>
+  );
+};

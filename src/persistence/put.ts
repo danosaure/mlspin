@@ -1,27 +1,29 @@
 import PersistenceBaseType from '../types/persistence-base';
 import PersistenceHistoryType from '../types/persistence-history';
+import MLSPinPersistenceError from './error';
+import get from './get';
 
-export default async (objectStore: IDBObjectStore, item: PersistenceBaseType, newHistory: PersistenceHistoryType): Promise<void> =>
-  new Promise((resolve) => {
-    const itemRequest = objectStore.get(item.id);
+export default async (
+  objectStore: IDBObjectStore,
+  item: PersistenceBaseType,
+  newHistory: PersistenceHistoryType
+): Promise<void> => {
+  const oldItem = await get(objectStore, item.id);
 
-    itemRequest.onsuccess = () => {
-      const oldItem = itemRequest.result;
-      const newItem = {
-        ...oldItem,
-        ...item,
-        __history: [...(oldItem.__history || []), newHistory],
-      };
-      objectStore.put(newItem);
+  const newItem = {
+    ...oldItem,
+    ...item,
+    __history: [...((oldItem || {}).__history || []), newHistory],
+  };
+
+  return new Promise((resolve, reject) => {
+    const putRequest: IDBRequest<IDBValidKey> = objectStore.put(newItem);
+
+    putRequest.onsuccess = () => {
+      // console.log(`[${item.id}]: putRequest.onsuccess():`, putRequest.result);
       resolve();
     };
 
-    itemRequest.onerror = () => {
-      const newItem = {
-        ...item,
-        __history: [newHistory],
-      };
-      objectStore.put(newItem);
-      resolve();
-    };
+    putRequest.onerror = () => reject(new MLSPinPersistenceError(`Error putRequest(${item.id})`));
   });
+};
