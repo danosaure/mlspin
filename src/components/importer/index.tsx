@@ -7,7 +7,9 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
+import mainPanel from '../main-panel';
 import saveContent from '../../import';
+import MainPanel from '../main-panel';
 
 export default () => {
   const [content, setContent] = useState('');
@@ -41,21 +43,15 @@ export default () => {
   };
 
   const alertSection = alertMessage ? (
-    <Box className="dano-importer-section" component="section">
+    <MainPanel.Section className="dano-import-section">
       <Alert variant="outlined" severity={severity}>
         {alertMessage}
       </Alert>
-    </Box>
+    </MainPanel.Section>
   ) : null;
 
   return (
-    <Box className="dano-importer">
-      <Box className="dano-importer-section" component="section">
-        <Typography className="dano-title" variant="h2">
-          Data importer
-        </Typography>
-      </Box>
-
+    <MainPanel className="dano-importer" title="Data importer">
       <Box className="dano-importer-section" component="section">
         <TextField
           className="dano-importer-textarea"
@@ -71,7 +67,7 @@ export default () => {
         />
       </Box>
 
-      <Box className="dano-importer-section" component="section">
+      <MainPanel.Section className="dano-importer-section">
         <Stack className="dano-importer-buttons" spacing={2} direction="row">
           <Button onClick={importContent} disabled={!content || inProgress} variant="contained">
             Import
@@ -80,9 +76,9 @@ export default () => {
             Clear
           </Button>
         </Stack>
-      </Box>
+      </MainPanel.Section>
 
       {alertSection}
-    </Box>
+    </MainPanel>
   );
 };

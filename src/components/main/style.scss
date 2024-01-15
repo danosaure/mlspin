@@ -1,17 +1,11 @@
+@use "main-tab-panel/style" as MainTabPanelStyle;
+
 .dano-main {
-    // display: flex;
-    // flex-grow: 1;
-
-    .dano-tabs {
-        .dano-tabs-item {
-
-            &.dano-tabs-divider {
-                flex-grow: 1;
-            }
-        }
+  .dano-tabs {
+    .dano-tabs-item {
+      &.dano-tabs-divider {
+        flex-grow: 1;
+      }
     }
-
-    .dano-tabpanel {
-        // flex-grow: 1;
-    }
+  }
 }

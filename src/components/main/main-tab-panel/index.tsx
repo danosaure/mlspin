@@ -12,7 +12,7 @@ interface TabPanelProps {
 export default (props: TabPanelProps) => (
   <div
     role="tabpanel"
-    className="dano-tabpanel"
+    className="dano-main-tab-panel"
     hidden={props.tabId !== props.selectedTabId}
     id={generateTabPanelId(props.tabId)}
     aria-labelledby={generateTabId(props.tabId)}

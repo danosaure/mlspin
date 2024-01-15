@@ -16,7 +16,7 @@ export default () => {
   };
 
   return (
-    <IconButton onClick={toggle} color="inherit" className="da-theme-toggler">
+    <IconButton onClick={toggle} color="inherit" className="dano-theme-toggler">
       {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
     </IconButton>
   );

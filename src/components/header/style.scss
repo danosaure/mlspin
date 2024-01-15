@@ -1,15 +1,15 @@
-@use './theme-toggler/style' as themeTogglerStyle;
+@use 'theme-toggler/style' as ThemeTogglerStyle;
 
 .dano-header {
-    header {
-        .dano-logo {
-            vertical-align: middle;
-            height: 60px;
-            margin-right: 20px;
-        }
-
-        .dano-title {
-            flex-grow: 1;
-        }
+  header {
+    .dano-logo {
+      vertical-align: middle;
+      height: 60px;
+      margin-right: 20px;
     }
+
+    .dano-title {
+      flex-grow: 1;
+    }
+  }
 }

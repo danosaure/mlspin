@@ -10,7 +10,7 @@ export default () => (
     <AppBar position="static">
       <Toolbar>
         <img className="dano-logo" src="assets/danosaure-logo.png" />
-        <Typography className="dano-title" variant="h1">
+        <Typography className="dano-title" variant="h2" component="div">
           MLSpin App
         </Typography>
         {/* <ThemeToggler /> */}

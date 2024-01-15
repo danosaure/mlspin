@@ -3,10 +3,10 @@ $dano-bg-secondary-color: #494b52;
 $dano-fg-primary-color: #f3eda7;
 $dano-fg-secondary-color: #a6a172;
 
-
-@use "header/style" as header;
-@use "importer/style" as importer;
-@use "main/style" as tabs;
+@use 'header/style' as HeaderStyle;
+@use 'importer/style' as ImporterStyle;
+@use 'main/style' as MainStyle;
+@use 'main-panel/style' as MainPanelStyle;
 
 /*
 :root {
