@@ -1,16 +1,14 @@
 import Persistence from '../persistence';
-import { DB_NAME, DB_VERSION } from '../persistence/constants';
 import Office from '../models/office';
 import Agent from '../models/agent';
 import PersistenceHistoryType from '../types/persistence-history';
 
 import parse from './office-results-parser';
 import MLSPinPersistenceError from '../persistence/error';
+import { PersistenceTransaction } from '../persistence/transaction';
 
 export default async (content: string): Promise<void> => {
   const data = parse(content);
-
-  console.log('data=', data);
 
   const newHistory: PersistenceHistoryType = {
     date: new Date(),
@@ -21,27 +19,18 @@ export default async (content: string): Promise<void> => {
 
   return new Promise(async (resolve, reject) => {
     try {
-      persistence = new Persistence(DB_NAME, DB_VERSION);
+      persistence = new Persistence();
       await persistence.open();
 
-      const transaction: IDBTransaction = await persistence.transaction([Office.STORE, Agent.STORE], 'readwrite');
+      const transaction: PersistenceTransaction = await persistence.transaction([Office.STORE, Agent.STORE], 'readwrite', {
+        onabort: () => reject(new MLSPinPersistenceError('Transaction aborted.')),
+        oncomplete: () => resolve(),
+      });
 
-      transaction.onabort = () => {
-        throw new MLSPinPersistenceError('Transaction aborted.');
-      };
+      await persistence.putMany(transaction.stores[Office.STORE], Object.values(data.offices), newHistory);
+      await persistence.putMany(transaction.stores[Agent.STORE], Object.values(data.agents), newHistory);
 
-      transaction.oncomplete = () => {
-        console.log(`transaction.oncomplete...`);
-        resolve();
-      };
-
-      const officeStore = transaction.objectStore(Office.STORE);
-      await persistence.putMany(officeStore, Object.values(data.offices), newHistory);
-
-      const agentStore = transaction.objectStore(Agent.STORE);
-      await persistence.putMany(agentStore, Object.values(data.agents), newHistory);
-
-      transaction.commit();
+      transaction.complete();
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Unknown';
       reject(new MLSPinPersistenceError(`Error importing: ${message}`));

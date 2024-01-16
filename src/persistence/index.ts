@@ -1,23 +1,18 @@
-import get from './get';
-import open from './open';
-import put from './put';
-import transaction from './transaction';
 import PersistenceBaseType from '../types/persistence-base';
 import PersistenceHistoryType from '../types/persistence-history';
 
+import { DB_NAME, DB_VERSION } from './constants';
 import MLSPinPersistenceError from './error';
+import get from './get';
+import open from './open';
+import openCursor, { PersistenceCursor } from './open-cursor';
+import put from './put';
+import transaction, { PersistenceTransaction, PersistenceTransactionEventHandlers } from './transaction';
 
 export default class Persistence {
-  private name: string;
-  private version: number;
   private db: IDBDatabase | null = null;
-  private onchangeversion: (() => void) | undefined;
 
-  constructor(name: string, version: number, onchangeversion?: () => void) {
-    this.name = name;
-    this.version = version;
-    this.onchangeversion = onchangeversion;
-  }
+  constructor() {}
 
   close(): void {
     if (this.db) {
@@ -26,19 +21,23 @@ export default class Persistence {
     }
   }
 
-  async open(): Promise<void> {
+  async open(onchangeversion?: () => void): Promise<void> {
     this.close();
 
     try {
-      this.db = await open(this.name, this.version, this.onchangeversion);
+      this.db = await open(DB_NAME, DB_VERSION, onchangeversion);
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Unknown Error';
       throw new MLSPinPersistenceError(`Persistence.open() error: ${message}`);
     }
   }
 
-  async transaction(storeNames: string | string[], mode?: IDBTransactionMode): Promise<IDBTransaction> {
-    return transaction(this.db, storeNames, mode);
+  async transaction(
+    storeNames: string | string[],
+    mode?: IDBTransactionMode,
+    eventHanders?: PersistenceTransactionEventHandlers
+  ): Promise<PersistenceTransaction> {
+    return transaction(this.db, storeNames, mode, eventHanders);
   }
 
   async put(objectStore: IDBObjectStore, item: PersistenceBaseType, newHistory: PersistenceHistoryType): Promise<void> {
@@ -53,4 +52,7 @@ export default class Persistence {
     return get(objectStore, key);
   }
 
+  async openCursor(objectStore: IDBObjectStore): Promise<PersistenceCursor> {
+    return openCursor(objectStore);
+  }
 }

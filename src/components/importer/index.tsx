@@ -5,9 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 
-import mainPanel from '../main-panel';
 import saveContent from '../../import';
 import MainPanel from '../main-panel';
 
