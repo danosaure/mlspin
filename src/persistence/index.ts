@@ -52,7 +52,11 @@ export default class Persistence {
     return get(objectStore, key);
   }
 
-  openCursor(storeOrIndex: IDBObjectStore | IDBIndex, withCursor: (cursor: IDBCursorWithValue) => void, cursorDone: () => void): void {
+  openCursor(
+    storeOrIndex: IDBObjectStore | IDBIndex,
+    withCursor: (cursor: IDBCursorWithValue) => void,
+    cursorDone: () => void
+  ): void {
     return openCursor(storeOrIndex, withCursor, cursorDone);
   }
 }

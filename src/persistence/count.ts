@@ -13,7 +13,7 @@ export default async (idx: IDBIndex): Promise<number> =>
       const request = idx.count();
 
       request.onsuccess = () => resolve(request.result);
-      request.onerror = (e: Event) => reject(new MLSPinPersistenceCountError());
+      request.onerror = () => reject(new MLSPinPersistenceCountError());
     } catch (e) {
       if (e instanceof Error) {
         reject(new MLSPinPersistenceCountError(e.message));

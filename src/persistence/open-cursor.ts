@@ -7,7 +7,11 @@ export class MLSPersistenceOpenCursorError extends MLSPinPersistenceError {
   }
 }
 
-export default (storeOrIndex: IDBObjectStore | IDBIndex, withCursor: (c: IDBCursorWithValue) => void, cursorDone: () => void): void => {
+export default (
+  storeOrIndex: IDBObjectStore | IDBIndex,
+  withCursor: (c: IDBCursorWithValue) => void,
+  cursorDone: () => void
+): void => {
   const cursorRequest = storeOrIndex.openCursor();
 
   cursorRequest.onerror = () => {
