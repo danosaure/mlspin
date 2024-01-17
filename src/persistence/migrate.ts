@@ -1,8 +1,9 @@
 import Agent from '../models/agent';
 import Office from '../models/office';
+import ZipLookup from '../models/zip-lookup';
 
 export default async (db: IDBDatabase): Promise<void> => {
-  [Office, Agent].forEach((record) => {
+  [Office, Agent, ZipLookup].forEach((record) => {
     const store = db.createObjectStore(record.STORE, { keyPath: record.PRIMARY_KEY });
 
     Object.entries(record.INDICES).forEach((entry) => {

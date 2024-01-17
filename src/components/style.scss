@@ -4,7 +4,7 @@ $dano-fg-primary-color: #f3eda7;
 $dano-fg-secondary-color: #a6a172;
 
 @use 'header/style' as HeaderStyle;
-@use 'importer/style' as ImporterStyle;
+@use 'importers/style' as ImportersStyle;
 @use 'main/style' as MainStyle;
 @use 'main-panel/style' as MainPanelStyle;
 @use "tab-panel/style" as TabPanelStyle;

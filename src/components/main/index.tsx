@@ -9,7 +9,7 @@ import { a11yProps } from './utils';
 
 import Agents from '../agents';
 import Offices from '../offices';
-import Importer from '../importer';
+import Importers from '../importers';
 
 export default () => {
   const [tabId, setTabId] = useState(0);
@@ -22,7 +22,7 @@ export default () => {
         <Tab className="dano-tabs-item" label="Agents" {...a11yProps(0)} />
         <Tab className="dano-tabs-item" label="Offices" {...a11yProps(1)} />
         <Tab className="dano-tabs-item dano-tabs-divider" label="" disabled /> {/* counted as 2 */}
-        <Tab className="dano-tabs-item" label="Import" {...a11yProps(3)} />
+        <Tab className="dano-tabs-item" label="Imports" {...a11yProps(3)} />
       </Tabs>
 
       <TabPanel tabId={0} selectedTabId={tabId}>
@@ -34,7 +34,7 @@ export default () => {
       </TabPanel>
 
       <TabPanel tabId={3} selectedTabId={tabId}>
-        <Importer />
+        <Importers />
       </TabPanel>
     </Box>
   );
