@@ -1,30 +1,25 @@
-export type PersistenceCursor = {
-  cursor: IDBCursorWithValue | null;
-  key: IDBValidKey | undefined;
-  value: any;
-  done: boolean;
-  continue: () => Promise<PersistenceCursor>;
-};
+import MLSPinPersistenceError from './error';
 
-const wrapCursorRequest = (cursorRequest: IDBRequest<IDBCursorWithValue | null>): PersistenceCursor => {
-  const cursor = cursorRequest.result;
+export class MLSPersistenceOpenCursorError extends MLSPinPersistenceError {
+  constructor(message?: string) {
+    super(message);
+    this.name = 'MLSPersistenceOpenCursorError';
+  }
+}
 
-  return {
-    cursor,
-    key: cursor?.key,
-    value: cursor?.value,
-    done: !cursor,
-    continue: async (): Promise<PersistenceCursor> =>
-      new Promise((resolve, reject) => {
-        cursorRequest.onsuccess = () => resolve(wrapCursorRequest(cursorRequest));
-        cursorRequest.onerror = () => reject(cursorRequest.error);
-        cursor?.continue();
-      }),
+export default (storeOrIndex: IDBObjectStore | IDBIndex, withCursor: (c: IDBCursorWithValue) => void, cursorDone: () => void): void => {
+  const cursorRequest = storeOrIndex.openCursor();
+
+  cursorRequest.onerror = () => {
+    throw new MLSPersistenceOpenCursorError();
+  };
+
+  cursorRequest.onsuccess = () => {
+    const cursor = cursorRequest.result;
+    if (cursor) {
+      withCursor(cursor);
+    } else {
+      cursorDone();
+    }
   };
 };
-
-export default async (objectStore: IDBObjectStore): Promise<PersistenceCursor> =>
-  new Promise((resolve) => {
-    const cursorRequest = objectStore.openCursor();
-    cursorRequest.onsuccess = () => resolve(wrapCursorRequest(cursorRequest));
-  });

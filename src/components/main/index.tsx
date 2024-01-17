@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 
-import MainTabPanel from './main-tab-panel';
+import TabPanel from '../tab-panel';
 import { a11yProps } from './utils';
 
 import Agents from '../agents';
@@ -25,17 +25,17 @@ export default () => {
         <Tab className="dano-tabs-item" label="Import" {...a11yProps(3)} />
       </Tabs>
 
-      <MainTabPanel tabId={0} selectedTabId={tabId}>
+      <TabPanel tabId={0} selectedTabId={tabId}>
         <Agents />
-      </MainTabPanel>
+      </TabPanel>
 
-      <MainTabPanel tabId={1} selectedTabId={tabId}>
+      <TabPanel tabId={1} selectedTabId={tabId}>
         <Offices />
-      </MainTabPanel>
+      </TabPanel>
 
-      <MainTabPanel tabId={3} selectedTabId={tabId}>
+      <TabPanel tabId={3} selectedTabId={tabId}>
         <Importer />
-      </MainTabPanel>
+      </TabPanel>
     </Box>
   );
 };

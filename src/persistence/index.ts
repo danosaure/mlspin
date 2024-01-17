@@ -5,7 +5,7 @@ import { DB_NAME, DB_VERSION } from './constants';
 import MLSPinPersistenceError from './error';
 import get from './get';
 import open from './open';
-import openCursor, { PersistenceCursor } from './open-cursor';
+import openCursor from './open-cursor';
 import put from './put';
 import transaction, { PersistenceTransaction, PersistenceTransactionEventHandlers } from './transaction';
 
@@ -52,7 +52,7 @@ export default class Persistence {
     return get(objectStore, key);
   }
 
-  async openCursor(objectStore: IDBObjectStore): Promise<PersistenceCursor> {
-    return openCursor(objectStore);
+  openCursor(storeOrIndex: IDBObjectStore | IDBIndex, withCursor: (cursor: IDBCursorWithValue) => void, cursorDone: () => void): void {
+    return openCursor(storeOrIndex, withCursor, cursorDone);
   }
 }

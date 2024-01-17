@@ -7,7 +7,7 @@ export default async (db: IDBDatabase): Promise<void> => {
 
     Object.entries(record.INDICES).forEach((entry) => {
       const columns = entry[0].split(',');
-      const indexName = columns.join('-');
+      const indexName = [record.STORE].concat(columns).join('-');
       store.createIndex(indexName, columns, { unique: entry[1] });
     });
   });
