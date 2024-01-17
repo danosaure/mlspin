@@ -46,12 +46,28 @@
 
   const toCSV = (content) => content.map((line) => line.join(';'));
 
-  const winWrite = (newWin, content) => newWin.document.write(content);
-
   const newWin = window.open('', '_blank');
   const body = $(SELECTORS.BODY);
 
-  winWrite(newWin, '<pre>');
+  const winWrite = (content) => newWin.document.write(content);
+
+  winWrite('<pre>');
+
+  const headers = [
+    'agent.id',
+    'agent.email',
+    'agent.name',
+    'agent.phone',
+    'office.id',
+    'office.name',
+    'office.address',
+    'office.city',
+    'office.state',
+    'office.zip',
+    'agent.role',
+  ];
+  
+  winWrite(`${headers.join(';')}\n`);
 
   const allRows = $(SELECTORS.OFFICE_ROWS);
   let remainingOffices = allRows.length;
@@ -78,14 +94,14 @@
         .map(agentMap(officeId, officeName, streetAddress, city, state, zip))
         .get();
       if (content.length) {
-        winWrite(newWin, `${content.join('\n')}\n`);
+        winWrite(`${content.join('\n')}\n`);
       }
 
       iframe.remove();
 
       remainingOffices--;
       if (remainingOffices === 0) {
-        winWrite(newWin, `</pre>`);
+        winWrite(`</pre>`);
         newWin.document.close();
       }
     });
