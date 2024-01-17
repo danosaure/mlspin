@@ -12,8 +12,9 @@ import TabPanel from '../tab-panel';
 import { a11yProps } from './utils';
 
 import Agents from '../agents';
-import Offices from '../offices';
 import Importers from '../importers';
+import Offices from '../offices';
+import ZipLookup from '../zip-lookup';
 
 export default () => {
   const [tabId, setTabId] = useState(0);
@@ -39,7 +40,7 @@ export default () => {
       </TabPanel>
 
       <TabPanel tabId={3} selectedTabId={tabId}>
-        Zip form
+        <ZipLookup />
       </TabPanel>
 
       <TabPanel tabId={4} selectedTabId={tabId}>

@@ -5,5 +5,5 @@ export const generateTabPanelId = (tabId: number): string => `da-tabpanel-${tabI
 export const a11yProps = (tabId: number): Record<string, string> => ({
   id: generateTabId(tabId),
   'aria-controls': generateTabPanelId(tabId),
-  iconPosition: "start",
+  iconPosition: 'start',
 });

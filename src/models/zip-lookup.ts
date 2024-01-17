@@ -1,7 +1,5 @@
 import PersistenceBaseType from '../types/persistence-base';
 
-import AgentType from '../types/agent';
-
 import Base from './base';
 
 export type ZipLookupType = PersistenceBaseType & {

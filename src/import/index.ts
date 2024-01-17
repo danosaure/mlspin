@@ -20,7 +20,11 @@ const buildZipLookup = (offices: OfficeType[]): Record<string, ZipLookupType> =>
     };
   }, {});
 
-const mergeWithCurrent = async (persistance: Persistence, objectStore: IDBObjectStore, zips: ZipLookupType[]): Promise<ZipLookupType[]> =>
+const mergeWithCurrent = async (
+  persistance: Persistence,
+  objectStore: IDBObjectStore,
+  zips: ZipLookupType[]
+): Promise<ZipLookupType[]> =>
   Promise.all(
     zips.map(async (zip): Promise<ZipLookupType> => {
       const oldItem = (await persistance.get(objectStore, zip.id)) as ZipLookupType;

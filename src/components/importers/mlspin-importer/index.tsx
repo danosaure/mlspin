@@ -13,7 +13,7 @@ import MainPanel from '../../main-panel';
 type MLSPinImporterSnackType = {
   severity: AlertColor;
   message: string;
-}
+};
 
 export default () => {
   const [content, setContent] = useState('');
@@ -32,25 +32,27 @@ export default () => {
   };
 
   const importContent = async () => {
-    setSnackMessages(snackMessages.concat({severity:'warning', message:'Import in progress...'}));
+    setSnackMessages(snackMessages.concat({ severity: 'warning', message: 'Import in progress...' }));
 
     try {
       await saveContent(content);
-      setSnackMessages(snackMessages.concat({severity: 'success', message: 'Data imported successfully.'}));
+      setSnackMessages(snackMessages.concat({ severity: 'success', message: 'Data imported successfully.' }));
     } catch (e) {
-      setSnackMessages(snackMessages.concat({severity: 'error', message: e instanceof Error ? e.message : String(e)}));
+      setSnackMessages(snackMessages.concat({ severity: 'error', message: e instanceof Error ? e.message : String(e) }));
     }
   };
 
   const snackbar = snackMessages.length ? (
-    <Snackbar open autoHideDuration={3000} onClose={snackbarClosed} anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} >
+    <Snackbar open autoHideDuration={3000} onClose={snackbarClosed} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
       <Stack direction="row">
-        {snackMessages.map((snackMessage, idx)  => (
-          <Alert key={idx} severity={snackMessage.severity} variant="filled">{snackMessage.message}</Alert>
+        {snackMessages.map((snackMessage, idx) => (
+          <Alert key={idx} severity={snackMessage.severity} variant="filled">
+            {snackMessage.message}
+          </Alert>
         ))}
       </Stack>
     </Snackbar>
-  ): null;
+  ) : null;
 
   return (
     <MainPanel className="dano-importer" title="Data importer">

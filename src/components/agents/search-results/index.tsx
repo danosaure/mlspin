@@ -1,6 +1,6 @@
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import Box from '@mui/material/Box';
+import { GridColDef } from '@mui/x-data-grid';
 import AgentType from '../../../types/agent';
+import SearchResults from '../../search-results';
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID', flex: 1 },
@@ -17,7 +17,5 @@ export type AgentsSearchResultsProps = {
 };
 
 export default ({ data }: AgentsSearchResultsProps) => (
-  <Box className="dano-agents-search-results">
-    <DataGrid rows={data} columns={columns} />
-  </Box>
+  <SearchResults className="dano-agents-search-results" rows={data} columns={columns} />
 );
