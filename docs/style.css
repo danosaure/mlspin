@@ -15,7 +15,7 @@
   padding-top: 8px;
   padding-bottom: 8px;
 }
-.dano-importer .dano-importer-textarea {
+.dano-importer .dano-importer-textarea.MuiInputBase-input {
   font-size: 12px;
 }
 .dano-main .dano-tabs .dano-tabs-item.dano-tabs-divider {
