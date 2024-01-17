@@ -18,7 +18,7 @@ export default () => {
 
   return (
     <Box component="main" className="dano-main">
-      <Tabs className="dano-tabs" value={tabId} onChange={changeTab} aria-label="Navigation tabs">
+      <Tabs className="dano-tabs" value={tabId} onChange={changeTab} aria-label="Navigation tabs" variant="fullWidth">
         <Tab className="dano-tabs-item" label="Agents" {...a11yProps(0)} />
         <Tab className="dano-tabs-item" label="Offices" {...a11yProps(1)} />
         <Tab className="dano-tabs-item dano-tabs-divider" label="" disabled /> {/* counted as 2 */}

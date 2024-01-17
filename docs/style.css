@@ -19,7 +19,7 @@
   font-size: 12px;
 }
 .dano-main .dano-tabs .dano-tabs-item.dano-tabs-divider {
-  flex-grow: 1;
+  flex-grow: 3;
 }
 
 .dano-main-panel-section {
