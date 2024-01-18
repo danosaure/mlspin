@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
-// import ThemeToggler from './theme-toggler';
+import ThemeToggler from './theme-toggler';
 
 export default () => (
   <Box className="dano-header">
@@ -13,7 +13,7 @@ export default () => (
         <Typography className="dano-title" variant="h2" component="div">
           MLSpin App
         </Typography>
-        {/* <ThemeToggler /> */}
+        <ThemeToggler />
       </Toolbar>
     </AppBar>
   </Box>

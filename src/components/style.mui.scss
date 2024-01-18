@@ -1,0 +1,165 @@
+// @function transparency($color, $pct) {
+//   @return color-mix(in lab, transparent #{$pct}, #{$color});
+// }
+
+@function disable($color) {
+  @return color-mix(in lab, transparent 50%, #{$color});
+}
+
+@function lighten($color) {
+  @return color-mix(in lab, transparent 30%, #{$color});
+}
+
+@function darken($color) {
+  @return color-mix(in srgb, #{$color}, black 40%);
+}
+
+
+// Material-UI overrides.
+.dano-app {
+  .MuiButtonBase-root {
+    text-transform: none; // I just hate all-caps.
+
+    color: var(--dano-fg-secondary-color);
+
+    &.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary {
+      color: var(--dano-fg-secondary-color);
+      background-color: var(--dano-bg-secondary-color);
+
+      &:hover {
+        background-color: darken(var(--dano-bg-secondary-color));
+      }
+    }
+
+    &.MuiButton-outlined {
+      color: var(--dano-bg-secondary-color);
+      border-color: lighten(var(--dano-bg-secondary-color));
+
+      &:hover {
+        border-color: var(--dano-bg-secondary-color);
+      }
+    }
+
+    &.Mui-selected {
+      color: var(--dano-bg-secondary-color);
+    }
+  }
+
+  .MuiPaper-root {
+    background-color: var(--dano-bg-secondary-color);
+    color: var(--dano-fg-secondary-color);
+  }
+
+  .MuiOutlinedInput-root {
+    color: var(--dano-fg-primary-color);
+    stop-color: var(--dano-fg-primary-color);
+  }
+
+  .MuiFormControl-root, .MuiTextField-root {
+    .MuiFormLabel-root, .MuiInputLabel-root {
+      color: lighten(var(--dano-fg-primary-color));
+    }
+
+    .MuiOutlinedInput-root {
+      .MuiOutlinedInput-notchedOutline {
+        border-color: lighten(var(--dano-fg-primary-color));
+      }
+
+
+
+      &:hover {
+        .MuiOutlinedInput-notchedOutline {
+          border-color: var(--dano-fg-primary-color);
+        }
+      }
+    }
+  }
+
+  .MuiTabs-root {
+    .MuiButtonBase-root {
+      color: lighten(var(--dano-fg-primary-color));
+
+      &.Mui-selected {
+        color: var(--dano-bg-secondary-color);
+      }
+    }
+
+    .MuiTabs-scroller {
+      .MuiTabs-indicator {
+        background-color: var(--dano-bg-secondary-color);
+      }
+
+      .MuiTab-root {
+        &.Mui-selected {
+  
+          &.MuiButtonBase-root {
+          }
+  
+        }
+      }
+  
+    }
+  }
+
+  .MuiDataGrid-root {
+    color: var(--dano-fg-primary-color);
+
+
+    .MuiButtonBase-root {
+      color: var(--dano-fg-primary-color);
+
+      &.Mui-disabled {
+        color: disable(var(--dano-fg-primary-color));
+      }
+    }
+
+    &.MuiDataGrid-withBorderColor {
+      border-color: var(--dano-bg-secondary-color);
+
+      .MuiDataGrid-main {
+        .MuiDataGrid-columnHeaders.MuiDataGrid-withBorderColor {
+          border-color: var(--dano-bg-secondary-color);
+
+          .MuiDataGrid-columnSeparator {
+            color: var(--dano-bg-secondary-color);
+          }
+        }
+      }
+
+      .MuiDataGrid-footerContainer {
+
+
+        &.MuiDataGrid-withBorderColor {
+          border-color: var(--dano-bg-secondary-color);
+        }
+
+        .MuiTablePagination-root {
+          color: var(--dano-fg-primary-color);
+
+          .MuiTablePagination-toolbar {
+            .MuiTablePagination-spacer {
+              color: var(--dano-fg-primary-color);
+            }
+
+            .MuiTablePagination-input {
+              .MuiTablePagination-selectIcon {
+                color: lighten(var(--dano-fg-primary-color));
+              }
+            }
+
+            .MuiTablePagination-actions {
+
+            }
+          }
+        }
+      }
+    }
+
+    .MuiDataGrid-row {
+      .MuiDataGrid-withBorderColor {
+        border-color: var(--dano-bg-secondary-color);
+      }
+
+    }
+  }
+}

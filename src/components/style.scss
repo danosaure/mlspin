@@ -1,7 +1,4 @@
-$dano-bg-primary-color: #202124;
-$dano-bg-secondary-color: #494b52;
-$dano-fg-primary-color: #f3eda7;
-$dano-fg-secondary-color: #a6a172;
+@use 'style.theme' as theme;
 
 @use 'header/style' as HeaderStyle;
 @use 'importers/style' as ImportersStyle;
@@ -10,34 +7,3 @@ $dano-fg-secondary-color: #a6a172;
 @use 'modal/style' as ModalStyle;
 @use "tab-panel/style" as TabPanelStyle;
 
-/*
-:root {
-    body[data-theme="dark"] {
-        --dano-bg-primary-color: $dano-bg-primary-color;
-        --dano-bg-secondary-color: $dano-bg-secondary-color;
-        --dano-fg-primary-color: $dano-fg-primary-color;
-        --dano-fg-secondary-color: $dano-fg-secondary-color;
-    }
-
-    body[data-theme="light"] {
-        --dano-bg-primary-color: $dano-fg-primary-color;
-        --dano-bg-secondary-color: $dano-fg-secondary-color;
-        --dano-fg-primary-color: $dano-bg-primary-color;
-        --dano-fg-secondary-color: $dano-bg-secondary-color;    
-    }
-}
-
-
-body {
-  background-color: var(--dano-bg-primary-color);
-  color: var(--dano-fg-primary-color);
-}
-*/
-
-body {
-    .dano-app {
-        .MuiButtonBase-root {
-            text-transform: none;
-        }
-    }
-}

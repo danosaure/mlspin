@@ -1,0 +1,22 @@
+@use 'style.mui' as MUIStyle;
+
+:root {
+  body[data-theme='dark'] {
+    --dano-bg-primary-color:    #000000;
+    --dano-bg-secondary-color:  #265D80;
+    --dano-fg-primary-color:    #285534;
+    --dano-fg-secondary-color:  #CCEBFF;
+  }
+
+  body[data-theme='light'] {
+    --dano-bg-primary-color:    #FFB6C1;
+    --dano-bg-secondary-color:  #804B53;
+    --dano-fg-primary-color:    #4B6F80;
+    --dano-fg-secondary-color:  #BFECFF;
+  }
+}
+
+body {
+  background-color: var(--dano-bg-primary-color);
+  color: var(--dano-fg-primary-color);
+}
