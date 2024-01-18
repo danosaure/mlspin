@@ -1,0 +1,23 @@
+.dano-modal {
+  .dano-modal-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 5px rgba(25, 118, 210, 0.5);
+    padding: 20px 10px;
+
+    .dano-modal-box-title {
+      font-size: 2rem;
+    }
+
+    .dano-modal-box-divider {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}
