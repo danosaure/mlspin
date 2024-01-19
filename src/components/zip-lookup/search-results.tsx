@@ -1,10 +1,9 @@
 import { MouseEvent } from 'react';
+import { Button, Stack } from '@mui/material';
 import { GridColDef } from '@mui/x-data-grid';
-import { ZipLookupType } from '../../models/zip-lookup';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 
 import SearchResults from '../search-results';
+import { ZipLookupType } from '../../models/zip-lookup';
 
 const preventDefault = (e: MouseEvent, cb: () => void) => {
   e.preventDefault();

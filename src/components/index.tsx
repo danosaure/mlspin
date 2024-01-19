@@ -1,4 +1,4 @@
-import Container from '@mui/material/Container';
+import { Container } from '@mui/material';
 
 import Header from './header';
 import Main from './main';

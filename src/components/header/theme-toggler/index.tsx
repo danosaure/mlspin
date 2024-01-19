@@ -1,8 +1,7 @@
 import { useState } from 'react';
 
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
-import IconButton from '@mui/material/IconButton';
+import { DarkMode as DarkModeIcon, LightMode as LightModeIcon } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 
 export default () => {
   const [darkMode, setDarkMode] = useState(true);

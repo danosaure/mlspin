@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Alert from '@mui/material/Alert';
+import { Alert } from '@mui/material';
 
 import { AgentSearchType } from '../../models/agent';
 import searchAgents, { AgentTypeSearchResult } from '../../search/agents';

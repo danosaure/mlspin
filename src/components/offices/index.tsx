@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import Alert from '@mui/material/Alert';
+import { Alert } from '@mui/material';
 
 import MainPanel from '../main-panel';
-import OfficeType from '../../types/office';
 import searchOffices from '../../search/offices';
+import OfficeType from '../../types/office';
 
 import OfficesSearchForm from './search-form';
 import OfficesSearchResults from './search-results';

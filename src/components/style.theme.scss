@@ -9,9 +9,9 @@
   }
 
   body[data-theme='light'] {
-    --dano-bg-primary-color:    #FFB6C1;
-    --dano-bg-secondary-color:  #804B53;
-    --dano-fg-primary-color:    #4B6F80;
+    --dano-bg-primary-color:    snow; // #FFB6C1;
+    --dano-bg-secondary-color:  hotpink;        // #804B53;
+    --dano-fg-primary-color:    palevioletred;  // #4B6F80;
     --dano-fg-secondary-color:  #BFECFF;
   }
 }

@@ -1,8 +1,6 @@
-import { ReactNode } from 'react';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Typography from '@mui/material/Typography';
 import classnames from 'classnames';
+import { ReactNode } from 'react';
+import { Box, Modal, Typography } from '@mui/material';
 
 export type MLSPinModalProps = {
   open: boolean;

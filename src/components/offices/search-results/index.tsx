@@ -1,6 +1,7 @@
 import { GridColDef } from '@mui/x-data-grid';
-import OfficeType from '../../../types/office';
+
 import SearchResults from '../../search-results';
+import OfficeType from '../../../types/office';
 
 const columns: GridColDef[] = [
   { field: 'name', headerName: 'Name', flex: 4 },

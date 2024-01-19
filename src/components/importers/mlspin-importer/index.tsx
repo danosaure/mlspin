@@ -1,11 +1,7 @@
 import { useState, ChangeEventHandler } from 'react';
 
-import Alert, { AlertColor } from '@mui/material/Alert';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Snackbar from '@mui/material/Snackbar';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
+import { AlertColor } from '@mui/material/Alert';
+import { Alert, Box, Button, Snackbar, Stack, TextField } from '@mui/material';
 
 import saveContent from '../../../import';
 import MainPanel from '../../main-panel';

@@ -1,5 +1,5 @@
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import Box from '@mui/material/Box';
+import { Box } from '@mui/material';
 
 export interface SearchResultsProps {
   className?: string;

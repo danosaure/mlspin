@@ -1,8 +1,6 @@
 import { useState, ChangeEvent } from 'react';
+import { Button, Stack, TextField } from '@mui/material';
 
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import { ZipLookupSearchType } from '../../search/zip-lookup';
 
 export type ZipLookupSearchFormProps = {

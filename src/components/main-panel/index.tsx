@@ -1,6 +1,5 @@
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import { ReactNode } from 'react';
+import { Box, Typography } from '@mui/material';
 
 import MainPanelSection from './main-panel-section';
 

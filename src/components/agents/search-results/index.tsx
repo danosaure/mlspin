@@ -1,4 +1,5 @@
 import { GridColDef } from '@mui/x-data-grid';
+
 import AgentType from '../../../types/agent';
 import SearchResults from '../../search-results';
 

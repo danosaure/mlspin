@@ -1,20 +1,19 @@
 import { useState, SyntheticEvent } from 'react';
-
-import BusinessIcon from '@mui/icons-material/Business';
-import ImportExportIcon from '@mui/icons-material/ImportExport';
-import MapIcon from '@mui/icons-material/Map';
-import PersonIcon from '@mui/icons-material/Person';
-import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
-import Tabs from '@mui/material/Tabs';
-
-import TabPanel from '../tab-panel';
-import { a11yProps } from './utils';
+import {
+  Business as BusinessIcon,
+  ImportExport as ImportExportIcon,
+  Map as MapIcon,
+  Person as PersonIcon,
+} from '@mui/icons-material';
+import { Box, Tab, Tabs } from '@mui/material';
 
 import Agents from '../agents';
 import Importers from '../importers';
 import Offices from '../offices';
+import TabPanel from '../tab-panel';
 import ZipLookup from '../zip-lookup';
+
+import { a11yProps } from './utils';
 
 export default () => {
   const [tabId, setTabId] = useState(0);
