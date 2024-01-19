@@ -1,5 +1,16 @@
-.dano-modal {
-  .dano-modal-box {
+@use "../style.utils" as danoUtils;
+
+.dano-modal-root {
+
+  &.dano-modal-tall .dano-modal-container {
+    height: 80vh;
+  }
+
+  &.dano-modal-wide .dano-modal-container {
+    width: 80vw;
+  }
+
+  .dano-modal-container {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -8,16 +19,18 @@
     height: 50vh;
     display: flex;
     flex-direction: column;
-    box-shadow: 5px 5px 5px rgba(25, 118, 210, 0.5);
-    padding: 20px 10px;
+    box-shadow: 5px 5px 5px danoUtils.dano-darken(var(--dano-bg-secondary-color));
+    background-color: var(--dano-bg-primary-color);
 
-    .dano-modal-box-title {
+    .dano-modal-container-header {
       font-size: 2rem;
+      background-color: var(--dano-bg-secondary-color);
+      color: var(--dano-fg-secondary-color);
+      padding: 20px 10px;
     }
 
-    .dano-modal-box-divider {
-      margin-top: 10px;
-      margin-bottom: 10px;
+    .dano-modal-container-body {
+      padding: 20px;
     }
   }
 }

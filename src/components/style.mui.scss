@@ -1,19 +1,4 @@
-// @function transparency($color, $pct) {
-//   @return color-mix(in lab, transparent #{$pct}, #{$color});
-// }
-
-@function disable($color) {
-  @return color-mix(in lab, transparent 50%, #{$color});
-}
-
-@function lighten($color) {
-  @return color-mix(in lab, transparent 30%, #{$color});
-}
-
-@function darken($color) {
-  @return color-mix(in srgb, #{$color}, black 40%);
-}
-
+@use "style.utils" as danoUtils;
 
 // Material-UI overrides.
 .dano-app {
@@ -27,13 +12,13 @@
       background-color: var(--dano-bg-secondary-color);
 
       &:hover {
-        background-color: darken(var(--dano-bg-secondary-color));
+        background-color: danoUtils.dano-darken(var(--dano-bg-secondary-color));
       }
     }
 
     &.MuiButton-outlined {
       color: var(--dano-bg-secondary-color);
-      border-color: lighten(var(--dano-bg-secondary-color));
+      border-color: danoUtils.dano-lighten(var(--dano-bg-secondary-color));
 
       &:hover {
         border-color: var(--dano-bg-secondary-color);
@@ -57,12 +42,12 @@
 
   .MuiFormControl-root, .MuiTextField-root {
     .MuiFormLabel-root, .MuiInputLabel-root {
-      color: lighten(var(--dano-fg-primary-color));
+      color: danoUtils.dano-lighten(var(--dano-fg-primary-color));
     }
 
     .MuiOutlinedInput-root {
       .MuiOutlinedInput-notchedOutline {
-        border-color: lighten(var(--dano-fg-primary-color));
+        border-color: danoUtils.dano-lighten(var(--dano-fg-primary-color));
       }
 
 
@@ -77,7 +62,7 @@
 
   .MuiTabs-root {
     .MuiButtonBase-root {
-      color: lighten(var(--dano-fg-primary-color));
+      color: danoUtils.dano-lighten(var(--dano-fg-primary-color));
 
       &.Mui-selected {
         color: var(--dano-bg-secondary-color);
@@ -143,7 +128,7 @@
 
             .MuiTablePagination-input {
               .MuiTablePagination-selectIcon {
-                color: lighten(var(--dano-fg-primary-color));
+                color: danoUtils.dano-lighten(var(--dano-fg-primary-color));
               }
             }
 

@@ -1,0 +1,15 @@
+// @function transparency($color, $pct) {
+//   @return color-mix(in lab, transparent #{$pct}, #{$color});
+// }
+
+@function dano-disable($color) {
+  @return color-mix(in lab, transparent 50%, #{$color});
+}
+
+@function dano-lighten($color) {
+  @return color-mix(in lab, transparent 30%, #{$color});
+}
+
+@function dano-darken($color) {
+  @return color-mix(in srgb, #{$color}, black 40%);
+}

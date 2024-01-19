@@ -34,7 +34,7 @@ export default () => {
 
       if (editData) {
         editModal = (
-          <Modal open onClose={closeEditModal} title={`Edit Zip ${editData.id}`}>
+          <Modal open tall onClose={closeEditModal} title={`Edit Zip ${editData.id}`}>
             <>Modal</>
           </Modal>
         );
