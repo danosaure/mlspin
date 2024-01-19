@@ -1,3 +1,102 @@
+.dano-app .MuiButtonBase-root {
+  text-transform: none;
+  color: var(--dano-fg-secondary-color);
+}
+.dano-app .MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary {
+  color: var(--dano-fg-secondary-color);
+  background-color: var(--dano-bg-secondary-color);
+}
+.dano-app .MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary:hover {
+  background-color: color-mix(in srgb, var(--dano-bg-secondary-color), black 40%);
+}
+.dano-app .MuiButtonBase-root.MuiButton-outlined {
+  color: var(--dano-bg-secondary-color);
+  border-color: color-mix(in lab, transparent 30%, var(--dano-bg-secondary-color));
+}
+.dano-app .MuiButtonBase-root.MuiButton-outlined:hover {
+  border-color: var(--dano-bg-secondary-color);
+}
+.dano-app .MuiButtonBase-root.Mui-selected {
+  color: var(--dano-bg-secondary-color);
+}
+.dano-app .MuiPaper-root {
+  background-color: var(--dano-bg-secondary-color);
+  color: var(--dano-fg-secondary-color);
+}
+.dano-app .MuiOutlinedInput-root {
+  color: var(--dano-fg-primary-color);
+  stop-color: var(--dano-fg-primary-color);
+}
+.dano-app .MuiFormControl-root .MuiFormLabel-root, .dano-app .MuiFormControl-root .MuiInputLabel-root, .dano-app .MuiTextField-root .MuiFormLabel-root, .dano-app .MuiTextField-root .MuiInputLabel-root {
+  color: color-mix(in lab, transparent 30%, var(--dano-fg-primary-color));
+}
+.dano-app .MuiFormControl-root .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline, .dano-app .MuiTextField-root .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: color-mix(in lab, transparent 30%, var(--dano-fg-primary-color));
+}
+.dano-app .MuiFormControl-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline, .dano-app .MuiTextField-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--dano-fg-primary-color);
+}
+.dano-app .MuiTabs-root .MuiButtonBase-root {
+  color: color-mix(in lab, transparent 30%, var(--dano-fg-primary-color));
+}
+.dano-app .MuiTabs-root .MuiButtonBase-root.Mui-selected {
+  color: var(--dano-bg-secondary-color);
+}
+.dano-app .MuiTabs-root .MuiTabs-scroller .MuiTabs-indicator {
+  background-color: var(--dano-bg-secondary-color);
+}
+.dano-app .MuiDataGrid-root {
+  color: var(--dano-fg-primary-color);
+}
+.dano-app .MuiDataGrid-root .MuiButtonBase-root {
+  color: var(--dano-fg-primary-color);
+}
+.dano-app .MuiDataGrid-root .MuiButtonBase-root.Mui-disabled {
+  color: disable(var(--dano-fg-primary-color));
+}
+.dano-app .MuiDataGrid-root.MuiDataGrid-withBorderColor {
+  border-color: var(--dano-bg-secondary-color);
+}
+.dano-app .MuiDataGrid-root.MuiDataGrid-withBorderColor .MuiDataGrid-main .MuiDataGrid-columnHeaders.MuiDataGrid-withBorderColor {
+  border-color: var(--dano-bg-secondary-color);
+}
+.dano-app .MuiDataGrid-root.MuiDataGrid-withBorderColor .MuiDataGrid-main .MuiDataGrid-columnHeaders.MuiDataGrid-withBorderColor .MuiDataGrid-columnSeparator {
+  color: var(--dano-bg-secondary-color);
+}
+.dano-app .MuiDataGrid-root.MuiDataGrid-withBorderColor .MuiDataGrid-footerContainer.MuiDataGrid-withBorderColor {
+  border-color: var(--dano-bg-secondary-color);
+}
+.dano-app .MuiDataGrid-root.MuiDataGrid-withBorderColor .MuiDataGrid-footerContainer .MuiTablePagination-root {
+  color: var(--dano-fg-primary-color);
+}
+.dano-app .MuiDataGrid-root.MuiDataGrid-withBorderColor .MuiDataGrid-footerContainer .MuiTablePagination-root .MuiTablePagination-toolbar .MuiTablePagination-spacer {
+  color: var(--dano-fg-primary-color);
+}
+.dano-app .MuiDataGrid-root.MuiDataGrid-withBorderColor .MuiDataGrid-footerContainer .MuiTablePagination-root .MuiTablePagination-toolbar .MuiTablePagination-input .MuiTablePagination-selectIcon {
+  color: color-mix(in lab, transparent 30%, var(--dano-fg-primary-color));
+}
+.dano-app .MuiDataGrid-root .MuiDataGrid-row .MuiDataGrid-withBorderColor {
+  border-color: var(--dano-bg-secondary-color);
+}
+
+:root body[data-theme=dark] {
+  --dano-bg-primary-color: #000000;
+  --dano-bg-secondary-color: #265D80;
+  --dano-fg-primary-color: #285534;
+  --dano-fg-secondary-color: #CCEBFF;
+}
+:root body[data-theme=light] {
+  --dano-bg-primary-color: snow;
+  --dano-bg-secondary-color: hotpink;
+  --dano-fg-primary-color: palevioletred;
+  --dano-fg-secondary-color: #BFECFF;
+}
+
+body {
+  background-color: var(--dano-bg-primary-color);
+  color: var(--dano-fg-primary-color);
+}
+
 .dano-theme-toggler {
   /* */
 }
@@ -27,28 +126,32 @@
   padding-bottom: 8px;
 }
 
-/*
-:root {
-    body[data-theme="dark"] {
-        --dano-bg-primary-color: $dano-bg-primary-color;
-        --dano-bg-secondary-color: $dano-bg-secondary-color;
-        --dano-fg-primary-color: $dano-fg-primary-color;
-        --dano-fg-secondary-color: $dano-fg-secondary-color;
-    }
-
-    body[data-theme="light"] {
-        --dano-bg-primary-color: $dano-fg-primary-color;
-        --dano-bg-secondary-color: $dano-fg-secondary-color;
-        --dano-fg-primary-color: $dano-bg-primary-color;
-        --dano-fg-secondary-color: $dano-bg-secondary-color;    
-    }
+.dano-modal-root.dano-modal-tall .dano-modal-container {
+  height: 80vh;
 }
-
-
-body {
+.dano-modal-root.dano-modal-wide .dano-modal-container {
+  width: 80vw;
+}
+.dano-modal-root .dano-modal-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 5px color-mix(in srgb, var(--dano-bg-secondary-color), black 40%);
   background-color: var(--dano-bg-primary-color);
-  color: var(--dano-fg-primary-color);
 }
-*/
+.dano-modal-root .dano-modal-container .dano-modal-container-header {
+  font-size: 2rem;
+  background-color: var(--dano-bg-secondary-color);
+  color: var(--dano-fg-secondary-color);
+  padding: 20px 10px;
+}
+.dano-modal-root .dano-modal-container .dano-modal-container-body {
+  padding: 20px;
+}
 
 /*# sourceMappingURL=style.css.map */
