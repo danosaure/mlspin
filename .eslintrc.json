@@ -1,23 +1,24 @@
 {
-    "root": true,
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/eslint-recommended",
-      "plugin:@typescript-eslint/recommended",
-      "prettier"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "@typescript-eslint",
-      "prettier"
-    ],
-    "rules": {
-      "max-len": ["warn", 120],
-      "no-console": "warn",
-      "no-async-promise-executor": "warn",
-      "prettier/prettier": "error"
-    },
-    "overrides": [{
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier"],
+  "rules": {
+    "max-len": ["warn", 120],
+    "no-console": "warn",
+    "no-async-promise-executor": "warn",
+    "prettier/prettier": "error",
+    "no-restricted-imports": ["error", {
+      "patterns": ["@mui/*/*/*"]
+    }]
+  },
+  "overrides": [
+    {
       "files": ["*.test.ts"],
       "env": {
         "mocha": true
@@ -25,5 +26,6 @@
       "globals": {
         "expect": "readonly"
       }
-    }]
-  }
+    }
+  ]
+}
