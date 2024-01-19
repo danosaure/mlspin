@@ -1,5 +1,6 @@
 const path = require('path');
 const copyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const nodeModulesSrc = path.join(__dirname, 'node_modules');
 const docsDest = path.join(__dirname, 'docs');
@@ -23,10 +24,11 @@ module.exports = {
   cache: false,
   entry: {
     app: path.join(__dirname, 'src', 'index.tsx'),
+    style: path.join(__dirname, 'src', 'components', 'style.scss'),
   },
   output: {
     path: path.resolve(__dirname, 'docs'),
-    filename: '[name].min.js',
+    clean: true,
   },
   externals: {
     react: 'React',
@@ -50,6 +52,10 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
     ],
   },
   optimization: {
@@ -66,5 +72,6 @@ module.exports = {
         ...assets3rdToCopy,
       ],
     }),
+    new MiniCssExtractPlugin(),
   ],
 };
