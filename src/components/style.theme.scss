@@ -1,6 +1,8 @@
 @use 'style.mui' as MUIStyle;
 
 :root {
+  --dano-error-color: red;
+  
   body[data-theme='dark'] {
     --dano-bg-primary-color:    #000000;
     --dano-bg-secondary-color:  #265D80;

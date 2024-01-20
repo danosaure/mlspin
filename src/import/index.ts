@@ -1,8 +1,6 @@
 import ZipLookup, { ZipLookupType } from '../models/zip-lookup';
-import Persistence from '../persistence';
-import MLSPinPersistenceError from '../persistence/error';
-import Office from '../models/office';
-import Agent from '../models/agent';
+import Persistence, { MLSPinPersistenceError } from '../persistence';
+import { Agent, Office } from '../models';
 import OfficeType from '../types/office';
 import PersistenceHistoryType from '../types/persistence-history';
 

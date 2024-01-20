@@ -9,6 +9,8 @@ import openCursor from './open-cursor';
 import put from './put';
 import transaction, { PersistenceTransaction, PersistenceTransactionEventHandlers } from './transaction';
 
+export { MLSPinPersistenceError };
+
 export default class Persistence {
   private db: IDBDatabase | null = null;
 

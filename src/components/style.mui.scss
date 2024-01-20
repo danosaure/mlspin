@@ -1,7 +1,20 @@
-@use "style.utils" as danoUtils;
+@use 'style.utils' as danoUtils;
 
 // Material-UI overrides.
 .dano-app {
+  .MuiInputBase-root {
+    &.MuiInputBase-colorPrimary {
+      .MuiInputBase-input.MuiOutlinedInput-input {
+        border-color: var(--dano-fg-primary-color);
+      }
+
+      &.Mui-error {
+        .MuiInputBase-input.MuiOutlinedInput-input {
+          border-color: var(--dano-error-color);
+        }
+      }
+    }
+  }
   .MuiButtonBase-root {
     text-transform: none; // I just hate all-caps.
 
@@ -30,18 +43,21 @@
     }
   }
 
-  .MuiPaper-root {
-    background-color: var(--dano-bg-secondary-color);
-    color: var(--dano-fg-secondary-color);
-  }
+  // .MuiPaper-root {
+  //   background-color: var(--dano-bg-secondary-color);
+  //   color: var(--dano-fg-secondary-color);
+  // }
 
   .MuiOutlinedInput-root {
-    color: var(--dano-fg-primary-color);
-    stop-color: var(--dano-fg-primary-color);
+    &.MuiInputBase-colorPrimary {
+      color: var(--dano-fg-primary-color);
+    }
   }
 
-  .MuiFormControl-root, .MuiTextField-root {
-    .MuiFormLabel-root, .MuiInputLabel-root {
+  .MuiFormControl-root,
+  .MuiTextField-root {
+    .MuiFormLabel-root,
+    .MuiInputLabel-root {
       color: danoUtils.dano-lighten(var(--dano-fg-primary-color));
     }
 
@@ -49,8 +65,6 @@
       .MuiOutlinedInput-notchedOutline {
         border-color: danoUtils.dano-lighten(var(--dano-fg-primary-color));
       }
-
-
 
       &:hover {
         .MuiOutlinedInput-notchedOutline {
@@ -76,19 +90,15 @@
 
       .MuiTab-root {
         &.Mui-selected {
-  
           &.MuiButtonBase-root {
           }
-  
         }
       }
-  
     }
   }
 
   .MuiDataGrid-root {
     color: var(--dano-fg-primary-color);
-
 
     .MuiButtonBase-root {
       color: var(--dano-fg-primary-color);
@@ -112,8 +122,6 @@
       }
 
       .MuiDataGrid-footerContainer {
-
-
         &.MuiDataGrid-withBorderColor {
           border-color: var(--dano-bg-secondary-color);
         }
@@ -133,7 +141,6 @@
             }
 
             .MuiTablePagination-actions {
-
             }
           }
         }
@@ -144,7 +151,12 @@
       .MuiDataGrid-withBorderColor {
         border-color: var(--dano-bg-secondary-color);
       }
+    }
+  }
 
+  .MuiCircularProgress-root {
+    &.MuiCircularProgress-colorPrimary {
+      color: var(--dano-fg-primary-color);
     }
   }
 }

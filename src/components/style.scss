@@ -1,9 +1,8 @@
 @use 'style.theme' as theme;
 
+@use 'admin/style' as AdminStyle;
 @use 'header/style' as HeaderStyle;
-@use 'importers/style' as ImportersStyle;
 @use 'main/style' as MainStyle;
 @use 'main-panel/style' as MainPanelStyle;
 @use 'modal/style' as ModalStyle;
-@use "tab-panel/style" as TabPanelStyle;
-
+@use 'tab-panel/style' as TabPanelStyle;
