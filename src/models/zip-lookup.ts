@@ -26,22 +26,22 @@ export default class ZipLookup extends Base {
   static async updateNeighborhoods(
     id: string,
     neighborhoods: string[],
-    objectStore?: IDBObjectStore,
     transaction?: PersistenceTransaction,
     persistence?: Persistence
   ): Promise<ZipLookup> {
-    if (!objectStore) {
-      if (!transaction) {
-        if (!persistence) {
-          persistence = new Persistence();
-          await persistence.open();
-        }
+    let localeTransaction = false;
 
-        transaction = await persistence.transaction([ZipLookup.STORE], 'readwrite');
+    if (!transaction) {
+      if (!persistence) {
+        persistence = new Persistence();
+        await persistence.open();
       }
 
-      objectStore = transaction.stores[ZipLookup.STORE];
+      transaction = await persistence.transaction([this.STORE], 'readwrite');
+      localeTransaction = true;
     }
+
+    const objectStore = transaction.stores[this.STORE];
 
     const oldItem: ZipLookupType = (await persistence?.get(objectStore, id)) as ZipLookupType;
 
@@ -57,7 +57,9 @@ export default class ZipLookup extends Base {
 
     await persistence?.put(objectStore, newItem, newHistory);
 
-    transaction?.complete();
+    if (localeTransaction) {
+      transaction.complete();
+    }
 
     return new ZipLookup(newItem);
   }

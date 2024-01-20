@@ -12,9 +12,9 @@ export default class Office extends Base {
   static readonly STORE = 'offices';
   static readonly INDICES: Record<string, boolean> = {
     city: false, // for city mapping.
-    'name,city,zip': false, // for search -> index `offices-name-city-zip`.
+    'name,zip': false, // for search -> index `offices-name-zip`.
   };
-  static readonly SEARCH_INDEX = 'offices-name-city-zip';
+  static readonly SEARCH_INDEX = 'offices-name-zip';
 
   constructor(data: OfficeType) {
     super(data);

@@ -1,5 +1,6 @@
 import ZipLookup, { ZipLookupType } from '../models/zip-lookup';
 import Persistence from '../persistence';
+import { PersistenceTransaction } from '../persistence/transaction';
 
 export type ZipLookupSearchType = {
   id?: string;
@@ -26,17 +27,27 @@ const matchZipLookup = (criteria: ZipLookupSearchType, zipLookup: ZipLookupType)
   return true;
 };
 
-export default async (criteria: ZipLookupSearchType): Promise<ZipLookupType[]> => {
-  const persistence = new Persistence();
-  await persistence.open();
+export default async (
+  criteria: ZipLookupSearchType,
+  persistence?: Persistence,
+  transaction?: PersistenceTransaction
+): Promise<ZipLookupType[]> => {
+  let localeTransaction = false;
 
-  const transaction = await persistence.transaction([ZipLookup.STORE], 'readonly');
+  if (!transaction) {
+    if (!persistence) {
+      persistence = new Persistence();
+      await persistence.open();
+    }
+    transaction = await persistence.transaction(ZipLookup.STORE);
+    localeTransaction = true;
+  }
 
   // Agents
   const matches = await new Promise<ZipLookupType[]>((resolve) => {
     const zips: ZipLookupType[] = [];
 
-    persistence.openCursor(
+    persistence?.openCursor(
       transaction.stores[ZipLookup.STORE],
       (cursor) => {
         const aZip: ZipLookupType = cursor.value;
@@ -51,6 +62,8 @@ export default async (criteria: ZipLookupSearchType): Promise<ZipLookupType[]> =
     );
   });
 
-  transaction.complete();
+  if (localeTransaction) {
+    transaction.complete();
+  }
   return matches.sort((a, b) => a.id.localeCompare(b.id));
 };

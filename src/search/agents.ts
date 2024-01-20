@@ -1,9 +1,8 @@
+import { searchOffices } from './offices';
+import { Agent, AgentSearchType, Office, OfficeSearchType, ZipLookup } from '../models';
 import Persistence from '../persistence';
-import Office, { OfficeSearchType } from '../models/office';
-import Agent, { AgentSearchType } from '../models/agent';
 import AgentType from '../types/agent';
 import OfficeType from '../types/office';
-import { searchOffices } from './offices';
 
 export type AgentTypeSearchResult = AgentType & {
   '_office.id': string;
@@ -35,7 +34,7 @@ export default async ({ name, office, city, zip }: AgentSearchType): Promise<Age
   const persistence = new Persistence();
   await persistence.open();
 
-  const transaction = await persistence.transaction([Agent.STORE, Office.STORE], 'readonly');
+  const transaction = await persistence.transaction([Agent.STORE, Office.STORE, ZipLookup.STORE], 'readonly');
 
   const officeCriteria: OfficeSearchType = {
     name: office,
@@ -44,7 +43,7 @@ export default async ({ name, office, city, zip }: AgentSearchType): Promise<Age
   };
 
   // Offices
-  const matchedOffices = await searchOffices(persistence, transaction.stores[Office.STORE], officeCriteria);
+  const matchedOffices = await searchOffices(persistence, transaction, officeCriteria);
   const offices: Record<string, OfficeType> = matchedOffices.reduce(
     (map, office) => ({
       ...map,

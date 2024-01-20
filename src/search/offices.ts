@@ -1,8 +1,14 @@
+import searchZipLookup from './zip-lookup';
+import { Office, OfficeSearchType, ZipLookup } from '../models';
 import Persistence from '../persistence';
-import Office, { OfficeSearchType } from '../models/office';
 import OfficeType from '../types/office';
+import { PersistenceTransaction } from '../persistence/transaction';
 
-const matchOffice = ({ name, city, zip }: OfficeSearchType, [keyName, keyCity, keyZip]: string[]): boolean => {
+type OfficeSearchWithZipLookupType = OfficeSearchType & {
+  zipLookups: string[];
+};
+
+const matchOffice = ({ name, city, zip, zipLookups }: OfficeSearchWithZipLookupType, [keyName, keyZip]: string[]): boolean => {
   if (name) {
     const officeName = keyName.toLocaleLowerCase();
     const matchName = name
@@ -19,7 +25,7 @@ const matchOffice = ({ name, city, zip }: OfficeSearchType, [keyName, keyCity, k
     }
   }
 
-  const matchCity = city ? keyCity.toLocaleLowerCase().indexOf(city.toLocaleLowerCase()) !== -1 : true;
+  const matchCity = city ? zipLookups.indexOf(keyZip) !== -1 : true;
   const matchZip = zip ? keyZip.indexOf(zip) !== -1 : true;
 
   if (city && zip) {
@@ -35,34 +41,47 @@ const matchOffice = ({ name, city, zip }: OfficeSearchType, [keyName, keyCity, k
 
 export const searchOffices = async (
   persistence: Persistence,
-  store: IDBObjectStore,
+  transaction: PersistenceTransaction,
   criteria: OfficeSearchType
-): Promise<OfficeType[]> =>
-  new Promise((resolve) => {
+): Promise<OfficeType[]> => {
+  let zipLookups: string[] = [];
+  if (criteria.city) {
+    const zipLookupMatches = await searchZipLookup({ city: criteria.city }, persistence, transaction);
+    zipLookups = zipLookupMatches.map((zipLookup) => zipLookup.id);
+  }
+
+  const criteriaWithZipLookups: OfficeSearchWithZipLookupType = {
+    ...criteria,
+    zipLookups,
+  };
+
+  return new Promise((resolve) => {
     const matches: OfficeType[] = [];
 
     persistence.openCursor(
-      store.index(Office.SEARCH_INDEX),
+      transaction.stores[Office.STORE].index(Office.SEARCH_INDEX),
       (cursor) => {
-        if (matchOffice(criteria, cursor.key as string[])) {
-          // if (Office.match({ name, city, zip }, cursor.value)) {
+        if (matchOffice(criteriaWithZipLookups, cursor.key as string[])) {
           matches.push(cursor.value);
         }
         cursor.continue();
       },
       () => {
-        resolve(matches.sort((a, b) => a.name.localeCompare(b.name)));
+        resolve(matches);
       }
     );
   });
+};
 
-export default async (criteria: OfficeSearchType): Promise<OfficeType[]> => {
-  const persistence = new Persistence();
-  await persistence.open();
+export default async (criteria: OfficeSearchType, persistence?: Persistence): Promise<OfficeType[]> => {
+  if (!persistence) {
+    persistence = new Persistence();
+    await persistence.open();
+  }
 
-  const transaction = await persistence.transaction(Office.STORE, 'readonly');
+  const transaction = await persistence.transaction([Office.STORE, ZipLookup.STORE], 'readonly');
 
-  const matches = await searchOffices(persistence, transaction.stores[Office.STORE], criteria);
+  const matches = await searchOffices(persistence, transaction, criteria);
 
   transaction.complete();
   return matches;
