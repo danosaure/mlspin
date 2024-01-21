@@ -1,7 +1,8 @@
-import { ImportExport as ImportExportIcon, Map as MapIcon } from '@mui/icons-material';
+import { Dataset as DatasetIcon, ImportExport as ImportExportIcon, Map as MapIcon } from '@mui/icons-material';
 import { Box, Stack, Tab, Tabs, Typography } from '@mui/material';
 import { useState, SyntheticEvent } from 'react';
 
+import Backup from './backup';
 import MLSPinImporter from './mlspin-importer';
 import ZipLookup from './zip-lookup';
 import { a11yProps } from '../main/utils';
@@ -19,8 +20,10 @@ export default () => {
           Admin
         </Typography>
         <Tabs className="dano--admin--tabs" value={tabId} onChange={changeTab} aria-label="Navigation tabs" variant="fullWidth">
-          <Tab className="dano--admin--tabs--item" label="MLSpin" {...a11yProps('mls')} icon={<ImportExportIcon />} />
+          <Tab className="dano--admin--tabs--item" label="MLSpin" {...a11yProps('mls')} icon={<DatasetIcon />} />
           <Tab className="dano--admin--tabs--item" label="Zip" {...a11yProps('zip')} icon={<MapIcon />} />
+          <Tab className="dano--admin--tabs--item dano--admin--tabs--divider" label="" disabled />
+          <Tab className="dano--admin--tabs--item" label="Backups" {...a11yProps('backups')} icon={<ImportExportIcon />} />
         </Tabs>
       </Stack>
 
@@ -30,6 +33,10 @@ export default () => {
 
       <TabPanel tabId="zip" selectedTabId={tabId}>
         <ZipLookup />
+      </TabPanel>
+
+      <TabPanel tabId="backups" selectedTabId={tabId}>
+        <Backup />
       </TabPanel>
     </Box>
   );

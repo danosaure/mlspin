@@ -1,1 +1,12 @@
 @use "mlspin-importer/style" as MLSPinImporter;
+
+.dano--admin {
+  .dano--admin--tabs {
+    flex-grow: 1;
+    .dano--admin--tabs--item {
+      &.dano--admin--tabs--divider {
+        flex: 1;
+      }
+    }
+  }
+}

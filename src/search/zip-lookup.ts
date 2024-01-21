@@ -48,7 +48,7 @@ export default async (
     const zips: ZipLookupType[] = [];
 
     persistence?.openCursor(
-      transaction.stores[ZipLookup.STORE],
+      (transaction as PersistenceTransaction).stores[ZipLookup.STORE],
       (cursor) => {
         const aZip: ZipLookupType = cursor.value;
 

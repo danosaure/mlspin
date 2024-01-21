@@ -1,6 +1,7 @@
 import PersistenceBaseType from '../types/persistence-base';
 import PersistenceHistoryType from '../types/persistence-history';
 
+import createBackup, { DownloadFileJsonType } from './create-backup';
 import { DB_NAME, DB_VERSION } from './constants';
 import MLSPinPersistenceError from './error';
 import get from './get';
@@ -61,4 +62,8 @@ export default class Persistence {
   ): void {
     return openCursor(storeOrIndex, withCursor, cursorDone);
   }
+
+  async createBackup(): Promise<DownloadFileJsonType> {
+    return createBackup(this);
+    }
 }
