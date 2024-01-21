@@ -4,7 +4,7 @@ import {
   ToggleOff as ToggleOffIcon,
   ToggleOn as ToggleOnIcon,
 } from '@mui/icons-material';
-import { ButtonGroup, IconButton, Stack } from '@mui/material';
+import { ButtonGroup, Stack } from '@mui/material';
 import { useState } from 'react';
 
 export default () => {

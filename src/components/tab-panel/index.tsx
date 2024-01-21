@@ -17,6 +17,10 @@ export default ({ tabId, selectedTabId, children }: TabPanelProps) => (
     id={generateTabPanelId(tabId)}
     aria-labelledby={generateTabId(tabId)}
   >
-    {tabId === selectedTabId && <Box className="dano--tab-panel--content" sx={{ p: 3 }}>{children}</Box>}
+    {tabId === selectedTabId && (
+      <Box className="dano--tab-panel--content" sx={{ p: 3 }}>
+        {children}
+      </Box>
+    )}
   </div>
 );

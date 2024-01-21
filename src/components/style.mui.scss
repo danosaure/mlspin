@@ -159,4 +159,23 @@
       color: var(--dano-fg-primary-color);
     }
   }
+
+  .MuiTableContainer-root {
+    // background-color: var(--dano-bg-primary-color);
+    // color: var(--dano-fg-primary-color);
+
+    .MuiTable-root {
+      .MuiTableBody-root {
+        .MuiTableRow-root {
+          .MuiTableCell-root {
+            color: inherit;
+            border-color: var(--dano-bg-secondary-color);
+          }
+
+        }
+
+      }
+
+    }
+  }
 }

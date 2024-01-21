@@ -1,4 +1,4 @@
-import { DownloadFileJsonType } from "../persistence/create-backup";
+import { DownloadFileJsonType } from '../persistence/create-backup';
 
 const downloadFile = (json: DownloadFileJsonType, filename: string): void => {
   const now = new Date();
@@ -16,6 +16,6 @@ const downloadFile = (json: DownloadFileJsonType, filename: string): void => {
 
   document.body.removeChild(link);
   URL.revokeObjectURL(href);
-}
+};
 
 export default downloadFile;

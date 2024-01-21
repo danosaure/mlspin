@@ -1,7 +1,5 @@
 import Persistence from './index';
-import { Agent, Office, ZipLookup, ZipLookupType } from '../models';
-import AgentType from '../types/agent';
-import OfficeType from '../types/office';
+import { Agent, Office, ZipLookup } from '../models';
 import PersistenceBaseType from '../types/persistence-base';
 
 export type DownloadStoreType = {
@@ -11,7 +9,7 @@ export type DownloadStoreType = {
 
 export type DownloadFileMetaType = {
   date: Date;
-}
+};
 
 export type DownloadFileJsonType = {
   meta: DownloadFileMetaType;
@@ -47,10 +45,10 @@ const backup = async (persistence: Persistence): Promise<DownloadFileJsonType> =
 
   return {
     meta: {
-      date: new Date()
+      date: new Date(),
     },
     data,
-  }
+  };
 };
 
 export default backup;

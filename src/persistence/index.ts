@@ -65,5 +65,5 @@ export default class Persistence {
 
   async createBackup(): Promise<DownloadFileJsonType> {
     return createBackup(this);
-    }
+  }
 }
