@@ -4,10 +4,18 @@ import AgentType from '../types/agent';
 import OfficeType from '../types/office';
 import PersistenceBaseType from '../types/persistence-base';
 
+export type DownloadStoreType = {
+  store: string;
+  entries: PersistenceBaseType[];
+};
+
+export type DownloadFileMetaType = {
+  date: Date;
+}
+
 export type DownloadFileJsonType = {
-  agents: AgentType[];
-  offices: OfficeType[];
-  zipLookups: ZipLookupType[];
+  meta: DownloadFileMetaType;
+  data: DownloadStoreType[];
 };
 
 const backup = async (persistence: Persistence): Promise<DownloadFileJsonType> => {
@@ -15,25 +23,34 @@ const backup = async (persistence: Persistence): Promise<DownloadFileJsonType> =
 
   const transaction = await persistence.transaction([Agent.STORE, Office.STORE, ZipLookup.STORE]);
 
-  const [agents, offices, zipLookups] = await Promise.all(
+  const data = await Promise.all(
     [Agent.STORE, Office.STORE, ZipLookup.STORE].map(
-      async (store) =>
-        new Promise<PersistenceBaseType[]>((resolve) => {
-          const results: PersistenceBaseType[] = [];
+      async (store: string) =>
+        new Promise<DownloadStoreType>((resolve) => {
+          const entries: PersistenceBaseType[] = [];
 
           persistence.openCursor(
             transaction.stores[store],
             (cursor) => {
-              results.push(cursor.value);
+              entries.push(cursor.value);
               cursor.continue();
             },
-            () => resolve(results)
+            () =>
+              resolve({
+                store,
+                entries,
+              })
           );
         })
     )
   );
 
-  return { agents: agents as AgentType[], offices: offices as OfficeType[], zipLookups: zipLookups as ZipLookupType[] };
+  return {
+    meta: {
+      date: new Date()
+    },
+    data,
+  }
 };
 
 export default backup;
