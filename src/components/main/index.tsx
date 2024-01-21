@@ -10,28 +10,28 @@ import TabPanel from '../tab-panel';
 import { a11yProps } from './utils';
 
 export default () => {
-  const [tabId, setTabId] = useState(0);
+  const [tabId, setTabId] = useState('agents');
 
-  const changeTab = (event: SyntheticEvent, newTabId: number) => setTabId(newTabId);
+  const changeTab = (event: SyntheticEvent, newTabId: string) => setTabId(newTabId);
 
   return (
-    <Box component="main" className="dano-main">
-      <Tabs className="dano-tabs" value={tabId} onChange={changeTab} aria-label="Navigation tabs" variant="fullWidth">
-        <Tab className="dano-tabs-item" label="Agents" {...a11yProps(0)} icon={<PersonIcon />} />
-        <Tab className="dano-tabs-item" label="Offices" {...a11yProps(1)} icon={<BusinessIcon />} />
-        <Tab className="dano-tabs-item dano-tabs-divider" label="" disabled /> {/* counted as 2 */}
-        <Tab className="dano-tabs-item" label="Admin" {...a11yProps(3)} icon={<AdminPanelSettingsIcon />} />
+    <Box component="main" className="dano--main">
+      <Tabs className="dano--main--tabs" value={tabId} onChange={changeTab} aria-label="Navigation tabs" variant="fullWidth">
+        <Tab className="dano--main--tabs--item" label="Agents" {...a11yProps('agents')} icon={<PersonIcon />} />
+        <Tab className="dano--main--tabs--item" label="Offices" {...a11yProps('offices')} icon={<BusinessIcon />} />
+        <Tab className="dano--main--tabs--item dano--tabs--divider" label="" disabled />
+        <Tab className="dano--main--tabs--item" label="Admin" {...a11yProps('admin')} icon={<AdminPanelSettingsIcon />} />
       </Tabs>
 
-      <TabPanel tabId={0} selectedTabId={tabId}>
+      <TabPanel tabId="agents" selectedTabId={tabId}>
         <Agents />
       </TabPanel>
 
-      <TabPanel tabId={1} selectedTabId={tabId}>
+      <TabPanel tabId="offices" selectedTabId={tabId}>
         <Offices />
       </TabPanel>
 
-      <TabPanel tabId={3} selectedTabId={tabId}>
+      <TabPanel tabId="admin" selectedTabId={tabId}>
         <Admin />
       </TabPanel>
     </Box>

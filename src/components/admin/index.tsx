@@ -8,27 +8,27 @@ import { a11yProps } from '../main/utils';
 import TabPanel from '../tab-panel';
 
 export default () => {
-  const [tabId, setTabId] = useState(0);
+  const [tabId, setTabId] = useState('mls');
 
-  const changeTab = (event: SyntheticEvent, newTabId: number) => setTabId(newTabId);
+  const changeTab = (event: SyntheticEvent, newTabId: string) => setTabId(newTabId);
 
   return (
-    <Box component="main" className="dano-admin">
+    <Box component="main" className="dano--admin">
       <Stack direction="row" spacing={10}>
         <Typography variant="h2" component="div">
           Admin
         </Typography>
-        <Tabs className="dano-admin-tabs" value={tabId} onChange={changeTab} aria-label="Navigation tabs" variant="fullWidth">
-          <Tab className="dano-admin-tabs-item" label="Agents & Offices" {...a11yProps(0)} icon={<ImportExportIcon />} />
-          <Tab className="dano-admin-tabs-item" label="Zip" {...a11yProps(1)} icon={<MapIcon />} />
+        <Tabs className="dano--admin--tabs" value={tabId} onChange={changeTab} aria-label="Navigation tabs" variant="fullWidth">
+          <Tab className="dano--admin--tabs--item" label="MLSpin" {...a11yProps('mls')} icon={<ImportExportIcon />} />
+          <Tab className="dano--admin--tabs--item" label="Zip" {...a11yProps('zip')} icon={<MapIcon />} />
         </Tabs>
       </Stack>
 
-      <TabPanel tabId={0} selectedTabId={tabId}>
+      <TabPanel tabId="mls" selectedTabId={tabId}>
         <MLSPinImporter />
       </TabPanel>
 
-      <TabPanel tabId={1} selectedTabId={tabId}>
+      <TabPanel tabId="zip" selectedTabId={tabId}>
         <ZipLookup />
       </TabPanel>
     </Box>

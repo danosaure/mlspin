@@ -5,18 +5,18 @@ import { generateTabId, generateTabPanelId } from '../main/utils';
 
 interface TabPanelProps {
   children?: ReactNode;
-  selectedTabId: number;
-  tabId: number;
+  selectedTabId: string;
+  tabId: string;
 }
 
-export default (props: TabPanelProps) => (
+export default ({ tabId, selectedTabId, children }: TabPanelProps) => (
   <div
     role="tabpanel"
-    className="dano-main-tab-panel"
-    hidden={props.tabId !== props.selectedTabId}
-    id={generateTabPanelId(props.tabId)}
-    aria-labelledby={generateTabId(props.tabId)}
+    className="dano--tab-panel"
+    hidden={tabId !== selectedTabId}
+    id={generateTabPanelId(tabId)}
+    aria-labelledby={generateTabId(tabId)}
   >
-    {props.tabId === props.selectedTabId && <Box sx={{ p: 3 }}>{props.children}</Box>}
+    {tabId === selectedTabId && <Box className="dano--tab-panel--content" sx={{ p: 3 }}>{children}</Box>}
   </div>
 );

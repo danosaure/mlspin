@@ -2,16 +2,16 @@
 
 :root {
   --dano-error-color: red;
-  
+
   body[data-theme='dark'] {
     --dano-bg-primary-color:    #000000;
     --dano-bg-secondary-color:  #265D80;
-    --dano-fg-primary-color:    #285534;
+    --dano-fg-primary-color:    #5B8766;        // #285534;
     --dano-fg-secondary-color:  #CCEBFF;
   }
 
   body[data-theme='light'] {
-    --dano-bg-primary-color:    snow; // #FFB6C1;
+    --dano-bg-primary-color:    snow;           // #FFB6C1;
     --dano-bg-secondary-color:  hotpink;        // #804B53;
     --dano-fg-primary-color:    palevioletred;  // #4B6F80;
     --dano-fg-secondary-color:  #BFECFF;
