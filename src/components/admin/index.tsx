@@ -2,7 +2,7 @@ import { Dataset as DatasetIcon, ImportExport as ImportExportIcon, Map as MapIco
 import { Box, Stack, Tab, Tabs, Typography } from '@mui/material';
 import { useState, SyntheticEvent } from 'react';
 
-import Backup from './backup';
+import Backups from './backups';
 import MLSPinImporter from './mlspin-importer';
 import ZipLookup from './zip-lookup';
 import { a11yProps } from '../main/utils';
@@ -36,7 +36,7 @@ export default () => {
       </TabPanel>
 
       <TabPanel tabId="backups" selectedTabId={tabId}>
-        <Backup />
+        <Backups />
       </TabPanel>
     </Box>
   );
