@@ -8,7 +8,9 @@ import get from './get';
 import open from './open';
 import openCursor from './open-cursor';
 import put from './put';
+import restoreBackup from './restore-backup';
 import transaction, { PersistenceTransaction, PersistenceTransactionEventHandlers } from './transaction';
+import { UploadedJsonFileType } from '../components/json-file-uploader-button';
 
 export { MLSPinPersistenceError };
 
@@ -65,5 +67,9 @@ export default class Persistence {
 
   async createBackup(): Promise<DownloadFileJsonType> {
     return createBackup(this);
+  }
+
+  async restoreBackup(data: UploadedJsonFileType): Promise<void> {
+    return restoreBackup(this, data);
   }
 }

@@ -12,7 +12,9 @@ export default () => {
   };
 
   const onloadend = async (result: UploadedJsonFileType) => {
-    console.log('admin.backups(): onloadend(): result=', result);
+    // TODO: indicator restore in progress
+    const persistence = new Persistence();
+    await persistence.restoreBackup(result);
   };
 
   const onerror = (message: string) => {
