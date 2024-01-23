@@ -1,7 +1,7 @@
-import PersistenceBaseType from '../types/persistence-base';
-import PersistenceHistoryType from '../types/persistence-history';
 import MLSPinPersistenceError from './error';
 import get from './get';
+import PersistenceBaseType from '../types/persistence-base';
+import PersistenceHistoryType from '../types/persistence-history';
 
 export default async (objectStore: IDBObjectStore, item: PersistenceBaseType, newHistory: PersistenceHistoryType) => {
   const oldItem = await get(objectStore, item.id);

@@ -1,15 +1,19 @@
+import { z } from 'zod';
+
 import Persistence from './index';
 import { Agent, Office, ZipLookup } from '../models';
-import PersistenceBaseType from '../types/persistence-base';
+import PersistenceBaseType, { PersistenceBaseZod } from '../types/persistence-base';
 
-export type DownloadStoreType = {
-  store: string;
-  entries: PersistenceBaseType[];
-};
+const DownloadStoreZod = z.object({
+  store: z.string(),
+  entries: z.array(PersistenceBaseZod),
+});
+export type DownloadStoreType = z.infer<typeof DownloadStoreZod>;
 
-export type DownloadFileMetaType = {
-  date: Date;
-};
+const DownloadFileMetaZod = z.object({
+  date: z.date(),
+});
+export type DownloadFileMetaType = z.infer<typeof DownloadFileMetaZod>;
 
 export type DownloadFileJsonType = {
   meta: DownloadFileMetaType;
