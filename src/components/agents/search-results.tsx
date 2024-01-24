@@ -1,10 +1,19 @@
-import { GridColDef } from '@mui/x-data-grid';
+import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
-import AgentType from '../../../types/agent';
-import SearchResults from '../../search-results';
+import SearchResultsRole from './search-results--role';
+import SearchResults from '../search-results';
+import AgentType from '../../types/agent';
+import AgentRoleType from '../../types/agent-role';
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID', flex: 1 },
+  {
+    field: 'role',
+    headerName: 'Role',
+    flex: 1,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    renderCell: (params: GridRenderCellParams<any, string>) => <SearchResultsRole role={params.value as AgentRoleType} />,
+  },
   { field: 'name', headerName: 'Name', flex: 2 },
   { field: 'email', headerName: 'Email', flex: 3 },
   { field: 'phone', headerName: 'Phone', flex: 2 },
