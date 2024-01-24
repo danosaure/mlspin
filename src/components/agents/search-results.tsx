@@ -11,6 +11,7 @@ const columns: GridColDef[] = [
     field: 'role',
     headerName: 'Role',
     flex: 1,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     renderCell: (params: GridRenderCellParams<any, string>) => <SearchResultsRole role={params.value as AgentRoleType} />,
   },
   { field: 'name', headerName: 'Name', flex: 2 },

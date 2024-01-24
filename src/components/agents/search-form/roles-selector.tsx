@@ -1,6 +1,8 @@
-import * as React from 'react';
-import { Theme, useTheme } from '@mui/material/styles';
 import { FormControl, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent } from '@mui/material';
+import { Theme, useTheme } from '@mui/material/styles';
+import classnames from 'classnames';
+import * as React from 'react';
+import { AgentSearchRolesType } from '../../../models/agent';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -13,55 +15,51 @@ const MenuProps = {
   },
 };
 
-function getStyles(name: string, personName: readonly string[], theme: Theme) {
+function getStyles(value: string, values: readonly string[], theme: Theme) {
   return {
-    fontWeight: personName.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium,
+    fontWeight: values.indexOf(value) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium,
   };
 }
 
-export default function MultipleSelectPlaceholder() {
+export type RolesSelectorProps = {
+  className?: string;
+  roles: AgentSearchRolesType[];
+  rolesChanged: (e: SelectChangeEvent<AgentSearchRolesType[]>) => void;
+};
+
+export default ({ className, roles, rolesChanged }: RolesSelectorProps) => {
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState<string[]>([]);
 
-  const handleChange = (event: SelectChangeEvent<typeof personName>) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value
-    );
-  };
-
+  const classNames = classnames('dano--roles-selector', {
+    [className || '']: className,
+  });
   return (
-    <div>
-      <FormControl sx={{ m:1, width: 100 }}>
-        <InputLabel>Roles</InputLabel>
+    <div className={classNames}>
+      <FormControl className="dano--roles-selector--form-control" sx={{ m: 1, width: 100 }}>
+        <InputLabel className="dano--roles-selector--input-label">Roles</InputLabel>
         <Select
+          className="dano--roles-selector--select"
           size="small"
           multiple
           displayEmpty
-          value={personName}
-          onChange={handleChange}
+          value={roles}
+          onChange={rolesChanged}
           input={<OutlinedInput />}
-          renderValue={(selected) => selected.length === 0 ? null : selected.join(',')}
+          renderValue={(selected) => (selected.length === 0 ? null : selected.join(','))}
           MenuProps={MenuProps}
           inputProps={{ 'aria-label': 'Without label' }}
         >
-          {/* <MenuItem disabled value="">
-            <em>Any</em>
-          </MenuItem> */}
-          <MenuItem value="A" style={getStyles('A', personName, theme)}>
+          <MenuItem className="dano--roles-selector--select--item" value="A" style={getStyles('A', roles, theme)}>
             Agents
           </MenuItem>
-          <MenuItem value="S" style={getStyles('S', personName, theme)}>
+          <MenuItem className="dano--roles-selector--select--item" value="S" style={getStyles('S', roles, theme)}>
             Staffs
           </MenuItem>
-          <MenuItem value="T" style={getStyles('T', personName, theme)}>
+          <MenuItem className="dano--roles-selector--select--item" value="T" style={getStyles('T', roles, theme)}>
             Teams
           </MenuItem>
         </Select>
       </FormControl>
     </div>
   );
-}
+};

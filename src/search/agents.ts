@@ -30,7 +30,7 @@ const augmentAgent = (agent: AgentType, office: OfficeType): AgentTypeSearchResu
   } as AgentTypeSearchResult;
 };
 
-export default async ({ name, office, city, zip }: AgentSearchType): Promise<AgentTypeSearchResult[]> => {
+export default async ({ name, office, city, zip, roles }: AgentSearchType): Promise<AgentTypeSearchResult[]> => {
   const persistence = new Persistence();
   await persistence.open();
 
@@ -61,7 +61,7 @@ export default async ({ name, office, city, zip }: AgentSearchType): Promise<Age
       (cursor) => {
         const anAgent: AgentType = cursor.value;
 
-        if (Agent.match({ name }, anAgent) && offices[anAgent.office]) {
+        if (offices[anAgent.office] && Agent.match({ name, roles }, anAgent)) {
           agents.push(augmentAgent(anAgent, offices[anAgent.office]));
         }
 

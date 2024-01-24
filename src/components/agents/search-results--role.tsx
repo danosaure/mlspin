@@ -13,7 +13,7 @@ export type AgentSearchResultsRoleProps = {
 };
 
 export default ({ role }: AgentSearchResultsRoleProps) => {
-  let Icon = ICONS[role];
+  const Icon = ICONS[role];
 
-  return <Icon />
+  return <Icon />;
 };

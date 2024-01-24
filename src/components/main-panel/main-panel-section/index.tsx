@@ -8,12 +8,9 @@ export interface MainPanelSectionProps {
 }
 
 export default ({ children, className }: MainPanelSectionProps) => {
-  const classNames = classnames(
-    'dano-main-panel-section',
-    {
-      [className || '']: Boolean(className),
-    }
-  );
+  const classNames = classnames('dano-main-panel-section', {
+    [className || '']: Boolean(className),
+  });
 
   return (
     <Box className={classNames} component="section">
