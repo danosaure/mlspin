@@ -51,10 +51,43 @@
   .MuiOutlinedInput-root {
     &.MuiInputBase-colorPrimary {
       color: var(--dano-fg-primary-color);
+
+      .MuiOutlinedInput-notchedOutline {
+        border-color: danoUtils.dano-lighten(var(--dano-fg-primary-color));
+      }
+
+      &:hover {
+        .MuiOutlinedInput-notchedOutline {
+          border-color: var(--dano-fg-primary-color);
+        }
+      }
+
+      .MuiSvgIcon-root {
+        color: inherit;
+      }
     }
   }
 
-  .MuiFormControl-root,
+  .MuiFormControl-root {
+    .MuiFormLabel-root {
+      &.MuiInputLabel-formControl {
+
+      }
+    }
+
+    .MuiInputLabel-root {
+      &.MuiFormLabel-colorPrimary {
+        color: var(--dano-fg-primary-color);
+        background-color: var(--dano-bg-primary-color);
+
+
+      }
+      &.MuiInputLabel-formControl {
+
+      }
+    }
+
+  }
   .MuiTextField-root {
     .MuiFormLabel-root,
     .MuiInputLabel-root {
@@ -69,6 +102,42 @@
       &:hover {
         .MuiOutlinedInput-notchedOutline {
           border-color: var(--dano-fg-primary-color);
+        }
+      }
+    }
+
+    .MuiInputBase-root {
+      &.MuiInputBase-colorPrimary {
+        color: var(--dano-fg-primary-color);
+
+        .MuiSvgIcon-root {
+          color: inherit;
+        }
+      }
+      &.MuiInputBase-formControl {
+        .MuiInputBase-input {
+          &.MuiSelect-select {
+            &.MuiSelect-multiple {
+              &:has(.MuiChip-root) {
+                // background-color: red;
+              }
+            }
+          }
+
+          .MuiChip-root {
+            &.MuiChip-sizeMedium {
+              color: var(--dano-fg-secondary-color);
+              background-color: var(--dano-bg-secondary-color);
+              font-size: 0.5rem;
+              line-height: 1.2rem;
+            }
+
+            .MuiChip-label {
+              &.MuiChip-labelMedium {
+                padding: 0px 8px;
+              }
+            }
+          }
         }
       }
     }
@@ -171,11 +240,8 @@
             color: inherit;
             border-color: var(--dano-bg-secondary-color);
           }
-
         }
-
       }
-
     }
   }
 }

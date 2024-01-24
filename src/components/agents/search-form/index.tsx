@@ -1,6 +1,7 @@
-import { useState, ChangeEvent } from 'react';
 import { Button, Stack, TextField } from '@mui/material';
+import { useState, ChangeEvent } from 'react';
 
+import RolesSelector from './roles-selector';
 import { AgentSearchType } from '../../../models/agent';
 
 export type AgentsSearchFormProps = {
@@ -12,6 +13,7 @@ export default ({ onSubmit }: AgentsSearchFormProps) => {
   const [office, setOffice] = useState('');
   const [city, setCity] = useState('');
   const [zip, setZip] = useState('');
+  const [roles, setRoles] = useState('');
 
   const nameChanged = (e: ChangeEvent<HTMLInputElement>) => setName(e.target.value);
   const officeChanged = (e: ChangeEvent<HTMLInputElement>) => setOffice(e.target.value);
@@ -27,7 +29,8 @@ export default ({ onSubmit }: AgentsSearchFormProps) => {
   };
 
   return (
-    <Stack className="dano-agents-search-form" spacing={2} direction="row">
+    <Stack className="dano-agents-search-form" spacing={2} direction="row" alignItems="center">
+      <RolesSelector />
       <TextField className="dano-agents-search-form-name" label="Name" size="small" value={name} onChange={nameChanged} />
       <TextField className="dano-agents-search-form-office" label="Office" size="small" value={office} onChange={officeChanged} />
       <TextField className="dano-agents-search-form-city" label="City" size="small" value={city} onChange={cityChanged} />
