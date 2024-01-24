@@ -1,4 +1,4 @@
-import { DataGrid, GridColDef } from '@mui/x-data-grid';
+import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
 
 export interface SearchResultsProps {
@@ -17,6 +17,8 @@ export default ({ className, columns, rows }: SearchResultsProps) => (
       isRowSelectable={() => false}
       disableColumnSelector
       disableRowSelectionOnClick
+      density="compact"
+      slots={{ toolbar: GridToolbar }}
     />
   </Box>
 );
