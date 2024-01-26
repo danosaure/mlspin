@@ -16,6 +16,7 @@ export { MLSPinPersistenceError };
 
 export default class Persistence {
   private db: IDBDatabase | null = null;
+  #currentVersion: number | null = null;
 
   constructor() {}
 
@@ -30,7 +31,13 @@ export default class Persistence {
     this.close();
 
     try {
-      this.db = await open(DB_NAME, DB_VERSION, onchangeversion);
+      if (this.#currentVersion === null) {
+        const databases = await indexedDB.databases();
+        const ourDatabase = databases.filter((db) => db.name === DB_NAME);
+        this.#currentVersion = ourDatabase.length ? ourDatabase[0].version || 1 : 1;
+      }
+
+      this.db = await open(DB_NAME, DB_VERSION, this.#currentVersion, onchangeversion);
     } catch (e) {
       const message = e instanceof Error ? e.message : 'Unknown Error';
       throw new MLSPinPersistenceError(`Persistence.open() error: ${message}`);
