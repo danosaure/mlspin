@@ -3,5 +3,4 @@ import createStore from './create-store';
 
 export default async (db: IDBDatabase): Promise<void> => {
   [Office, Agent, ZipLookup].forEach((record) => createStore(db, record));
-  console.log(`001-initial-structure() done`);
 };

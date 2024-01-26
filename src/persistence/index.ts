@@ -34,7 +34,7 @@ export default class Persistence {
       if (this.#currentVersion === null) {
         const databases = await indexedDB.databases();
         const ourDatabase = databases.filter((db) => db.name === DB_NAME);
-        this.#currentVersion = ourDatabase.length ? ourDatabase[0].version || 1 : 1;
+        this.#currentVersion = ourDatabase.length ? ourDatabase[0].version || 0 : 0;
       }
 
       this.db = await open(DB_NAME, DB_VERSION, this.#currentVersion, onchangeversion);

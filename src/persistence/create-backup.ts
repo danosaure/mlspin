@@ -1,5 +1,5 @@
 import Persistence from './index';
-import { Agent, Office, ZipLookup } from '../models';
+import { Agent, Office, USPS, ZipLookup } from '../models';
 import PersistenceBaseType from '../types/persistence-base';
 
 export type DownloadStoreType = {
@@ -22,7 +22,7 @@ const backup = async (persistence: Persistence): Promise<DownloadFileJsonType> =
   const transaction = await persistence.transaction([Agent.STORE, Office.STORE, ZipLookup.STORE]);
 
   const data = await Promise.all(
-    [Agent.STORE, Office.STORE, ZipLookup.STORE].map(
+    [Agent.STORE, Office.STORE, USPS.STORE, ZipLookup.STORE].map(
       async (store: string) =>
         new Promise<DownloadStoreType>((resolve) => {
           const entries: PersistenceBaseType[] = [];
