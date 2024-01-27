@@ -24,6 +24,7 @@ export default () => {
     if (data.length) {
       const searchResultData: ZipLookupSearchResultsType[] = data.map((zipLookup: ZipLookupType) => ({
         id: zipLookup.id,
+        city: zipLookup.city,
         neighborhoods: zipLookup.neighborhoods,
         save: async (neighborhoods: string[]): Promise<void> => save(zipLookup.id, neighborhoods),
       }));

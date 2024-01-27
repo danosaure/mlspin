@@ -5,6 +5,7 @@ import SearchResults from '../../search-results';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'Zip', flex: 1 },
+  { field: 'city', headerName: 'City', flex: 1 },
   {
     field: 'neighborhoods',
     headerName: 'Neighborhoods',

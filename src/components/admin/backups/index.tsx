@@ -18,6 +18,7 @@ export default () => {
   };
 
   const onerror = (message: string) => {
+    // eslint-disable-next-line no-console
     console.error('admin.backups(): onerror():', message);
   };
 

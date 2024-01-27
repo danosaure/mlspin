@@ -18,7 +18,7 @@ export default (
     cursorRequest.onerror = () => {
       throw new MLSPersistenceOpenCursorError();
     };
-  
+
     cursorRequest.onsuccess = () => {
       const cursor = cursorRequest.result;
       if (cursor) {
@@ -26,7 +26,7 @@ export default (
       } else {
         cursorDone();
       }
-    };  
+    };
   } catch (e) {
     // Probably because the index is empty.
     cursorDone();

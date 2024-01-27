@@ -6,6 +6,7 @@ import PersistenceHistoryType from '../types/persistence-history';
 import Base from './base';
 
 export type ZipLookupType = PersistenceBaseType & {
+  city?: string;
   neighborhoods: string[];
 };
 
