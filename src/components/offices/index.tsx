@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { Alert } from '@mui/material';
 
 import MainPanel from '../main-panel';
-import searchOffices from '../../search/offices';
+import searchOffices, { OfficesSearchResultsType } from '../../search/offices';
 import OfficeType from '../../types/office';
 
 import OfficesSearchForm from './search-form';
 import OfficesSearchResults from './search-results';
 
 export default () => {
-  const [data, setData] = useState<OfficeType[] | null>(null);
+  const [data, setData] = useState<OfficesSearchResultsType[] | null>(null);
 
   const onSubmit = async (criteria: Record<string, string>): Promise<void> => {
     const matches = await searchOffices(criteria);
