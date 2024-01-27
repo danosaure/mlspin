@@ -8,11 +8,11 @@ export class MLSPinPersistenceMigrateError extends MLSPinPersistenceError {
   }
 }
 
-export default async (db: IDBDatabase, currentVersion: number): Promise<void> => {
+export default async (db: IDBDatabase, transaction: IDBTransaction, currentVersion: number): Promise<void> => {
   for (let version = currentVersion + 1; version <= db.version; version++) {
     const migrate = migrations[version];
     if (migrate) {
-      await migrate(db);
+      await migrate(db, transaction);
     } else {
       throw new MLSPinPersistenceMigrateError(`Unable to find migration ${version}.`);
     }

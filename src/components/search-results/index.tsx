@@ -23,8 +23,8 @@ export default ({ className, columns, rows }: SearchResultsProps) => (
         pagination: {
           paginationModel: {
             pageSize: 50,
-          }
-        }
+          },
+        },
       }}
     />
   </Box>

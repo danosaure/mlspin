@@ -12,9 +12,6 @@ export type ZipLookupType = PersistenceBaseType & {
 
 export default class ZipLookup extends Base {
   static readonly STORE = 'zips';
-  static readonly INDICES: Record<string, boolean> = {
-    neighborhoods: false,
-  };
 
   constructor(data: ZipLookupType) {
     super(data);

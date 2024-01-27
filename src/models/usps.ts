@@ -8,7 +8,6 @@ export type USPSType = PersistenceBaseType & {
 
 export default class USPS extends Base {
   static readonly STORE = 'usps';
-  static readonly INDICES: Record<string, boolean> = {};
 
   constructor(data: USPSType) {
     super(data);
