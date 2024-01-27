@@ -3,7 +3,6 @@ import { Alert } from '@mui/material';
 
 import MainPanel from '../main-panel';
 import searchOffices, { OfficesSearchResultsType } from '../../search/offices';
-import OfficeType from '../../types/office';
 
 import OfficesSearchForm from './search-form';
 import OfficesSearchResults from './search-results';

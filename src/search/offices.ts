@@ -88,22 +88,27 @@ export default async (criteria: OfficeSearchType, persistence?: Persistence): Pr
   const matches = await searchOffices(persistence, transaction, criteria);
   const agentsByOfficeIndex = transaction.stores[Agent.STORE].index('agents-office');
 
-  const searchMatches = await Promise.all(matches.map((office) => new Promise<OfficesSearchResultsType>((resolve) => {
-    let count = 0;
-    const cursorRequest = agentsByOfficeIndex.openKeyCursor(IDBKeyRange.only([office.id]));
-    cursorRequest.onsuccess = () => {
-      const cursor = cursorRequest.result;
-      if (cursor) {
-        count++;
-        cursor.continue();
-      } else {
-        resolve({
-          ...office,
-          agentsCount: count,
-        });
-      }
-    }
-  })));
+  const searchMatches = await Promise.all(
+    matches.map(
+      (office) =>
+        new Promise<OfficesSearchResultsType>((resolve) => {
+          let count = 0;
+          const cursorRequest = agentsByOfficeIndex.openKeyCursor(IDBKeyRange.only([office.id]));
+          cursorRequest.onsuccess = () => {
+            const cursor = cursorRequest.result;
+            if (cursor) {
+              count++;
+              cursor.continue();
+            } else {
+              resolve({
+                ...office,
+                agentsCount: count,
+              });
+            }
+          };
+        })
+    )
+  );
 
   transaction.complete();
   return searchMatches;
