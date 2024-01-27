@@ -43,7 +43,7 @@ export default async (content: string): Promise<void> => {
   const newHistory: PersistenceHistoryType = {
     date: new Date(),
     action: 'import',
-    message: 'MLS import'
+    message: 'MLS import',
   };
 
   let persistence: Persistence | undefined;

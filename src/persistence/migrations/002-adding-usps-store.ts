@@ -1,6 +1,7 @@
-import createStore from './create-store';
-import { USPS } from '../../models';
+import { MigrationType } from '.';
 
-export default async (db: IDBDatabase): Promise<void> => {
-  createStore(db, USPS);
+const migrate: MigrationType = async (db: IDBDatabase): Promise<void> => {
+  db.createObjectStore('usps', { keyPath: 'id' });
 };
+
+export default migrate;

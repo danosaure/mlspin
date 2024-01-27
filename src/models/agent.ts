@@ -19,10 +19,6 @@ export type AgentSearchType = {
 
 export default class Agent extends Base {
   static readonly STORE = 'agents';
-  static readonly INDICES: Record<string, boolean> = {
-    name: false,
-    email: false,
-  };
 
   constructor(data: AgentType) {
     super(data);

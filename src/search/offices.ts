@@ -1,5 +1,5 @@
 import searchZipLookup from './zip-lookup';
-import { Office, OfficeSearchType, ZipLookup } from '../models';
+import { Agent, Office, OfficeSearchType, ZipLookup } from '../models';
 import Persistence from '../persistence';
 import OfficeType from '../types/office';
 import { PersistenceTransaction } from '../persistence/transaction';
@@ -73,16 +73,43 @@ export const searchOffices = async (
   });
 };
 
-export default async (criteria: OfficeSearchType, persistence?: Persistence): Promise<OfficeType[]> => {
+export type OfficesSearchResultsType = OfficeType & {
+  agentsCount: number;
+};
+
+export default async (criteria: OfficeSearchType, persistence?: Persistence): Promise<OfficesSearchResultsType[]> => {
   if (!persistence) {
     persistence = new Persistence();
     await persistence.open();
   }
 
-  const transaction = await persistence.transaction([Office.STORE, ZipLookup.STORE], 'readonly');
+  const transaction = await persistence.transaction([Agent.STORE, Office.STORE, ZipLookup.STORE], 'readonly');
 
   const matches = await searchOffices(persistence, transaction, criteria);
+  const agentsByOfficeIndex = transaction.stores[Agent.STORE].index('agents-office');
+
+  const searchMatches = await Promise.all(
+    matches.map(
+      (office) =>
+        new Promise<OfficesSearchResultsType>((resolve) => {
+          let count = 0;
+          const cursorRequest = agentsByOfficeIndex.openKeyCursor(IDBKeyRange.only([office.id]));
+          cursorRequest.onsuccess = () => {
+            const cursor = cursorRequest.result;
+            if (cursor) {
+              count++;
+              cursor.continue();
+            } else {
+              resolve({
+                ...office,
+                agentsCount: count,
+              });
+            }
+          };
+        })
+    )
+  );
 
   transaction.complete();
-  return matches;
+  return searchMatches;
 };
