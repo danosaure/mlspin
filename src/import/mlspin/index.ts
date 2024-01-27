@@ -1,10 +1,9 @@
 import ZipLookup, { ZipLookupType } from '../../models/zip-lookup';
 import Persistence, { MLSPinPersistenceError } from '../../persistence';
-import { Agent, Office } from '../../models';
-import OfficeType from '../../types/office';
-import PersistenceHistoryType from '../../types/persistence-history';
+import { Agent, Office, OfficeType } from '../../models';
 
 import parse from './office-results-parser';
+import { PersistenceHistoryType } from '../../models/base';
 
 const buildZipLookup = (offices: OfficeType[]): Record<string, ZipLookupType> =>
   offices.reduce((records: Record<string, ZipLookupType>, office) => {

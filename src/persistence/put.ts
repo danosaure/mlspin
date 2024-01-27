@@ -1,5 +1,4 @@
-import PersistenceBaseType from '../types/persistence-base';
-import PersistenceHistoryType from '../types/persistence-history';
+import { PersistenceBaseType, PersistenceHistoryType } from '../models/base';
 import MLSPinPersistenceError from './error';
 import get from './get';
 

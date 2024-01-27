@@ -1,6 +1,4 @@
-import AgentType from '../types/agent';
-
-import Base from './base';
+import Base, { PersistenceBaseType } from './base';
 
 const ROLES_MAPPINGS = {
   A: 'Subscribers',
@@ -9,12 +7,23 @@ const ROLES_MAPPINGS = {
 };
 
 export type AgentSearchRolesType = keyof typeof ROLES_MAPPINGS;
+
 export type AgentSearchType = {
   name?: string;
   office?: string;
   city?: string;
   zip?: string;
   roles?: AgentSearchRolesType[];
+};
+
+export type AgentRoleType = 'Office Contacts' | 'Subscribers' | 'Teams';
+
+export type AgentType = PersistenceBaseType & {
+  email: string;
+  name: string;
+  phone: string;
+  office: string;
+  role: AgentRoleType;
 };
 
 export default class Agent extends Base {

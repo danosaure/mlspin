@@ -1,5 +1,4 @@
-import PersistenceBaseType from '../types/persistence-base';
-import Base from './base';
+import Base, { PersistenceBaseType } from './base';
 
 export type USPSType = PersistenceBaseType & {
   name: string;

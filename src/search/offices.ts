@@ -1,7 +1,6 @@
 import searchZipLookup from './zip-lookup';
-import { Agent, Office, OfficeSearchType, ZipLookup } from '../models';
+import { Agent, Office, OfficeSearchType, OfficeType, ZipLookup } from '../models';
 import Persistence from '../persistence';
-import OfficeType from '../types/office';
 import { PersistenceTransaction } from '../persistence/transaction';
 
 type OfficeSearchWithZipLookupType = OfficeSearchType & {
