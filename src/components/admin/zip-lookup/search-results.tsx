@@ -5,10 +5,10 @@ import SearchResults from '../../search-results';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'Zip', flex: 1 },
-  { field: 'city', headerName: 'City', flex: 1 },
+  { field: 'city', headerName: 'City to display', flex: 1 },
   {
     field: 'neighborhoods',
-    headerName: 'Neighborhoods',
+    headerName: 'Searchable by',
     flex: 4,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     renderCell: (params: GridRenderCellParams<any, string[]>) => <NeighborhoodCell value={params.value} save={params.row.save} />,

@@ -19,6 +19,13 @@ export default ({ className, columns, rows }: SearchResultsProps) => (
       disableRowSelectionOnClick
       density="compact"
       slots={{ toolbar: GridToolbar }}
+      initialState={{
+        pagination: {
+          paginationModel: {
+            pageSize: 50,
+          }
+        }
+      }}
     />
   </Box>
 );

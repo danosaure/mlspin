@@ -17,6 +17,7 @@ export default async (content: string): Promise<void> => {
   const newHistory: PersistenceHistoryType = {
     date: new Date(),
     action: 'import',
+    message: 'USPS import',
   };
 
   let persistence: Persistence | undefined;
