@@ -2,4 +2,4 @@ export { default as Agent, AgentSearchType, AgentSearchRolesType, AgentRoleType,
 export { default as Office, OfficeType, OfficeResults, OfficeSearchType } from './office';
 export { default as USPS, USPSType } from './usps';
 export { default as ZipLookup, ZipLookupType } from './zip-lookup';
-export { default as UserPreference, UserPreferencesType } from './user-preference';
+export { default as UserPreference, UserPreferenceType } from './user-preference';

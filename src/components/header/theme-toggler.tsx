@@ -6,34 +6,35 @@ import {
 } from '@mui/icons-material';
 import { ButtonGroup, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { UserPreference } from '../../models';
+import UserPreference from '../../models/user-preference';
 
 export default () => {
   const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
-    console.log('<ThemeToggler> useEffect()');
     (async () => {
       const savedTheme = await UserPreference.getTheme();
-      console.log('<ThemeToggler>   savedTheme=', savedTheme);
+      toggle(savedTheme, true);
     })();
-    console.log('</ThemeToggler> useEffect()');
   }, []);
 
-  const toggle = (v: string) => {
-    setTheme(v);
+  const toggle = async (newTheme: string, skipSave?: boolean): Promise<void> => {
     const body = document.querySelector('body');
     if (body) {
-      body.dataset.theme = theme;
+      body.dataset.theme = newTheme;
+    }
+    setTheme(newTheme);
+    if (!skipSave) {
+      await UserPreference.setTheme(newTheme);
     }
   };
 
   return (
     <Stack alignItems="center">
       <ButtonGroup variant="text" disableElevation>
-        <DarkModeIcon onClick={() => toggle('dark')} />
+        <DarkModeIcon onClick={theme === 'dark' ? () => {} : () => toggle('dark')} />
         {theme === 'dark' ? <ToggleOffIcon onClick={() => toggle('light')} /> : <ToggleOnIcon onClick={() => toggle('dark')} />}
-        <LightModeIcon onClick={() => toggle('light')} />
+        <LightModeIcon onClick={theme === 'light' ? () => {} : () => toggle('light')} />
       </ButtonGroup>
     </Stack>
   );
