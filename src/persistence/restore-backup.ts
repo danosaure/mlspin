@@ -1,11 +1,11 @@
 import Persistence, { MLSPinPersistenceError } from './index';
 import objectStoreClear from './object-store--clear';
 import { UploadedJsonFileType } from '../components/json-file-uploader-button';
-import { Agent, Office, ZipLookup } from '../models';
+import { Agent, Office, USPS, ZipLookup } from '../models';
 import PersistenceHistoryType from '../types/persistence-history';
 import PersistenceBaseType from '../types/persistence-base';
 
-const STORE_NAMES = [Agent.STORE, Office.STORE, ZipLookup.STORE];
+const STORE_NAMES = [Agent.STORE, Office.STORE, USPS.STORE, ZipLookup.STORE];
 
 export class MLSPinPersistenceRestoreBackupError extends MLSPinPersistenceError {
   constructor(message?: string) {

@@ -12,18 +12,23 @@ export default (
   withCursor: (c: IDBCursorWithValue) => void,
   cursorDone: () => void
 ): void => {
-  const cursorRequest = storeOrIndex.openCursor();
+  try {
+    const cursorRequest = storeOrIndex.openCursor();
 
-  cursorRequest.onerror = () => {
-    throw new MLSPersistenceOpenCursorError();
-  };
+    cursorRequest.onerror = () => {
+      throw new MLSPersistenceOpenCursorError();
+    };
 
-  cursorRequest.onsuccess = () => {
-    const cursor = cursorRequest.result;
-    if (cursor) {
-      withCursor(cursor);
-    } else {
-      cursorDone();
-    }
-  };
+    cursorRequest.onsuccess = () => {
+      const cursor = cursorRequest.result;
+      if (cursor) {
+        withCursor(cursor);
+      } else {
+        cursorDone();
+      }
+    };
+  } catch (e) {
+    // Probably because the index is empty.
+    cursorDone();
+  }
 };
