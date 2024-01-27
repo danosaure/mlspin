@@ -1,6 +1,3 @@
-import PersistenceBaseType from '../types/persistence-base';
-import PersistenceHistoryType from '../types/persistence-history';
-
 import createBackup, { DownloadFileJsonType } from './create-backup';
 import { DB_NAME, DB_VERSION } from './constants';
 import MLSPinPersistenceError from './error';
@@ -11,6 +8,7 @@ import put from './put';
 import restoreBackup from './restore-backup';
 import transaction, { PersistenceTransaction, PersistenceTransactionEventHandlers } from './transaction';
 import { UploadedJsonFileType } from '../components/json-file-uploader-button';
+import { PersistenceBaseType, PersistenceHistoryType } from '../models/base';
 
 export { MLSPinPersistenceError };
 

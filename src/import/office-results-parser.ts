@@ -1,8 +1,5 @@
-import OfficeResults from '../types/office-results';
 import { parseCSV, CSVParsedType } from '../utils';
-import AgentType from '../types/agent';
-import AgentRoleType from '../types/agent-role';
-import OfficeType from '../types/office';
+import { AgentRoleType, AgentType, OfficeResults, OfficeType } from '../models';
 
 const extractAgentAndOffice = (lineData: CSVParsedType): [agent: AgentType, office: OfficeType] => [
   {

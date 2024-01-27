@@ -1,6 +1,5 @@
 import Persistence from '../persistence';
-import PersistenceBaseType from '../types/persistence-base';
-import Base from './base';
+import Base, { PersistenceBaseType } from './base';
 
 export type UserPreferencesType = PersistenceBaseType & {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

@@ -1,9 +1,7 @@
 import Persistence from '../persistence';
 import { PersistenceTransaction } from '../persistence/transaction';
-import PersistenceBaseType from '../types/persistence-base';
-import PersistenceHistoryType from '../types/persistence-history';
 
-import Base from './base';
+import Base, { PersistenceBaseType, PersistenceHistoryType } from './base';
 
 export type ZipLookupType = PersistenceBaseType & {
   city?: string;

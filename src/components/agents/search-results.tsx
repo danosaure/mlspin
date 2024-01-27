@@ -2,8 +2,7 @@ import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
 import SearchResultsRole from './search-results--role';
 import SearchResults from '../search-results';
-import AgentType from '../../types/agent';
-import AgentRoleType from '../../types/agent-role';
+import { AgentRoleType, AgentType } from '../../models';
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID', flex: 1 },

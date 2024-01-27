@@ -1,6 +1,6 @@
 import { USPS, USPSType, ZipLookup, ZipLookupType } from '../../models';
+import { PersistenceHistoryType } from '../../models/base';
 import Persistence from '../../persistence';
-import PersistenceHistoryType from '../../types/persistence-history';
 import MLSPinImportError from '../error';
 import parse from './parser';
 

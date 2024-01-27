@@ -1,4 +1,4 @@
-import PersistenceBaseType from '../types/persistence-base';
+import { PersistenceBaseType } from '../models/base';
 
 export default async (objectStore: IDBObjectStore, key: IDBValidKey): Promise<PersistenceBaseType> =>
   new Promise((resolve) => {

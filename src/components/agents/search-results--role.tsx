@@ -1,6 +1,5 @@
 import { Business as BusinessIcon, Groups as GroupsIcon, Person as PersonIcon } from '@mui/icons-material';
-
-import AgentRoleType from '../../types/agent-role';
+import { AgentRoleType } from '../../models';
 
 const ICONS = {
   'Office Contacts': BusinessIcon,

@@ -1,8 +1,6 @@
 import { searchOffices } from './offices';
-import { Agent, AgentSearchType, Office, OfficeSearchType, ZipLookup } from '../models';
+import { Agent, AgentSearchType, AgentType, Office, OfficeSearchType, OfficeType, ZipLookup } from '../models';
 import Persistence from '../persistence';
-import AgentType from '../types/agent';
-import OfficeType from '../types/office';
 
 export type AgentTypeSearchResult = AgentType & {
   '_office.id': string;
