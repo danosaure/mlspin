@@ -130,6 +130,19 @@
       }
     ]
   },
+  "mocha": {
+    "diff": true,
+    "exit": true,
+    "recursive": true,
+    "spec": [
+      "src/**/*.unit.test.ts"
+    ],
+    "require": [
+      "@babel/register",
+      "source-map-support/register",
+      "./src/setup.test.cjs"
+    ]
+  },
   "nyc": {
     "all": true,
     "temp-dir": "./reports/nyc_output",
