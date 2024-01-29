@@ -16,14 +16,10 @@ export type AgentSearchType = {
   roles?: AgentSearchRolesType[];
 };
 
-export type AgentRoleType = 'Office Contacts' | 'Subscribers' | 'Teams';
-
 export type AgentType = PersistenceBaseType & {
   email: string;
   name: string;
   phone: string;
-  office: string;
-  role: AgentRoleType;
 };
 
 export default class Agent extends Base {
@@ -37,7 +33,7 @@ export default class Agent extends Base {
     return super.toJSON() as AgentType;
   }
 
-  static match({ name, roles }: AgentSearchType, agent: AgentType): boolean {
+  static match({ name }: AgentSearchType, agent: AgentType): boolean {
     if (name) {
       const agentName = agent.name.toLowerCase();
 
@@ -57,10 +53,10 @@ export default class Agent extends Base {
       }
     }
 
-    if (roles && roles.length) {
-      const mapped = roles.map((r) => ROLES_MAPPINGS[r]);
-      return mapped.indexOf(agent.role) !== -1;
-    }
+    // if (roles && roles.length) {
+    //   const mapped = roles.map((r) => ROLES_MAPPINGS[r]);
+    //   return mapped.indexOf(agent.role) !== -1;
+    // }
 
     return true;
   }
