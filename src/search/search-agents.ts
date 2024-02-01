@@ -6,8 +6,11 @@ import { AgentOfficeRoleType, AgentType } from '../models/types';
 import mergeAgentData from './agent-merge-data';
 import { AgentSearchResultType, AgentSearchType, OfficeSearchResultType } from './types';
 import { getFragments, matchFragmentsToString } from '../utils';
+import { ROLES_MAPPINGS } from './roles-mappings';
 
 export const searchAgents = async ({ name, office, city, zip, roles }: AgentSearchType): Promise<AgentSearchResultType[]> => {
+  const mappedRoles = roles.map((role) => ROLES_MAPPINGS[role]);
+
   const persistence = new Persistence();
   await persistence.open();
 
@@ -38,8 +41,9 @@ export const searchAgents = async ({ name, office, city, zip, roles }: AgentSear
         if (offices[cursor.key as string]) {
           const agentOfficeRole: AgentOfficeRoleType = cursor.value;
 
-          // TODO: Validate Role.
-          matches[agentOfficeRole.agent] = [...(matches[agentOfficeRole.agent] || []), agentOfficeRole];
+          if (mappedRoles.length === 0 || mappedRoles.includes(agentOfficeRole.role)) {
+            matches[agentOfficeRole.agent] = [...(matches[agentOfficeRole.agent] || []), agentOfficeRole];
+          }
         }
 
         cursor.continue();
@@ -61,7 +65,6 @@ export const searchAgents = async ({ name, office, city, zip, roles }: AgentSear
           const agent: AgentType = cursor.value;
           if (matchFragmentsToString(agent.name, getFragments(name))) {
             foundAgentOfficeRoles.forEach((agentOfficeRole) => {
-              console.log(`roles=[${roles}]   =?=   agentOfficeRole.role="${agentOfficeRole.role}"`);
               agents.push(mergeAgentData(cursor.value, agentOfficeRole, offices[agentOfficeRole.office]));
             });
           }
