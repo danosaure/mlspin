@@ -1,5 +1,5 @@
 import { AgentOfficeRoleType, AgentRoleType, AgentType, OfficeType, ZipLookupType } from '../../models/types';
-import { CSVParsedType } from '../../utils';
+import { CSVParsedType } from '../../utils/csv-parsed-type';
 
 import EXTRACTED_DATA_TYPES from './extract-data-types';
 

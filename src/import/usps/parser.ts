@@ -1,5 +1,6 @@
 import { USPSType } from '../../models/types';
-import { CSVParsedType, parseCSV } from '../../utils';
+import { parseCSV } from '../../utils';
+import { CSVParsedType } from '../../utils/csv-parsed-type';
 
 export default (content: string): Record<string, USPSType> => {
   const csvContent: CSVParsedType[] = parseCSV(content);
@@ -11,7 +12,7 @@ export default (content: string): Record<string, USPSType> => {
           [entry['usps.zip']]: {
             id: entry['usps.zip'],
             name: entry['usps.city'],
-            alternatives: entry['usps.cities'] ? entry['usps.cities'].split(',').map((city) => city.trim()) : [],
+            alternatives: entry['usps.cities'] ? entry['usps.cities'].split(',').map((city: string) => city.trim()) : [],
           },
         };
       }

@@ -1,5 +1,6 @@
 import { AgentOfficeRoleType, AgentRoleType, AgentType, OfficeType, ZipLookupType } from '../models/types';
-import { parseCSV, CSVParsedType } from '../utils';
+import { parseCSV } from '../utils';
+import { CSVParsedType } from '../utils/csv-parsed-type';
 import { OfficeResultsType } from './office-results-type';
 
 const extractAgentAndOffice = (

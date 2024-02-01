@@ -1,4 +1,4 @@
-export type CSVParsedType = Record<string, string>;
+import { CSVParsedType } from './csv-parsed-type';
 
 const SEPARATOR = ';';
 const MATCHING_QUOTES = /^(['"]).*\1$/;
