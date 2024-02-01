@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import parseCSV, { CSVParsedType } from './csv-parser';
+import { CSVParsedType, parseCSV } from './csv-parser';
 
 describe(__filename, () => {
   it('should return empty list', () => {

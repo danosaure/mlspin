@@ -1,21 +1,17 @@
-import Base, { PersistenceBaseType } from './base';
+import { AgentOfficeRoleType } from './types';
 
-export type AgentRoleType = 'Office Contacts' | 'Subscribers' | 'Teams';
+export default class AgentOfficeRole {
+  static readonly STORE = 'agents-offices-roles';
 
-export type AgentOfficeRoleType = PersistenceBaseType & {
-  agent: string;
-  office: string;
-  role: AgentRoleType;
-};
-
-export default class AgentOfficeRole extends Base {
-  static readonly STORE = 'agent-office-role';
+  #data: AgentOfficeRoleType;
 
   constructor(data: AgentOfficeRoleType) {
-    super(data);
+    this.#data = data;
   }
 
   toJSON(): AgentOfficeRoleType {
-    return this.toJSON() as AgentOfficeRoleType;
+    return {
+      ...this.#data,
+    };
   }
 }

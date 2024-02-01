@@ -1,4 +1,4 @@
-import { USPSType } from '../../models';
+import { USPSType } from '../../models/types';
 import { CSVParsedType, parseCSV } from '../../utils';
 
 export default (content: string): Record<string, USPSType> => {

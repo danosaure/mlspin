@@ -1,7 +1,7 @@
 import { GridColDef } from '@mui/x-data-grid';
 
 import SearchResults from '../../search-results';
-import { OfficesSearchResultsType } from '../../../search/offices';
+import { OfficeSearchResultType } from '../../../search/types';
 
 const columns: GridColDef[] = [
   { field: 'name', headerName: 'Name', flex: 4 },
@@ -12,7 +12,7 @@ const columns: GridColDef[] = [
 ];
 
 export type OfficesSearchResultsProps = {
-  data: OfficesSearchResultsType[];
+  data: OfficeSearchResultType[];
 };
 
 export default ({ data }: OfficesSearchResultsProps) => (

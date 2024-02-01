@@ -1,31 +1,39 @@
+import { AgentOfficeRoleType, AgentRoleType, AgentType, OfficeType, ZipLookupType } from '../models/types';
 import { parseCSV, CSVParsedType } from '../utils';
-import { AgentRoleType, AgentType, OfficeResults, OfficeType } from '../models';
+import { OfficeResultsType } from './office-results-type';
 
-const extractAgentAndOffice = (lineData: CSVParsedType): [agent: AgentType, office: OfficeType] => [
+const extractAgentAndOffice = (
+  lineData: CSVParsedType
+): [agent: AgentType, office: OfficeType, agentOfficeRole: AgentOfficeRoleType, zipLookup: ZipLookupType] => [
   {
     id: lineData['agent.id'],
     name: lineData['agent.name'],
     email: lineData['agent.email'],
     phone: lineData['agent.phone'],
-    role: lineData['agent.role'] as AgentRoleType,
-    office: lineData['office.id'],
   },
   {
     id: lineData['office.id'],
     name: lineData['office.name'],
     address: lineData['office.address'],
-    city: lineData['office.city'],
-    state: lineData['office.state'],
     zip: lineData['office.zip'],
+  },
+  {
+    agent: lineData['agent.id'],
+    office: lineData['office.id'],
+    role: lineData['agent.role'] as AgentRoleType,
+  },
+  {
+    id: lineData['office.zip'],
+    neighborhoods: [lineData['office.city']],
   },
 ];
 
-export default (content: string): OfficeResults => {
+export default (content: string): OfficeResultsType => {
   const csvContent: CSVParsedType[] = parseCSV(content);
 
   return csvContent.reduce(
     (cache, lineData: CSVParsedType) => {
-      const [agent, office] = extractAgentAndOffice(lineData);
+      const [agent, office, agentOfficeRole, zipLookup] = extractAgentAndOffice(lineData);
       if (!agent.id) {
         return cache;
       }
@@ -38,8 +46,16 @@ export default (content: string): OfficeResults => {
           ...cache.offices,
           [office.id]: office,
         },
+        agentsOfficesRoles: [...cache.agentsOfficesRoles, agentOfficeRole],
+        zipLookups: {
+          ...cache.zipLookups,
+          [zipLookup.id]: {
+            ...cache.zipLookups[zipLookup.id],
+            neighborhoods: [...cache.zipLookups[zipLookup.id].neighborhoods, ...zipLookup.neighborhoods],
+          },
+        },
       };
     },
-    { agents: {}, offices: {} }
+    { agents: {}, offices: {}, agentsOfficesRoles: [], zipLookups: {} } as OfficeResultsType
   );
 };

@@ -1,4 +1,4 @@
-import { MigrationType } from '.';
+import MigrationType from './migration-type';
 
 const migrate: MigrationType = async (db: IDBDatabase, transaction: IDBTransaction): Promise<void> => {
   const store = db.createObjectStore('agents-offices-roles', { keyPath: ['agent', 'office', 'role'] });

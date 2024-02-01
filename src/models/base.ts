@@ -1,15 +1,5 @@
-export type PersistenceHistoryActionType = 'import' | 'restore' | 'user' | 'system';
-
-export type PersistenceHistoryType = {
-  date: Date;
-  action: PersistenceHistoryActionType;
-  message?: string;
-};
-
-export type PersistenceBaseType = {
-  id: string;
-  __history?: PersistenceHistoryType[];
-};
+import { fromJSON as persistenceHistoryFromJSON, toJSON as persistenceHistoryToJSON } from './persistence-history';
+import { PersistenceBaseJsonType, PersistenceBaseType } from './types';
 
 abstract class Base {
   static readonly PRIMARY_KEY = 'id';
@@ -21,7 +11,17 @@ abstract class Base {
   }
 
   toJSON() {
-    return { ...this.data };
+    return {
+      ...this.data,
+      __history: persistenceHistoryToJSON(this.data.__history || []),
+    };
+  }
+
+  static fromJSON(json: PersistenceBaseJsonType): PersistenceBaseType {
+    return {
+      id: json.id,
+      __history: persistenceHistoryFromJSON(json.__history || []),
+    };
   }
 }
 

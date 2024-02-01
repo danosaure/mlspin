@@ -5,7 +5,7 @@ const MATCHING_QUOTES = /^(['"]).*\1$/;
 
 const cleanValue = (s: string) => (MATCHING_QUOTES.test(s) ? s.substring(1, s.length - 1) : s);
 
-export default (content: string): CSVParsedType[] => {
+export const parseCSV = (content: string): CSVParsedType[] => {
   const results: CSVParsedType[] = [];
 
   const lines = content.trim().split('\n');
