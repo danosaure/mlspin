@@ -2,7 +2,7 @@ import Persistence, { MLSPinPersistenceError } from './index';
 import objectStoreClear from './object-store--clear';
 import { UploadedJsonFileType } from '../components/json-file-uploader-button';
 import { Agent, Office, USPS, ZipLookup } from '../models';
-import { PersistenceBaseType, PersistenceHistoryType } from '../models/base';
+import { PersistenceBaseType, PersistenceHistoryType } from '../models/types';
 
 const STORE_NAMES = [Agent.STORE, Office.STORE, USPS.STORE, ZipLookup.STORE];
 

@@ -3,11 +3,12 @@ import { Alert, CircularProgress, Stack, Typography } from '@mui/material';
 
 import ZipLookupSearchResults, { ZipLookupSearchResultsType } from './search-results';
 import MainPanel from '../../main-panel';
-import ZipLookup, { ZipLookupType } from '../../../models/zip-lookup';
-import searchZipLookup from '../../../search/zip-lookup';
+import ZipLookup from '../../../models/zip-lookup';
+import { ZipLookupType } from '../../../models/types';
+import { searchZipLookup } from '../../../search/search-zip-lookups';
 
 export default () => {
-  const [data, setData] = useState<ZipLookupType[] | null>(null);
+  const [data, setData] = useState<Record<string, ZipLookupType>>({});
 
   const save = async (id: string, neighborhoods: string[]) => {
     await ZipLookup.updateNeighborhoods(id, neighborhoods);
@@ -21,8 +22,8 @@ export default () => {
   );
 
   if (data) {
-    if (data.length) {
-      const searchResultData: ZipLookupSearchResultsType[] = data.map((zipLookup: ZipLookupType) => ({
+    if (Object.values(data).length) {
+      const searchResultData: ZipLookupSearchResultsType[] = Object.values(data).map((zipLookup: ZipLookupType) => ({
         id: zipLookup.id,
         city: zipLookup.city,
         neighborhoods: zipLookup.neighborhoods,
@@ -41,7 +42,7 @@ export default () => {
 
   useEffect(() => {
     (async () => {
-      const matches: ZipLookupType[] = await searchZipLookup({});
+      const matches: Record<string, ZipLookupType> = await searchZipLookup();
       setData(matches);
     })();
   }, []);

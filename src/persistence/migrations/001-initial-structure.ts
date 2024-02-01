@@ -1,5 +1,5 @@
-import { MigrationType } from '.';
 import createIndexOnStore from './create-index-on-store';
+import MigrationType from './migration-type';
 
 const migrate: MigrationType = async (db: IDBDatabase): Promise<void> => {
   // Agents

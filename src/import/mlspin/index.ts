@@ -1,21 +1,12 @@
-import ZipLookup, { ZipLookupType } from '../../models/zip-lookup';
+import ZipLookup from '../../models/zip-lookup';
 import Persistence, { MLSPinPersistenceError } from '../../persistence';
-import { Agent, Office, OfficeType } from '../../models';
-
+import { Agent, Office } from '../../models';
 import parse from './office-results-parser';
-import { PersistenceHistoryType } from '../../models/base';
-
-const buildZipLookup = (offices: OfficeType[]): Record<string, ZipLookupType> =>
-  offices.reduce((records: Record<string, ZipLookupType>, office) => {
-    const record: ZipLookupType = records[office.zip] || { id: office.zip, neighborhoods: [] };
-    if (record.neighborhoods.indexOf(office.city) === -1) {
-      record.neighborhoods.push(office.city);
-    }
-    return {
-      ...records,
-      [office.zip]: record,
-    };
-  }, {});
+import { newHistory } from '../../models/persistence-history';
+import extractDataByType from './extract-data-by-type';
+import EXTRACTED_DATA_TYPES from './extract-data-types';
+import AgentOfficeRole from '../../models/agent-office-role';
+import { AgentOfficeRoleType, AgentType, OfficeType, ZipLookupType } from '../../models/types';
 
 const mergeWithCurrent = async (
   persistance: Persistence,
@@ -39,11 +30,19 @@ const mergeWithCurrent = async (
 export default async (content: string): Promise<void> => {
   const data = parse(content);
 
-  const newHistory: PersistenceHistoryType = {
-    date: new Date(),
-    action: 'import',
-    message: 'MLS import',
-  };
+  // Agents
+  const agents = extractDataByType(data, EXTRACTED_DATA_TYPES.AGENT) as AgentType[];
+
+  // Offices
+  const offices = extractDataByType(data, EXTRACTED_DATA_TYPES.OFFICE) as OfficeType[];
+
+  // Ziplookups
+  const zipLookups = extractDataByType(data, EXTRACTED_DATA_TYPES.ZIP_LOOKUP) as ZipLookupType[];
+
+  // AgentsOfficesRoles
+  const agentsOfficesRoles = extractDataByType(data, EXTRACTED_DATA_TYPES.AGENT_OFFICE_ROLE) as AgentOfficeRoleType[];
+
+  const history = newHistory('import', 'MLS import');
 
   let persistence: Persistence | undefined;
 
@@ -52,21 +51,27 @@ export default async (content: string): Promise<void> => {
       persistence = new Persistence();
       await persistence.open();
 
-      const transaction = await persistence.transaction([Office.STORE, Agent.STORE, ZipLookup.STORE], 'readwrite', {
-        onabort: () => reject(new MLSPinPersistenceError('Transaction aborted.')),
-        oncomplete: () => resolve(),
-      });
+      const transaction = await persistence.transaction(
+        [Office.STORE, Agent.STORE, ZipLookup.STORE, AgentOfficeRole.STORE],
+        'readwrite',
+        {
+          onabort: () => reject(new MLSPinPersistenceError('Transaction aborted.')),
+          oncomplete: () => resolve(),
+        }
+      );
 
       // store `offices`
-      await persistence.putMany(transaction.stores[Office.STORE], Object.values(data.offices), newHistory);
+      await persistence.putMany(transaction.stores[Office.STORE], offices, history);
 
       // store `agents`
-      await persistence.putMany(transaction.stores[Agent.STORE], Object.values(data.agents), newHistory);
+      await persistence.putMany(transaction.stores[Agent.STORE], agents, history);
 
       // store `zips`
-      const zipLookups = buildZipLookup(Object.values(data.offices));
-      const zipLookupsToPut = await mergeWithCurrent(persistence, transaction.stores[ZipLookup.STORE], Object.values(zipLookups));
-      await persistence.putMany(transaction.stores[ZipLookup.STORE], zipLookupsToPut, newHistory);
+      const zipLookupsToPut = await mergeWithCurrent(persistence, transaction.stores[ZipLookup.STORE], zipLookups);
+      await persistence.putMany(transaction.stores[ZipLookup.STORE], zipLookupsToPut, history);
+
+      // store `agents-offices-roles`
+      await persistence.putMany(transaction.stores[AgentOfficeRole.STORE], agentsOfficesRoles, history);
 
       transaction.complete();
     } catch (e) {

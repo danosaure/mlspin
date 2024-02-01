@@ -1,8 +1,7 @@
 import { FormControl, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent } from '@mui/material';
 import { Theme, useTheme } from '@mui/material/styles';
 import classnames from 'classnames';
-import * as React from 'react';
-import { AgentSearchRolesType } from '../../../models/agent';
+import { AgentSearchRolesType } from '../../../search/types';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;

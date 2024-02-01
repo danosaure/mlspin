@@ -8,7 +8,8 @@ import put from './put';
 import restoreBackup from './restore-backup';
 import transaction, { PersistenceTransaction, PersistenceTransactionEventHandlers } from './transaction';
 import { UploadedJsonFileType } from '../components/json-file-uploader-button';
-import { PersistenceBaseType, PersistenceHistoryType } from '../models/base';
+import PersistenceType from './persistence-type';
+import { PersistenceHistoryType } from '../models/types';
 
 export { MLSPinPersistenceError };
 
@@ -43,15 +44,15 @@ export default class Persistence {
     return transaction(this.db, storeNames, mode, eventHanders);
   }
 
-  async put(objectStore: IDBObjectStore, item: PersistenceBaseType, newHistory: PersistenceHistoryType): Promise<void> {
+  async put(objectStore: IDBObjectStore, item: PersistenceType, newHistory: PersistenceHistoryType): Promise<void> {
     await put(objectStore, item, newHistory);
   }
 
-  async putMany(objectStore: IDBObjectStore, items: PersistenceBaseType[], newHistory: PersistenceHistoryType): Promise<void> {
+  async putMany(objectStore: IDBObjectStore, items: PersistenceType[], newHistory: PersistenceHistoryType): Promise<void> {
     await Promise.all(items.map((item) => this.put(objectStore, item, newHistory)));
   }
 
-  async get(objectStore: IDBObjectStore, key: IDBValidKey): Promise<PersistenceBaseType> {
+  async get(objectStore: IDBObjectStore, key: IDBValidKey): Promise<PersistenceType> {
     return get(objectStore, key);
   }
 

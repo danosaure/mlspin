@@ -1,4 +1,4 @@
-export default (e: MouseEvent, cb: () => void) => {
+export const preventDefault = (e: MouseEvent, cb: () => void) => {
   e.preventDefault();
   cb();
 };

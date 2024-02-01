@@ -1,6 +1,6 @@
 import Persistence from './index';
 import { Agent, Office, USPS, ZipLookup } from '../models';
-import { PersistenceBaseType } from '../models/base';
+import { PersistenceBaseType } from '../models/types';
 
 export type DownloadStoreType = {
   store: string;

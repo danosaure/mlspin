@@ -1,30 +1,5 @@
-import Base, { PersistenceBaseType } from './base';
-
-const ROLES_MAPPINGS = {
-  A: 'Subscribers',
-  S: 'Office Contacts',
-  T: 'Teams',
-};
-
-export type AgentSearchRolesType = keyof typeof ROLES_MAPPINGS;
-
-export type AgentSearchType = {
-  name?: string;
-  office?: string;
-  city?: string;
-  zip?: string;
-  roles?: AgentSearchRolesType[];
-};
-
-export type AgentRoleType = 'Office Contacts' | 'Subscribers' | 'Teams';
-
-export type AgentType = PersistenceBaseType & {
-  email: string;
-  name: string;
-  phone: string;
-  office: string;
-  role: AgentRoleType;
-};
+import Base from './base';
+import { AgentJsonType, AgentType } from './types';
 
 export default class Agent extends Base {
   static readonly STORE = 'agents';
@@ -33,35 +8,16 @@ export default class Agent extends Base {
     super(data);
   }
 
-  toJSON(): AgentType {
-    return super.toJSON() as AgentType;
+  toJSON(): AgentJsonType {
+    return super.toJSON() as AgentJsonType;
   }
 
-  static match({ name, roles }: AgentSearchType, agent: AgentType): boolean {
-    if (name) {
-      const agentName = agent.name.toLowerCase();
-
-      const matchName = name
-        .toLowerCase()
-        .split(' ')
-        .reduce((result, fragment) => {
-          if (!result || !fragment) {
-            return result;
-          }
-
-          return agentName.indexOf(fragment) !== -1;
-        }, true);
-
-      if (!matchName) {
-        return false;
-      }
-    }
-
-    if (roles && roles.length) {
-      const mapped = roles.map((r) => ROLES_MAPPINGS[r]);
-      return mapped.indexOf(agent.role) !== -1;
-    }
-
-    return true;
+  static fromJSON(json: AgentJsonType): AgentType {
+    return {
+      ...super.fromJSON(json),
+      email: json.email,
+      name: json.name,
+      phone: json.phone,
+    };
   }
 }

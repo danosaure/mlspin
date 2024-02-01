@@ -1,9 +1,5 @@
-import Base, { PersistenceBaseType } from './base';
-
-export type USPSType = PersistenceBaseType & {
-  name: string;
-  alternatives?: string[];
-};
+import Base from './base';
+import { USPSType } from './types';
 
 export default class USPS extends Base {
   static readonly STORE = 'usps';

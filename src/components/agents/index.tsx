@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import { Alert } from '@mui/material';
 
-import { AgentSearchType } from '../../models/agent';
-import searchAgents, { AgentTypeSearchResult } from '../../search/agents';
+import { searchAgents } from '../../search/search-agents';
 import MainPanel from '../main-panel';
 
 import AgentsSearchForm from './search-form';
 import AgentsSearchResults from './search-results';
+import { AgentSearchResultType, AgentSearchType } from '../../search/types';
 
 export default () => {
-  const [data, setData] = useState<AgentTypeSearchResult[] | null>(null);
+  const [data, setData] = useState<AgentSearchResultType[] | null>(null);
 
   const onSubmit = async (criteria: AgentSearchType): Promise<void> => {
-    const matches: AgentTypeSearchResult[] = await searchAgents(criteria);
+    const matches: AgentSearchResultType[] = await searchAgents(criteria);
     setData(matches);
   };
 

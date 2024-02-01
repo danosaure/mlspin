@@ -2,7 +2,7 @@ import { Button, SelectChangeEvent, Stack, TextField } from '@mui/material';
 import { useState, ChangeEvent } from 'react';
 
 import RolesSelector from './roles-selector';
-import { AgentSearchRolesType, AgentSearchType } from '../../../models/agent';
+import { AgentSearchRolesType, AgentSearchType } from '../../../search/types';
 
 export type AgentsSearchFormProps = {
   onSubmit: (criteria: AgentSearchType) => void;

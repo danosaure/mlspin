@@ -1,12 +1,9 @@
 import Persistence from '../persistence';
 import { PersistenceTransaction } from '../persistence/transaction';
 
-import Base, { PersistenceBaseType, PersistenceHistoryType } from './base';
-
-export type ZipLookupType = PersistenceBaseType & {
-  city?: string;
-  neighborhoods: string[];
-};
+import Base from './base';
+import { newHistory } from './persistence-history';
+import { ZipLookupJsonType, ZipLookupType } from './types';
 
 export default class ZipLookup extends Base {
   static readonly STORE = 'zips';
@@ -15,8 +12,16 @@ export default class ZipLookup extends Base {
     super(data);
   }
 
-  toJSON(): ZipLookupType {
-    return super.toJSON() as ZipLookupType;
+  toJSON(): ZipLookupJsonType {
+    return super.toJSON() as ZipLookupJsonType;
+  }
+
+  static fromJSON(json: ZipLookupJsonType): ZipLookupType {
+    return {
+      ...super.fromJSON(json),
+      city: json.city,
+      neighborhoods: json.neighborhoods || [],
+    };
   }
 
   static async updateNeighborhoods(
@@ -46,12 +51,9 @@ export default class ZipLookup extends Base {
       neighborhoods,
     };
 
-    const newHistory: PersistenceHistoryType = {
-      date: new Date(),
-      action: 'user',
-    };
+    const history = newHistory('user');
 
-    await persistence?.put(objectStore, newItem, newHistory);
+    await persistence?.put(objectStore, newItem, history);
 
     if (localeTransaction) {
       transaction.complete();

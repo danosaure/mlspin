@@ -1,10 +1,7 @@
 import Persistence from '../persistence';
-import Base, { PersistenceBaseType, PersistenceHistoryType } from './base';
-
-export type UserPreferenceType = PersistenceBaseType & {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any;
-};
+import Base from './base';
+import { newHistory } from './persistence-history';
+import { UserPreferenceType } from './types';
 
 class UserPreference extends Base {
   static readonly STORE = 'user-preferences';
@@ -41,12 +38,9 @@ class UserPreference extends Base {
       id: 'theme',
       value: theme,
     };
-    const newHistory: PersistenceHistoryType = {
-      date: new Date(),
-      action: 'user',
-      message: `Changed theme to "${theme}".`,
-    };
-    await persistence.put(transaction.stores[UserPreference.STORE], userPreference, newHistory);
+
+    const history = newHistory('user', `Changed theme to "${theme}".`);
+    await persistence.put(transaction.stores[UserPreference.STORE], userPreference, history);
   }
 }
 
