@@ -64,8 +64,8 @@ export default class Persistence {
     return openCursor(storeOrIndex, withCursor, cursorDone);
   }
 
-  async createBackup(): Promise<DownloadFileJsonType> {
-    return createBackup(this);
+  static async createBackup(): Promise<DownloadFileJsonType> {
+    return createBackup();
   }
 
   async restoreBackup(data: UploadedJsonFileType): Promise<void> {

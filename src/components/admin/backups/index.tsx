@@ -6,8 +6,7 @@ import JsonFileUploaderButton, { UploadedJsonFileType } from '../../json-file-up
 
 export default () => {
   const createBackup = async (): Promise<void> => {
-    const persistence = new Persistence();
-    const content = await persistence.createBackup();
+    const content = await Persistence.createBackup();
     await downloadFile(content, 'db-backup');
   };
 
