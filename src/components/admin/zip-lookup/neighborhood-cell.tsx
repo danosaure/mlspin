@@ -1,16 +1,15 @@
 import { Check as CheckIcon, Close as CloseIcon, ModeEdit as ModeEditIcon } from '@mui/icons-material';
 import { Alert, Button, ButtonGroup, Stack, TextField, Typography } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
+import { sortAlpha } from '../../../utils';
 
 export type NeighborhoodCellType = {
   value: string[] | undefined;
   save: (values: string[]) => Promise<void>;
 };
 
-const sorter = (a: string, b: string) => a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase());
-
 export default ({ value, save }: NeighborhoodCellType) => {
-  const v: string = Array.isArray(value) ? value.sort(sorter).join(', ') : '';
+  const v: string = Array.isArray(value) ? value.sort(sortAlpha).join(', ') : '';
 
   const [editMode, setEditMode] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -42,7 +41,7 @@ export default ({ value, save }: NeighborhoodCellType) => {
           .map((s) => s.trim())
           .filter((s) => /[a-zA-Z]/.test(s))
       ).values()
-    ).sort(sorter);
+    ).sort(sortAlpha);
 
     if (neighborhoods.length) {
       await save(neighborhoods);

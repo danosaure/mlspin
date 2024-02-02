@@ -5,7 +5,7 @@ import AgentOfficeRole from '../models/agent-office-role';
 import { AgentOfficeRoleType, AgentType } from '../models/types';
 import mergeAgentData from './agent-merge-data';
 import { AgentSearchResultType, AgentSearchType, OfficeSearchResultType } from './types';
-import { getFragments, matchFragmentsToString } from '../utils';
+import { getFragments, matchFragmentsToString, sortAlpha } from '../utils';
 import { ROLES_MAPPINGS } from './roles-mappings';
 
 export const searchAgents = async ({ name, office, city, zip, roles }: AgentSearchType): Promise<AgentSearchResultType[]> => {
@@ -77,5 +77,5 @@ export const searchAgents = async ({ name, office, city, zip, roles }: AgentSear
   });
 
   transaction.complete();
-  return matches.sort((a, b) => a.agentName.localeCompare(b.agentName));
+  return matches.sort((a, b) => sortAlpha(a.agentName, b.agentName));
 };

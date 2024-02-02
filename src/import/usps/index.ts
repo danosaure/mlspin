@@ -1,6 +1,7 @@
 import { USPS, ZipLookup } from '../../models';
 import { PersistenceHistoryType, USPSType, ZipLookupType } from '../../models/types';
 import Persistence from '../../persistence';
+import { sortAlpha } from '../../utils';
 import MLSPinImportError from '../error';
 import parse from './parser';
 
@@ -53,9 +54,7 @@ export default async (content: string): Promise<void> => {
               const set = new Set(zipLookup.neighborhoods.concat(uspsEntry.alternatives || []).concat([uspsEntry.name]));
               if (set.size !== zipLookup.neighborhoods.length) {
                 needUpdate = true;
-                zipLookup.neighborhoods = Array.from(set.values()).sort((a, b) =>
-                  a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase())
-                );
+                zipLookup.neighborhoods = Array.from(set.values()).sort(sortAlpha);
               }
 
               if (needUpdate) {
