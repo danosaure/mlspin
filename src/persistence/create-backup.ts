@@ -1,10 +1,9 @@
-import Persistence from './index';
-import { Agent, Office, USPS, ZipLookup } from '../models';
-import { PersistenceBaseType } from '../models/types';
+import { DB_NAME } from './constants';
 
 export type DownloadStoreType = {
   store: string;
-  entries: PersistenceBaseType[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  entries: any[];
 };
 
 export type DownloadFileMetaType = {
@@ -16,32 +15,50 @@ export type DownloadFileJsonType = {
   data: DownloadStoreType[];
 };
 
-const backup = async (persistence: Persistence): Promise<DownloadFileJsonType> => {
-  await persistence.open();
+/**
+ * This is using the low level API to make it faster.
+ *
+ * @returns
+ */
+const createBackup = async (): Promise<DownloadFileJsonType> => {
+  const db: IDBDatabase = await new Promise((resolve) => {
+    const dbReq = indexedDB.open(DB_NAME); // version not important.
+    dbReq.onsuccess = () => resolve(dbReq.result);
+  });
 
-  const transaction = await persistence.transaction([Agent.STORE, Office.STORE, ZipLookup.STORE]);
+  const objectStoreNames: string[] = Array.from(db.objectStoreNames);
 
-  const data = await Promise.all(
-    [Agent.STORE, Office.STORE, USPS.STORE, ZipLookup.STORE].map(
+  const transaction: IDBTransaction = db.transaction(objectStoreNames, 'readonly');
+
+  const data: DownloadStoreType[] = await Promise.all(
+    objectStoreNames.map(
       async (store: string) =>
-        new Promise<DownloadStoreType>((resolve) => {
-          const entries: PersistenceBaseType[] = [];
+        new Promise<DownloadStoreType>(async (storeResolve) => {
+          const objectStore = transaction.objectStore(store);
 
-          persistence.openCursor(
-            transaction.stores[store],
-            (cursor) => {
-              entries.push(cursor.value);
-              cursor.continue();
-            },
-            () =>
-              resolve({
-                store,
-                entries,
-              })
-          );
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const entries: any[] = await new Promise((entriesResolve) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const docs: any[] = [];
+
+            const cursorReq = objectStore.openCursor();
+            cursorReq.onsuccess = () => {
+              const cursor = cursorReq.result;
+              if (cursor) {
+                docs.push(cursor.value);
+                cursor.continue();
+              } else {
+                entriesResolve(docs);
+              }
+            };
+          });
+
+          storeResolve({ store, entries });
         })
     )
   );
+
+  db.close();
 
   return {
     meta: {
@@ -51,4 +68,4 @@ const backup = async (persistence: Persistence): Promise<DownloadFileJsonType> =
   };
 };
 
-export default backup;
+export default createBackup;
