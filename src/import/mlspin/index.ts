@@ -1,31 +1,13 @@
 import ZipLookup from '../../models/zip-lookup';
 import Persistence, { MLSPinPersistenceError } from '../../persistence';
-import { Agent, Office } from '../../models';
+import { Agent, Office, USPS } from '../../models';
 import parse from './office-results-parser';
 import { newHistory } from '../../models/persistence-history';
 import extractDataByType from './extract-data-by-type';
 import EXTRACTED_DATA_TYPES from './extract-data-types';
 import AgentOfficeRole from '../../models/agent-office-role';
 import { AgentOfficeRoleType, AgentType, OfficeType, ZipLookupType } from '../../models/types';
-
-const mergeWithCurrent = async (
-  persistance: Persistence,
-  objectStore: IDBObjectStore,
-  zips: ZipLookupType[]
-): Promise<ZipLookupType[]> =>
-  Promise.all(
-    zips.map(async (zip): Promise<ZipLookupType> => {
-      const oldItem = (await persistance.get(objectStore, zip.id)) as ZipLookupType;
-      const neighborhoods = oldItem
-        ? Array.from(new Set(oldItem.neighborhoods.concat(zip.neighborhoods)).values())
-        : zip.neighborhoods;
-      return {
-        ...oldItem,
-        ...zip,
-        neighborhoods,
-      };
-    })
-  );
+import { mergeZipLookupsWithCurrent } from './merge-zip-lookups-with-current';
 
 export default async (content: string): Promise<void> => {
   const data = parse(content);
@@ -52,7 +34,7 @@ export default async (content: string): Promise<void> => {
       await persistence.open();
 
       const transaction = await persistence.transaction(
-        [Office.STORE, Agent.STORE, ZipLookup.STORE, AgentOfficeRole.STORE],
+        [Office.STORE, Agent.STORE, ZipLookup.STORE, AgentOfficeRole.STORE, USPS.STORE],
         'readwrite',
         {
           onabort: () => reject(new MLSPinPersistenceError('Transaction aborted.')),
@@ -67,7 +49,7 @@ export default async (content: string): Promise<void> => {
       await persistence.putMany(transaction.stores[Agent.STORE], agents, history);
 
       // store `zips`
-      const zipLookupsToPut = await mergeWithCurrent(persistence, transaction.stores[ZipLookup.STORE], zipLookups);
+      const zipLookupsToPut = await mergeZipLookupsWithCurrent(persistence, transaction, zipLookups);
       await persistence.putMany(transaction.stores[ZipLookup.STORE], zipLookupsToPut, history);
 
       // store `agents-offices-roles`
