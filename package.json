@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "run-s check tsc webpack",
     "check": "run-s eslint prettier",
     "clean:build": "rimraf build",
     "clean:docs": "rimraf docs",

@@ -4,3 +4,4 @@ export { hasOwnProperty } from './has-own-property';
 export { matchFragmentsToString } from './match-fragments-to-string';
 export { matchFragmentsToStringArray } from './match-fragments-to-string-array';
 export { preventDefault } from './prevent-default';
+export { sortAlpha } from './sort-alpha';

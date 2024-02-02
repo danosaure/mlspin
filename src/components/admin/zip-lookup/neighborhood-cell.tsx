@@ -7,7 +7,7 @@ export type NeighborhoodCellType = {
   save: (values: string[]) => Promise<void>;
 };
 
-const sorter = (a: string, b: string) => a.localeCompare(b);
+const sorter = (a: string, b: string) => a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase());
 
 export default ({ value, save }: NeighborhoodCellType) => {
   const v: string = Array.isArray(value) ? value.sort(sorter).join(', ') : '';
@@ -35,11 +35,14 @@ export default ({ value, save }: NeighborhoodCellType) => {
   const saveEdit = async () => {
     setErrorMessage('');
 
-    const neighborhoods: string[] = fieldValue
-      .split(',')
-      .map((s) => s.trim())
-      .filter((s) => /[a-zA-Z]/.test(s))
-      .sort((a: string, b: string) => a.toLocaleLowerCase().localeCompare(b.toLocaleLowerCase()));
+    const neighborhoods: string[] = Array.from(
+      new Set(
+        fieldValue
+          .split(',')
+          .map((s) => s.trim())
+          .filter((s) => /[a-zA-Z]/.test(s))
+      ).values()
+    ).sort(sorter);
 
     if (neighborhoods.length) {
       await save(neighborhoods);
@@ -55,7 +58,9 @@ export default ({ value, save }: NeighborhoodCellType) => {
 
   let content = (
     <>
-      <Typography sx={{ flex: 1 }}>{fieldValue}</Typography>
+      <Typography noWrap sx={{ flex: 1 }}>
+        {fieldValue}
+      </Typography>
       <Button variant="text" startIcon={<ModeEditIcon />} onClick={editField} />
     </>
   );
