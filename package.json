@@ -150,6 +150,10 @@
     "temp-dir": "./reports/nyc_output",
     "report-dir": "./reports/coverage",
     "check-coverage": false,
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
     "include": [
       "src/**/*.ts",
       "src/**/*.tsx"
