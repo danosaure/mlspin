@@ -21,7 +21,7 @@ export default ({ className, snackbarClosed, snacks }: SnackbarsProps) => {
     <Snackbar
       className={classNames}
       open
-      autoHideDuration={2000}
+      autoHideDuration={1500}
       onClose={snackbarClosed}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
     >

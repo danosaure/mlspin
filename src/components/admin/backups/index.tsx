@@ -3,8 +3,13 @@ import { Button, Table, TableBody, TableCell, TableContainer, TableRow } from '@
 import Persistence from '../../../persistence';
 import downloadFile from '../../../utils/download-file';
 import JsonFileUploaderButton, { UploadedJsonFileType } from '../../json-file-uploader-button';
+import { updateUspsData } from '../../../import/update-usps-data';
+import { SnackbarsContext } from '../../snackbars-context';
+import { useContext } from 'react';
 
 export default () => {
+  const { addMessage } = useContext(SnackbarsContext);
+
   const createBackup = async (): Promise<void> => {
     const content = await Persistence.createBackup();
     await downloadFile(content, 'db-backup');
@@ -19,6 +24,17 @@ export default () => {
   const onerror = (message: string) => {
     // eslint-disable-next-line no-console
     console.error('admin.backups(): onerror():', message);
+  };
+
+  const updateUSPS = async (): Promise<void> => {
+    addMessage({ severity: 'warning', message: 'Loading USPS data...' });
+
+    try {
+      await updateUspsData();
+      addMessage({ severity: 'success', message: 'USPS data loaded.' });
+    } catch (e) {
+      addMessage({ severity: 'error', message: `ERR loading USPS data: ${e instanceof Error ? e.message : e}` });
+    }
   };
 
   return (
@@ -45,6 +61,15 @@ export default () => {
             </TableCell>
             <TableCell>
               <JsonFileUploaderButton label="Restore from backup" onloadend={onloadend} onerror={onerror} />
+            </TableCell>
+          </TableRow>
+
+          <TableRow>
+            <TableCell size="small">Update the USPS data. This needs to be run at least once.</TableCell>
+            <TableCell>
+              <Button variant="contained" onClick={updateUSPS}>
+                Update USPS data
+              </Button>
             </TableCell>
           </TableRow>
         </TableBody>

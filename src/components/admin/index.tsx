@@ -1,15 +1,9 @@
-import {
-  Dataset as DatasetIcon,
-  ImportExport as ImportExportIcon,
-  Map as MapIcon,
-  MarkunreadMailbox as MarkunreadMailboxIcon,
-} from '@mui/icons-material';
+import { Dataset as DatasetIcon, ImportExport as ImportExportIcon, Map as MapIcon } from '@mui/icons-material';
 import { Box, Stack, Tab, Tabs, Typography } from '@mui/material';
 import { useState, SyntheticEvent } from 'react';
 
 import Backups from './backups';
 import MLSPinImporter from './mlspin-importer';
-import USPSImporter from './usps-importer';
 import ZipLookup from './zip-lookup';
 import { a11yProps } from '../main/utils';
 import TabPanel from '../tab-panel';
@@ -29,7 +23,6 @@ export default () => {
           <Tab className="dano--admin--tabs--item" label="Zip" {...a11yProps('zip')} icon={<MapIcon />} />
           <Tab className="dano--admin--tabs--item dano--admin--tabs--divider" label="" disabled />
           <Tab className="dano--admin--tabs--item" label="MLSpin" {...a11yProps('mls')} icon={<DatasetIcon />} />
-          <Tab className="dano--admin--tabs--item" label="USPS" {...a11yProps('usps')} icon={<MarkunreadMailboxIcon />} />
           <Tab className="dano--admin--tabs--item" label="Backups" {...a11yProps('backups')} icon={<ImportExportIcon />} />
         </Tabs>
       </Stack>
@@ -40,10 +33,6 @@ export default () => {
 
       <TabPanel tabId="zip" selectedTabId={tabId}>
         <ZipLookup />
-      </TabPanel>
-
-      <TabPanel tabId="usps" selectedTabId={tabId}>
-        <USPSImporter />
       </TabPanel>
 
       <TabPanel tabId="backups" selectedTabId={tabId}>
