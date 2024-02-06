@@ -13,7 +13,7 @@ export type MLSPinModalProps = {
   big?: boolean;
 };
 
-export default ({ className, open, title, onClose, wide, tall, big, children }: MLSPinModalProps) => {
+const MLSPinModal = ({ className, open, title, onClose, wide, tall, big, children }: MLSPinModalProps) => {
   const classNames = classnames('dano-modal-root', {
     'dano-modal-wide': big || wide,
     'dano-modal-tall': big || tall,
@@ -30,3 +30,7 @@ export default ({ className, open, title, onClose, wide, tall, big, children }: 
     </Modal>
   );
 };
+
+MLSPinModal.displayName = 'MLSPinModal';
+
+export { MLSPinModal };

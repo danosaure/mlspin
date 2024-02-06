@@ -6,7 +6,7 @@ export type OfficesSearchFormProps = {
   onSubmit: ({ name, city, zip }: OfficeSearchType) => void;
 };
 
-export default ({ onSubmit }: OfficesSearchFormProps) => {
+const OfficesSearchForm = ({ onSubmit }: OfficesSearchFormProps) => {
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [zip, setZip] = useState('');
@@ -44,3 +44,7 @@ export default ({ onSubmit }: OfficesSearchFormProps) => {
     </Stack>
   );
 };
+
+OfficesSearchForm.displayName = 'OfficesSearchForm';
+
+export { OfficesSearchForm };

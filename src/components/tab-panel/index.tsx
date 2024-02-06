@@ -9,7 +9,7 @@ interface TabPanelProps {
   tabId: string;
 }
 
-export default ({ tabId, selectedTabId, children }: TabPanelProps) => (
+const TabPanel = ({ tabId, selectedTabId, children }: TabPanelProps) => (
   <div
     role="tabpanel"
     className="dano--tab-panel"
@@ -24,3 +24,7 @@ export default ({ tabId, selectedTabId, children }: TabPanelProps) => (
     )}
   </div>
 );
+
+TabPanel.displayName = 'TabPanel';
+
+export { TabPanel };

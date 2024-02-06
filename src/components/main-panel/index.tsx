@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Box, Typography } from '@mui/material';
 
-import MainPanelSection from './main-panel-section';
+import { MLSPinMainPanelSection } from './main-panel-section';
 
 export interface MainPanelProps {
   className?: string;
@@ -11,16 +11,16 @@ export interface MainPanelProps {
 
 const MainPanel = ({ title, children, className }: MainPanelProps) => (
   <Box className={`dano-main-panel ${className}`}>
-    <MainPanelSection className={`${className}-section`}>
+    <MLSPinMainPanelSection className={`${className}-section`}>
       <Typography className="dano-title" variant="h3" component="div">
         {title}
       </Typography>
-    </MainPanelSection>
+    </MLSPinMainPanelSection>
 
     {children}
   </Box>
 );
 
-MainPanel.Section = MainPanelSection;
+MainPanel.Section = MLSPinMainPanelSection;
 
-export default MainPanel;
+export { MainPanel };

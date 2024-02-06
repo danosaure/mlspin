@@ -1,12 +1,12 @@
 import { Container } from '@mui/material';
 
-import Header from './header';
-import Main from './main';
+import { MLSPinHeader } from './header';
+import { MLSPinMain } from './main';
 import { SnackbarsContext } from './snackbars-context';
 import { useState } from 'react';
-import Snackbars, { MLSPinSnackbarsType } from './snackbars';
+import { MLSPinSnackbarsType, Snackbars } from './snackbars';
 
-export default () => {
+const MLSPinApp = () => {
   const [messages, setMessages] = useState<MLSPinSnackbarsType[]>([]);
 
   const addMessage = (message: MLSPinSnackbarsType) => setMessages(messages.concat(message));
@@ -15,11 +15,15 @@ export default () => {
   return (
     <SnackbarsContext.Provider value={{ addMessage, clearMessages }}>
       <Container fixed className="dano-app">
-        <Header />
-        <Main />
+        <MLSPinHeader />
+        <MLSPinMain />
       </Container>
 
       <Snackbars snackbarClosed={clearMessages} snacks={messages} />
     </SnackbarsContext.Provider>
   );
 };
+
+MLSPinApp.displayName = 'MLSPinApp';
+
+export { MLSPinApp };

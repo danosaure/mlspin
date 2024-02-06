@@ -28,7 +28,14 @@ export type FileUploaderButtonProps = {
   expectedMimeType: FileUploadMimeType;
 };
 
-export default ({ className, expectedMimeType, label, onprogress, onloadend, onerror }: FileUploaderButtonProps) => {
+const TextFileUploaderButton = ({
+  className,
+  expectedMimeType,
+  label,
+  onprogress,
+  onloadend,
+  onerror,
+}: FileUploaderButtonProps) => {
   const handleUpload: ChangeEventHandler<HTMLInputElement> = (fileInputEvent: ChangeEvent<HTMLInputElement>) => {
     // fileInputEvent.stopPropagation();
     // fileInputEvent.preventDefault();
@@ -87,3 +94,7 @@ export default ({ className, expectedMimeType, label, onprogress, onloadend, one
     </Button>
   );
 };
+
+TextFileUploaderButton.displayName = 'TextFileUploaderButton';
+
+export { TextFileUploaderButton };

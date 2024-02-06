@@ -8,7 +8,7 @@ export type NeighborhoodCellType = {
   save: (values: string[]) => Promise<void>;
 };
 
-export default ({ value, save }: NeighborhoodCellType) => {
+const AdminZipLookupNeighborhoodCell = ({ value, save }: NeighborhoodCellType) => {
   const v: string = Array.isArray(value) ? value.sort(sortAlpha).join(', ') : '';
 
   const [editMode, setEditMode] = useState(false);
@@ -108,3 +108,7 @@ export default ({ value, save }: NeighborhoodCellType) => {
     </Stack>
   );
 };
+
+AdminZipLookupNeighborhoodCell.displayName = 'AdminZipLookupNeighborhoodCell';
+
+export { AdminZipLookupNeighborhoodCell };

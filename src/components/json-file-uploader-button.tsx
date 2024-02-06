@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 
-import TextFileUploaderButton, { UploadedFileType } from './text-file-uploader-button';
+import { TextFileUploaderButton, UploadedFileType } from './text-file-uploader-button';
 import { DownloadFileJsonType } from '../persistence/create-backup';
 
 export type UploadedJsonFileType = {
@@ -17,7 +17,7 @@ export type JsonFileUploaderButtonProps = {
   onerror?: (message: string) => void;
 };
 
-export default ({ className, label, onerror, onloadend, onprogress }: JsonFileUploaderButtonProps) => {
+const JsonFileUploaderButton = ({ className, label, onerror, onloadend, onprogress }: JsonFileUploaderButtonProps) => {
   const textonloadend = async (uploadedFile: UploadedFileType): Promise<void> => {
     try {
       const json: DownloadFileJsonType = JSON.parse(uploadedFile.content) as DownloadFileJsonType;
@@ -47,3 +47,7 @@ export default ({ className, label, onerror, onloadend, onprogress }: JsonFileUp
     />
   );
 };
+
+JsonFileUploaderButton.displayName = 'JsonFileUploaderButton';
+
+export { JsonFileUploaderButton };

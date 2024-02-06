@@ -2,13 +2,13 @@ import { Dataset as DatasetIcon, ImportExport as ImportExportIcon, Map as MapIco
 import { Box, Stack, Tab, Tabs, Typography } from '@mui/material';
 import { useState, SyntheticEvent } from 'react';
 
-import Backups from './backups';
-import MLSPinImporter from './mlspin-importer';
-import ZipLookup from './zip-lookup';
+import { AdminBackups } from './backups';
+import { MLSPinImporter } from './mlspin-importer';
+import { AdminZipLookup } from './zip-lookup';
 import { a11yProps } from '../main/utils';
-import TabPanel from '../tab-panel';
+import { TabPanel } from '../tab-panel';
 
-export default () => {
+const MLSPinAdmin = () => {
   const [tabId, setTabId] = useState('zip');
 
   const changeTab = (event: SyntheticEvent, newTabId: string) => setTabId(newTabId);
@@ -32,12 +32,16 @@ export default () => {
       </TabPanel>
 
       <TabPanel tabId="zip" selectedTabId={tabId}>
-        <ZipLookup />
+        <AdminZipLookup />
       </TabPanel>
 
       <TabPanel tabId="backups" selectedTabId={tabId}>
-        <Backups />
+        <AdminBackups />
       </TabPanel>
     </Box>
   );
 };
+
+MLSPinAdmin.displayName = 'MLSPinAdmin';
+
+export { MLSPinAdmin };

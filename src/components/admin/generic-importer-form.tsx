@@ -9,7 +9,7 @@ export type GenericImporterFormProps = {
   saveContent: (content: string) => Promise<void>;
 };
 
-export default ({ className, disabled, placeholder, saveContent }: GenericImporterFormProps) => {
+const AdminGenericImporterForm = ({ className, disabled, placeholder, saveContent }: GenericImporterFormProps) => {
   const [content, setContent] = useState('');
 
   const contentChanged: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -51,3 +51,7 @@ export default ({ className, disabled, placeholder, saveContent }: GenericImport
     </Stack>
   );
 };
+
+AdminGenericImporterForm.displayName = 'AdminGenericImporterForm';
+
+export { AdminGenericImporterForm };

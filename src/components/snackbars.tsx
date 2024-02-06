@@ -13,7 +13,7 @@ export type SnackbarsProps = {
   snackbarClosed: () => void;
 };
 
-export default ({ className, snackbarClosed, snacks }: SnackbarsProps) => {
+const Snackbars = ({ className, snackbarClosed, snacks }: SnackbarsProps) => {
   const classNames = classnames('dano--snackbars', {
     [className || '']: className,
   });
@@ -35,3 +35,7 @@ export default ({ className, snackbarClosed, snacks }: SnackbarsProps) => {
     </Snackbar>
   ) : null;
 };
+
+Snackbars.displayName = 'Snackbars';
+
+export { Snackbars };

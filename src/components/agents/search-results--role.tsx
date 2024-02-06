@@ -11,8 +11,12 @@ export type AgentSearchResultsRoleProps = {
   role: AgentRoleType;
 };
 
-export default ({ role }: AgentSearchResultsRoleProps) => {
+const AgentsSearchResultsRole = ({ role }: AgentSearchResultsRoleProps) => {
   const Icon = ICONS[role];
 
   return <Icon />;
 };
+
+AgentsSearchResultsRole.displayName = 'AgentsSearchResultsRole';
+
+export { AgentsSearchResultsRole };

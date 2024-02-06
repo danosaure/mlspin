@@ -1,8 +1,8 @@
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 
-import ThemeToggler from './theme-toggler';
+import { ThemeToggler } from './theme-toggler';
 
-export default () => (
+const MLSPinHeader = () => (
   <Box className="dano--header">
     <AppBar position="static">
       <Toolbar>
@@ -15,3 +15,7 @@ export default () => (
     </AppBar>
   </Box>
 );
+
+MLSPinHeader.displayName = 'MLSPinHeader';
+
+export { MLSPinHeader };

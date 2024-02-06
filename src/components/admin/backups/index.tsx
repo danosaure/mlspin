@@ -2,12 +2,12 @@ import { Button, Table, TableBody, TableCell, TableContainer, TableRow } from '@
 
 import Persistence from '../../../persistence';
 import downloadFile from '../../../utils/download-file';
-import JsonFileUploaderButton, { UploadedJsonFileType } from '../../json-file-uploader-button';
+import { JsonFileUploaderButton, UploadedJsonFileType } from '../../json-file-uploader-button';
 import { updateUspsData } from '../../../import/update-usps-data';
 import { SnackbarsContext } from '../../snackbars-context';
 import { useContext } from 'react';
 
-export default () => {
+const AdminBackups = () => {
   const { addMessage } = useContext(SnackbarsContext);
 
   const createBackup = async (): Promise<void> => {
@@ -77,3 +77,7 @@ export default () => {
     </TableContainer>
   );
 };
+
+AdminBackups.displayName = 'AdminBackups';
+
+export { AdminBackups };

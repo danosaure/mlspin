@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 
 import { importMLS } from '../../import';
-import MainPanel from '../main-panel';
-import GenericImporterForm from './generic-importer-form';
+import { MainPanel } from '../main-panel';
+import { AdminGenericImporterForm } from './generic-importer-form';
 import { SnackbarsContext } from '../snackbars-context';
 
-export default () => {
+const MLSPinImporter = () => {
   const { addMessage } = useContext(SnackbarsContext);
 
   const saveContent = async (content: string) => {
@@ -21,7 +21,7 @@ export default () => {
 
   return (
     <MainPanel className="dano--importer" title="Data importer">
-      <GenericImporterForm
+      <AdminGenericImporterForm
         className="dano--importer--form"
         saveContent={saveContent}
         placeholder="Paste in the output from the bookmarklet."
@@ -29,3 +29,7 @@ export default () => {
     </MainPanel>
   );
 };
+
+MLSPinImporter.displayName = 'MLSPinImporter';
+
+export { MLSPinImporter };
