@@ -2,13 +2,12 @@ import { Button, Table, TableBody, TableCell, TableContainer, TableRow } from '@
 
 import Persistence from '../../../persistence';
 import downloadFile from '../../../utils/download-file';
-import JsonFileUploaderButton, { UploadedJsonFileType } from '../../json-file-uploader-button';
+import { JsonFileUploaderButton, UploadedJsonFileType } from '../../json-file-uploader-button';
 import { updateUspsData } from '../../../import/update-usps-data';
-import { SnackbarsContext } from '../../snackbars-context';
-import { useContext } from 'react';
+import { useSnackbars } from '../../snackbars';
 
-export default () => {
-  const { addMessage } = useContext(SnackbarsContext);
+const AdminBackups = () => {
+  const { setSnack } = useSnackbars();
 
   const createBackup = async (): Promise<void> => {
     const content = await Persistence.createBackup();
@@ -27,13 +26,13 @@ export default () => {
   };
 
   const updateUSPS = async (): Promise<void> => {
-    addMessage({ severity: 'warning', message: 'Loading USPS data...' });
+    setSnack('warning', 'Loading USPS data...');
 
     try {
       await updateUspsData();
-      addMessage({ severity: 'success', message: 'USPS data loaded.' });
+      setSnack('success', 'USPS data loaded.');
     } catch (e) {
-      addMessage({ severity: 'error', message: `ERR loading USPS data: ${e instanceof Error ? e.message : e}` });
+      setSnack('error', `ERR loading USPS data: ${e instanceof Error ? e.message : e}`);
     }
   };
 
@@ -77,3 +76,7 @@ export default () => {
     </TableContainer>
   );
 };
+
+AdminBackups.displayName = 'AdminBackups';
+
+export { AdminBackups };

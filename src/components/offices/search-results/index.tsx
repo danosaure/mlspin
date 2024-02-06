@@ -1,6 +1,6 @@
 import { GridColDef } from '@mui/x-data-grid';
 
-import SearchResults from '../../search-results';
+import { SearchResults } from '../../search-results';
 import { OfficeSearchResultType } from '../../../search/types';
 
 const columns: GridColDef[] = [
@@ -15,6 +15,10 @@ export type OfficesSearchResultsProps = {
   data: OfficeSearchResultType[];
 };
 
-export default ({ data }: OfficesSearchResultsProps) => (
+const OfficesSearchResults = ({ data }: OfficesSearchResultsProps) => (
   <SearchResults className="dano-offices-search-results" rows={data} columns={columns} />
 );
+
+OfficesSearchResults.displayName = 'OfficesSearchResults';
+
+export { OfficesSearchResults };

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Alert, CircularProgress, Stack, Typography } from '@mui/material';
 
-import ZipLookupSearchResults, { ZipLookupSearchResultsType } from './search-results';
-import MainPanel from '../../main-panel';
+import { AdminZipLookupSearchResults, ZipLookupSearchResultsType } from './search-results';
+import { MainPanel } from '../../main-panel';
 import ZipLookup from '../../../models/zip-lookup';
 import { ZipLookupType } from '../../../models/types';
 import { searchZipLookup } from '../../../search/search-zip-lookups';
 
-export default () => {
+const AdminZipLookup = () => {
   const [data, setData] = useState<Record<string, ZipLookupType>>({});
 
   const save = async (id: string, neighborhoods: string[]) => {
@@ -30,7 +30,7 @@ export default () => {
         save: async (neighborhoods: string[]): Promise<void> => save(zipLookup.id, neighborhoods),
       }));
 
-      content = <ZipLookupSearchResults data={searchResultData} />;
+      content = <AdminZipLookupSearchResults data={searchResultData} />;
     } else {
       content = (
         <Alert variant="outlined" severity="warning">
@@ -53,3 +53,7 @@ export default () => {
     </MainPanel>
   );
 };
+
+AdminZipLookup.displayName = 'AdminZipLookup';
+
+export { AdminZipLookup };

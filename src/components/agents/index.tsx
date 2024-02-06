@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { Alert } from '@mui/material';
 
 import { searchAgents } from '../../search/search-agents';
-import MainPanel from '../main-panel';
+import { MainPanel } from '../main-panel';
 
-import AgentsSearchForm from './search-form';
-import AgentsSearchResults from './search-results';
+import { AgentsSearchForm } from './search-form';
+import { AgentsSearchResults } from './search-results';
 import { AgentSearchResultType, AgentSearchType } from '../../search/types';
 
-export default () => {
+const MLSPinAgents = () => {
   const [data, setData] = useState<AgentSearchResultType[] | null>(null);
 
   const onSubmit = async (criteria: AgentSearchType): Promise<void> => {
@@ -39,3 +39,7 @@ export default () => {
     </MainPanel>
   );
 };
+
+MLSPinAgents.displayName = 'MLSPinAgents';
+
+export { MLSPinAgents };

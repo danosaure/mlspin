@@ -7,7 +7,7 @@ export interface MainPanelSectionProps {
   children?: ReactNode;
 }
 
-export default ({ children, className }: MainPanelSectionProps) => {
+const MLSPinMainPanelSection = ({ children, className }: MainPanelSectionProps) => {
   const classNames = classnames('dano-main-panel-section', {
     [className || '']: Boolean(className),
   });
@@ -18,3 +18,7 @@ export default ({ children, className }: MainPanelSectionProps) => {
     </Box>
   );
 };
+
+MLSPinMainPanelSection.displayName = 'MLSPinMainPanelSection';
+
+export { MLSPinMainPanelSection };

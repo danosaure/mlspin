@@ -2,14 +2,14 @@ import { useState, SyntheticEvent } from 'react';
 import { AdminPanelSettings as AdminPanelSettingsIcon, Business as BusinessIcon, Person as PersonIcon } from '@mui/icons-material';
 import { Box, Tab, Tabs } from '@mui/material';
 
-import Admin from '../admin';
-import Agents from '../agents';
-import Offices from '../offices';
-import TabPanel from '../tab-panel';
+import { MLSPinAdmin } from '../admin';
+import { MLSPinAgents } from '../agents';
+import { Offices } from '../offices';
+import { TabPanel } from '../tab-panel';
 
 import { a11yProps } from './utils';
 
-export default () => {
+const MLSPinMain = () => {
   const [tabId, setTabId] = useState('agents');
 
   const changeTab = (event: SyntheticEvent, newTabId: string) => setTabId(newTabId);
@@ -24,7 +24,7 @@ export default () => {
       </Tabs>
 
       <TabPanel tabId="agents" selectedTabId={tabId}>
-        <Agents />
+        <MLSPinAgents />
       </TabPanel>
 
       <TabPanel tabId="offices" selectedTabId={tabId}>
@@ -32,8 +32,12 @@ export default () => {
       </TabPanel>
 
       <TabPanel tabId="admin" selectedTabId={tabId}>
-        <Admin />
+        <MLSPinAdmin />
       </TabPanel>
     </Box>
   );
 };
+
+MLSPinMain.displayName = 'MLSPinMain';
+
+export { MLSPinMain };

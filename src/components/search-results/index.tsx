@@ -8,7 +8,7 @@ export interface SearchResultsProps {
   rows: Record<string, any>[];
 }
 
-export default ({ className, columns, rows }: SearchResultsProps) => (
+const SearchResults = ({ className, columns, rows }: SearchResultsProps) => (
   <Box className={`dano-search-results ${className}`}>
     <DataGrid
       className={`dano-search-results-grid ${className}`}
@@ -29,3 +29,7 @@ export default ({ className, columns, rows }: SearchResultsProps) => (
     />
   </Box>
 );
+
+SearchResults.displayName = 'SearchResults';
+
+export { SearchResults };

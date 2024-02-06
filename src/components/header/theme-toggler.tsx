@@ -8,7 +8,7 @@ import { ButtonGroup, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import UserPreference from '../../models/user-preference';
 
-export default () => {
+const ThemeToggler = () => {
   const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
@@ -39,3 +39,7 @@ export default () => {
     </Stack>
   );
 };
+
+ThemeToggler.displayName = 'ThemeToggler';
+
+export { ThemeToggler };

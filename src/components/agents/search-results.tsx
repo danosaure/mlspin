@@ -1,7 +1,7 @@
 import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
-import SearchResultsRole from './search-results--role';
-import SearchResults from '../search-results';
+import { AgentsSearchResultsRole } from './search-results--role';
+import { SearchResults } from '../search-results';
 import { AgentRoleType } from '../../models/types';
 import { AgentSearchResultType } from '../../search/types';
 
@@ -12,7 +12,7 @@ const columns: GridColDef[] = [
     headerName: 'Role',
     flex: 1,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    renderCell: (params: GridRenderCellParams<any, string>) => <SearchResultsRole role={params.value as AgentRoleType} />,
+    renderCell: (params: GridRenderCellParams<any, string>) => <AgentsSearchResultsRole role={params.value as AgentRoleType} />,
   },
   { field: 'agentName', headerName: 'Name', flex: 2 },
   { field: 'agentEmail', headerName: 'Email', flex: 3 },
@@ -26,6 +26,10 @@ export type AgentsSearchResultsProps = {
   data: AgentSearchResultType[];
 };
 
-export default ({ data }: AgentsSearchResultsProps) => (
+const AgentsSearchResults = ({ data }: AgentsSearchResultsProps) => (
   <SearchResults className="dano-agents-search-results" rows={data} columns={columns} />
 );
+
+AgentsSearchResults.displayName = 'AgentsSearchResults';
+
+export { AgentsSearchResults };

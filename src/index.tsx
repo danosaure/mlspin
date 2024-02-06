@@ -1,5 +1,7 @@
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
-import App from './components';
+import { MLSPinApp } from './components';
 
-ReactDOM.render(<App />, document.getElementById('react-app-placeholder'));
+const container = document.getElementById('react-app-placeholder');
+const root = createRoot(container!);
+root.render(<MLSPinApp />);

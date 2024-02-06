@@ -26,7 +26,7 @@ export type RolesSelectorProps = {
   rolesChanged: (e: SelectChangeEvent<AgentSearchRolesType[]>) => void;
 };
 
-export default ({ className, roles, rolesChanged }: RolesSelectorProps) => {
+const AgentsSearchFormRolesSelector = ({ className, roles, rolesChanged }: RolesSelectorProps) => {
   const theme = useTheme();
 
   const classNames = classnames('dano--roles-selector', {
@@ -62,3 +62,7 @@ export default ({ className, roles, rolesChanged }: RolesSelectorProps) => {
     </div>
   );
 };
+
+AgentsSearchFormRolesSelector.displayName = 'AgentsSearchFormRolesSelector';
+
+export { AgentsSearchFormRolesSelector };
