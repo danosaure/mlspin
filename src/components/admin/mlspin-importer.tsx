@@ -1,21 +1,19 @@
-import { useContext } from 'react';
-
 import { importMLS } from '../../import';
 import { MainPanel } from '../main-panel';
+import { useSnackbars } from '../snackbars';
 import { AdminGenericImporterForm } from './generic-importer-form';
-import { SnackbarsContext } from '../snackbars-context';
 
 const MLSPinImporter = () => {
-  const { addMessage } = useContext(SnackbarsContext);
+  const { setSnack } = useSnackbars();
 
   const saveContent = async (content: string) => {
-    addMessage({ severity: 'warning', message: 'Import in progress...' });
+    setSnack('warning', 'Import in progress...');
 
     try {
       await importMLS(content);
-      addMessage({ severity: 'success', message: 'Data imported successfully.' });
+      setSnack('success', 'Data imported successfully.');
     } catch (e) {
-      addMessage({ severity: 'error', message: e instanceof Error ? e.message : String(e) });
+      setSnack('error', e instanceof Error ? e.message : String(e));
     }
   };
 

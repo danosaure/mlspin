@@ -1,23 +1,18 @@
-import { AlertColor } from '@mui/material/Alert';
 import { Alert, Snackbar, Stack } from '@mui/material';
+import { MLSPinSnackbarsType } from './types';
 import classnames from 'classnames';
 
-export type MLSPinSnackbarsType = {
-  severity: AlertColor;
-  message: string;
-};
-
-export type SnackbarsProps = {
+export interface SnackbarsProps {
   className?: string;
-  snacks?: MLSPinSnackbarsType[];
+  snack?: MLSPinSnackbarsType | null;
   snackbarClosed: () => void;
-};
+}
 
-const Snackbars = ({ className, snackbarClosed, snacks }: SnackbarsProps) => {
+const Snackbars = ({ className, snackbarClosed, snack }: SnackbarsProps) => {
   const classNames = classnames('dano--snackbars', {
     [className || '']: className,
   });
-  return snacks?.length ? (
+  return snack ? (
     <Snackbar
       className={classNames}
       open
@@ -25,12 +20,10 @@ const Snackbars = ({ className, snackbarClosed, snacks }: SnackbarsProps) => {
       onClose={snackbarClosed}
       anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
     >
-      <Stack direction="row">
-        {snacks.map((snackMessage, idx) => (
-          <Alert key={idx} severity={snackMessage.severity} variant="filled">
-            {snackMessage.message}
-          </Alert>
-        ))}
+      <Stack direction="column">
+        <Alert severity={snack.severity} variant="filled">
+          {snack.message}
+        </Alert>
       </Stack>
     </Snackbar>
   ) : null;
