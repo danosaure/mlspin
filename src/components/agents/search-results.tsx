@@ -4,6 +4,8 @@ import { AgentsSearchResultsRole } from './search-results--role';
 import { SearchResults } from '../search-results';
 import { AgentRoleType } from '../../models/types';
 import { AgentSearchResultType } from '../../search/types';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 const columns: GridColDef[] = [
   // { field: 'id', headerName: 'ID', flex: 1 },
@@ -30,6 +32,6 @@ const AgentsSearchResults = ({ data }: AgentsSearchResultsProps) => (
   <SearchResults className="dano-agents-search-results" rows={data} columns={columns} />
 );
 
-AgentsSearchResults.displayName = 'AgentsSearchResults';
+AgentsSearchResults.displayName = displayName(namespace('AgentsSearchResults'));
 
 export { AgentsSearchResults };

@@ -1,6 +1,8 @@
 import { Box } from '@mui/material';
 import classnames from 'classnames';
 import { ReactNode } from 'react';
+import { displayName } from '../../../utils';
+import namespace from './namespace';
 
 export interface MainPanelSectionProps {
   className?: string;
@@ -19,6 +21,6 @@ const MLSPinMainPanelSection = ({ children, className }: MainPanelSectionProps) 
   );
 };
 
-MLSPinMainPanelSection.displayName = 'MLSPinMainPanelSection';
+MLSPinMainPanelSection.displayName = displayName(namespace('MLSPinMainPanelSection'));
 
 export { MLSPinMainPanelSection };

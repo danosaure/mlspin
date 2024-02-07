@@ -1,7 +1,8 @@
 import { Check as CheckIcon, Close as CloseIcon, ModeEdit as ModeEditIcon } from '@mui/icons-material';
 import { Alert, Button, ButtonGroup, Stack, TextField, Typography } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
-import { sortAlpha } from '../../../utils';
+import { displayName, sortAlpha } from '../../../utils';
+import namespace from './namespace';
 
 export type NeighborhoodCellType = {
   value: string[] | undefined;
@@ -109,6 +110,6 @@ const AdminZipLookupNeighborhoodCell = ({ value, save }: NeighborhoodCellType) =
   );
 };
 
-AdminZipLookupNeighborhoodCell.displayName = 'AdminZipLookupNeighborhoodCell';
+AdminZipLookupNeighborhoodCell.displayName = displayName(namespace('AdminZipLookupNeighborhoodCell'));
 
 export { AdminZipLookupNeighborhoodCell };

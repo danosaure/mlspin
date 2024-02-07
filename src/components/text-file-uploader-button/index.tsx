@@ -2,6 +2,8 @@ import { Button } from '@mui/material';
 import classnames from 'classnames';
 import { ChangeEvent, ChangeEventHandler } from 'react';
 import { VisuallyHiddenInput } from './visually-hidden-input';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 export type FileUploadMimeType = 'application/json' | 'text/plain';
 
@@ -94,6 +96,6 @@ const TextFileUploaderButton = ({
   );
 };
 
-TextFileUploaderButton.displayName = 'TextFileUploaderButton';
+TextFileUploaderButton.displayName = displayName(namespace('TextFileUploaderButton'));
 
 export { TextFileUploaderButton };

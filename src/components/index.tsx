@@ -3,6 +3,8 @@ import { Container } from '@mui/material';
 import { MLSPinHeader } from './header';
 import { MLSPinMain } from './main';
 import { SnackbarsProvider } from './snackbars';
+import { displayName } from '../utils';
+import namespace from './namespace';
 
 const MLSPinApp = () => {
   return (
@@ -15,6 +17,6 @@ const MLSPinApp = () => {
   );
 };
 
-MLSPinApp.displayName = 'MLSPinApp';
+MLSPinApp.displayName = displayName(namespace('MLSPinApp'));
 
 export { MLSPinApp };

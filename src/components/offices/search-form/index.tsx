@@ -1,6 +1,8 @@
 import { useState, ChangeEvent } from 'react';
 import { Button, Stack, TextField } from '@mui/material';
 import { OfficeSearchType } from '../../../search/types';
+import { displayName } from '../../../utils';
+import namespace from './namespace';
 
 export type OfficesSearchFormProps = {
   onSubmit: ({ name, city, zip }: OfficeSearchType) => void;
@@ -45,6 +47,6 @@ const OfficesSearchForm = ({ onSubmit }: OfficesSearchFormProps) => {
   );
 };
 
-OfficesSearchForm.displayName = 'OfficesSearchForm';
+OfficesSearchForm.displayName = displayName(namespace('OfficesSearchForm'));
 
 export { OfficesSearchForm };

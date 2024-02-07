@@ -2,6 +2,8 @@ import { GridColDef, GridRenderCellParams } from '@mui/x-data-grid';
 
 import { AdminZipLookupNeighborhoodCell } from './neighborhood-cell';
 import { SearchResults } from '../../search-results';
+import { displayName } from '../../../utils';
+import namespace from './namespace';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'Zip', flex: 1 },
@@ -31,6 +33,6 @@ const AdminZipLookupSearchResults = ({ data }: ZipLookupSearchResultsProps) => (
   <SearchResults className="dano-zip-lookup-search-results" rows={data} columns={columns} />
 );
 
-AdminZipLookupSearchResults.displayName = 'AdminZipLookupSearchResults';
+AdminZipLookupSearchResults.displayName = displayName(namespace('AdminZipLookupSearchResults'));
 
 export { AdminZipLookupSearchResults };

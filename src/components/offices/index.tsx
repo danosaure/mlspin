@@ -7,6 +7,8 @@ import { OfficesSearchForm } from './search-form';
 import { OfficesSearchResults } from './search-results';
 import { searchOfficesFromForm } from '../../search/search-offices-from-form';
 import { OfficeSearchResultType, OfficeSearchType } from '../../search/types';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 const Offices = () => {
   const [data, setData] = useState<OfficeSearchResultType[] | null>(null);
@@ -40,6 +42,6 @@ const Offices = () => {
   );
 };
 
-Offices.displayName = 'Offices';
+Offices.displayName = displayName(namespace('Offices'));
 
 export { Offices };

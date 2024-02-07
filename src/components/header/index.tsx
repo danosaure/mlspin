@@ -1,6 +1,8 @@
 import { AppBar, Box, Toolbar, Typography } from '@mui/material';
 
 import { ThemeToggler } from './theme-toggler';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 const MLSPinHeader = () => (
   <Box className="dano--header">
@@ -16,6 +18,6 @@ const MLSPinHeader = () => (
   </Box>
 );
 
-MLSPinHeader.displayName = 'MLSPinHeader';
+MLSPinHeader.displayName = displayName(namespace('MLSPinHeader'));
 
 export { MLSPinHeader };

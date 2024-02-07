@@ -3,6 +3,8 @@ import { AlertColor } from '@mui/material';
 import { MLSPinSnackbarsType } from './types';
 import { Snackbars } from './component';
 import { SnackbarsContext } from './context';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 export interface SnackbarsProviderProps {
   children: ReactNode;
@@ -23,6 +25,6 @@ const SnackbarsProvider = ({ children }: SnackbarsProviderProps) => {
     </SnackbarsContext.Provider>
   );
 };
-SnackbarsProvider.displayName = 'SnackbarsProvider';
+SnackbarsProvider.displayName = displayName(namespace('SnackbarsProvider'));
 
 export { SnackbarsProvider };

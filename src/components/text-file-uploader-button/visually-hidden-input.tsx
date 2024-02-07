@@ -1,4 +1,6 @@
 import { styled } from '@mui/material';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -12,6 +14,6 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-VisuallyHiddenInput.displayName = 'VisuallyHiddenInput';
+VisuallyHiddenInput.displayName = displayName(namespace('VisuallyHiddenInput'));
 
 export { VisuallyHiddenInput };

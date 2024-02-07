@@ -7,6 +7,8 @@ import { MLSPinImporter } from './mlspin-importer';
 import { AdminZipLookup } from './zip-lookup';
 import { a11yProps } from '../main/utils';
 import { TabPanel } from '../tab-panel';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 const MLSPinAdmin = () => {
   const [tabId, setTabId] = useState('zip');
@@ -42,6 +44,6 @@ const MLSPinAdmin = () => {
   );
 };
 
-MLSPinAdmin.displayName = 'MLSPinAdmin';
+MLSPinAdmin.displayName = displayName(namespace('MLSPinAdmin'));
 
 export { MLSPinAdmin };

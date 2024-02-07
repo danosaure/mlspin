@@ -1,6 +1,8 @@
 import { Button, Stack, TextField } from '@mui/material';
 import classnames from 'classnames';
 import { useState, ChangeEventHandler } from 'react';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 export type GenericImporterFormProps = {
   className?: string;
@@ -52,6 +54,6 @@ const AdminGenericImporterForm = ({ className, disabled, placeholder, saveConten
   );
 };
 
-AdminGenericImporterForm.displayName = 'AdminGenericImporterForm';
+AdminGenericImporterForm.displayName = displayName(namespace('AdminGenericImporterForm'));
 
 export { AdminGenericImporterForm };

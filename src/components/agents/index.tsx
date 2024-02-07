@@ -7,6 +7,8 @@ import { MainPanel } from '../main-panel';
 import { AgentsSearchForm } from './search-form';
 import { AgentsSearchResults } from './search-results';
 import { AgentSearchResultType, AgentSearchType } from '../../search/types';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 const MLSPinAgents = () => {
   const [data, setData] = useState<AgentSearchResultType[] | null>(null);
@@ -40,6 +42,6 @@ const MLSPinAgents = () => {
   );
 };
 
-MLSPinAgents.displayName = 'MLSPinAgents';
+MLSPinAgents.displayName = displayName(namespace('MLSPinAgents'));
 
 export { MLSPinAgents };

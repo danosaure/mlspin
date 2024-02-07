@@ -1,5 +1,7 @@
 import { Business as BusinessIcon, Groups as GroupsIcon, Person as PersonIcon } from '@mui/icons-material';
 import { AgentRoleType } from '../../models/types';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 const ICONS = {
   'Office Contacts': BusinessIcon,
@@ -17,6 +19,6 @@ const AgentsSearchResultsRole = ({ role }: AgentSearchResultsRoleProps) => {
   return <Icon />;
 };
 
-AgentsSearchResultsRole.displayName = 'AgentsSearchResultsRole';
+AgentsSearchResultsRole.displayName = displayName(namespace('AgentsSearchResultsRole'));
 
 export { AgentsSearchResultsRole };

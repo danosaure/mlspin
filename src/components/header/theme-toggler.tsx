@@ -7,6 +7,8 @@ import {
 import { ButtonGroup, Stack } from '@mui/material';
 import { useEffect, useState } from 'react';
 import UserPreference from '../../models/user-preference';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 const ThemeToggler = () => {
   const [theme, setTheme] = useState('dark');
@@ -40,6 +42,6 @@ const ThemeToggler = () => {
   );
 };
 
-ThemeToggler.displayName = 'ThemeToggler';
+ThemeToggler.displayName = displayName(namespace('ThemeToggler'));
 
 export { ThemeToggler };

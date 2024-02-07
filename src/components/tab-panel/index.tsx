@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 import { Box } from '@mui/material';
 
 import { generateTabId, generateTabPanelId } from '../main/utils';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -25,6 +27,6 @@ const TabPanel = ({ tabId, selectedTabId, children }: TabPanelProps) => (
   </div>
 );
 
-TabPanel.displayName = 'TabPanel';
+TabPanel.displayName = displayName(namespace('TabPanel'));
 
 export { TabPanel };

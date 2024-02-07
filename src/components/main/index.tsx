@@ -8,6 +8,8 @@ import { Offices } from '../offices';
 import { TabPanel } from '../tab-panel';
 
 import { a11yProps } from './utils';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 const MLSPinMain = () => {
   const [tabId, setTabId] = useState('agents');
@@ -38,6 +40,6 @@ const MLSPinMain = () => {
   );
 };
 
-MLSPinMain.displayName = 'MLSPinMain';
+MLSPinMain.displayName = displayName(namespace('MLSPinMain'));
 
 export { MLSPinMain };

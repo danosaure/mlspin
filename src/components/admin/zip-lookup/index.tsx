@@ -6,6 +6,8 @@ import { MainPanel } from '../../main-panel';
 import ZipLookup from '../../../models/zip-lookup';
 import { ZipLookupType } from '../../../models/types';
 import { searchZipLookup } from '../../../search/search-zip-lookups';
+import { displayName } from '../../../utils';
+import namespace from './namespace';
 
 const AdminZipLookup = () => {
   const [data, setData] = useState<Record<string, ZipLookupType>>({});
@@ -54,6 +56,6 @@ const AdminZipLookup = () => {
   );
 };
 
-AdminZipLookup.displayName = 'AdminZipLookup';
+AdminZipLookup.displayName = displayName(namespace('AdminZipLookup'));
 
 export { AdminZipLookup };

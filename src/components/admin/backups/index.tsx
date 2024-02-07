@@ -5,6 +5,8 @@ import downloadFile from '../../../utils/download-file';
 import { JsonFileUploaderButton, UploadedJsonFileType } from '../../json-file-uploader-button';
 import { updateUspsData } from '../../../import/update-usps-data';
 import { useSnackbars } from '../../snackbars';
+import { displayName } from '../../../utils';
+import namespace from './namespace';
 
 const AdminBackups = () => {
   const { setSnack } = useSnackbars();
@@ -81,6 +83,6 @@ const AdminBackups = () => {
   );
 };
 
-AdminBackups.displayName = 'AdminBackups';
+AdminBackups.displayName = displayName(namespace('AdminBackups'));
 
 export { AdminBackups };

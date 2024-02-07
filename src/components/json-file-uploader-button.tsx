@@ -2,6 +2,8 @@ import classnames from 'classnames';
 
 import { TextFileUploaderButton, UploadedFileType } from './text-file-uploader-button';
 import { DownloadFileJsonType } from '../persistence/create-backup';
+import { displayName } from '../utils';
+import namespace from './namespace';
 
 export type UploadedJsonFileType = {
   json: DownloadFileJsonType;
@@ -48,6 +50,6 @@ const JsonFileUploaderButton = ({ className, label, onerror, onloadend, onprogre
   );
 };
 
-JsonFileUploaderButton.displayName = 'JsonFileUploaderButton';
+JsonFileUploaderButton.displayName = displayName(namespace('JsonFileUploaderButton'));
 
 export { JsonFileUploaderButton };

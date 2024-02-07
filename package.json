@@ -15,7 +15,7 @@
     "eslint": "eslint --fix --ext=.js,.ts,.tsx src",
     "prettier": "prettier 'src/**/*.ts' --write",
     "sass": "sass src/components/style.scss docs/style.css",
-    "serve": "cd docs; python3 -m http.server -b localhost 8080",
+    "serve": "python3 -m http.server --directory docs -b localhost 8080",
     "test": "mocha",
     "pretsc": "run-s clean:build",
     "tsc": "tsc",
