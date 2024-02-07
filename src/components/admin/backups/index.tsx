@@ -10,14 +10,18 @@ const AdminBackups = () => {
   const { setSnack } = useSnackbars();
 
   const createBackup = async (): Promise<void> => {
+    setSnack('warning', 'Generating backup file...');
     const content = await Persistence.createBackup();
+
+    setSnack('succes', 'Backup file ready to be downloaded.');
     await downloadFile(content, 'db-backup');
   };
 
   const onloadend = async (result: UploadedJsonFileType) => {
-    // TODO: indicator restore in progress
+    setSnack('warning', 'Loading backup file to restore...');
     const persistence = new Persistence();
     await persistence.restoreBackup(result);
+    setSnack('succes', 'Backup file restored.');
   };
 
   const onerror = (message: string) => {
