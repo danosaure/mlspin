@@ -1,8 +1,7 @@
 import { Button } from '@mui/material';
 import classnames from 'classnames';
 import { ChangeEvent, ChangeEventHandler } from 'react';
-
-import VisuallyHiddenInput from './visually-hidden-input';
+import { VisuallyHiddenInput } from './visually-hidden-input';
 
 export type FileUploadMimeType = 'application/json' | 'text/plain';
 

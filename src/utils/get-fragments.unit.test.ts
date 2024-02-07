@@ -1,8 +1,10 @@
 import { expect } from 'chai';
+import path from 'path';
 
+import namespace from './namespace';
 import { getFragments } from './get-fragments';
 
-describe(__filename, () => {
+describe(namespace(path.basename(__filename)), () => {
   it('returns empty array when empty string', () => {
     expect(getFragments('')).to.deep.equal([]);
   });
