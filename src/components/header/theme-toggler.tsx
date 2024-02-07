@@ -5,13 +5,16 @@ import {
   ToggleOn as ToggleOnIcon,
 } from '@mui/icons-material';
 import { ButtonGroup, Stack } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import UserPreference from '../../models/user-preference';
 import { displayName } from '../../utils';
 import namespace from './namespace';
+import { atom, useRecoilState } from 'recoil';
+import { useSnackbars } from '../snackbars';
 
 const ThemeToggler = () => {
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useRecoilState(headerThemeTogglerThemeState);
+  const { setSnack } = useSnackbars();
 
   useEffect(() => {
     (async () => {
@@ -27,7 +30,9 @@ const ThemeToggler = () => {
     }
     setTheme(newTheme);
     if (!skipSave) {
+      setSnack('warning', 'Saving theme preference...');
       await UserPreference.setTheme(newTheme);
+      setSnack('success', 'Theme preference saved.');
     }
   };
 
@@ -43,5 +48,10 @@ const ThemeToggler = () => {
 };
 
 ThemeToggler.displayName = displayName(namespace('ThemeToggler'));
+
+const headerThemeTogglerThemeState = atom({
+  key: `${ThemeToggler.displayName}--theme`,
+  default: 'dark',
+});
 
 export { ThemeToggler };
