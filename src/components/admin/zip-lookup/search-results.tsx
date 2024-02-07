@@ -14,7 +14,7 @@ const columns: GridColDef[] = [
     flex: 4,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     renderCell: (params: GridRenderCellParams<any, string[]>) => (
-      <AdminZipLookupNeighborhoodCell value={params.value} save={params.row.save} />
+      <AdminZipLookupNeighborhoodCell id={params.row.id} value={params.value} save={params.row.save} />
     ),
   },
 ];

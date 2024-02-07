@@ -22,6 +22,7 @@ const MLSPinImporter = () => {
   return (
     <MainPanel className="dano--importer" title="Data importer">
       <AdminGenericImporterForm
+        id={MLSPinImporter.displayName}
         className="dano--importer--form"
         saveContent={saveContent}
         placeholder="Paste in the output from the bookmarklet."
