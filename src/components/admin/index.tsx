@@ -1,6 +1,6 @@
 import { Dataset as DatasetIcon, ImportExport as ImportExportIcon, Map as MapIcon } from '@mui/icons-material';
 import { Box, Stack, Tab, Tabs, Typography } from '@mui/material';
-import { useState, SyntheticEvent } from 'react';
+import { SyntheticEvent } from 'react';
 
 import { AdminBackups } from './backups';
 import { MLSPinImporter } from './mlspin-importer';
@@ -9,9 +9,10 @@ import { a11yProps } from '../main/utils';
 import { TabPanel } from '../tab-panel';
 import { displayName } from '../../utils';
 import namespace from './namespace';
+import { atom, useRecoilState } from 'recoil';
 
 const MLSPinAdmin = () => {
-  const [tabId, setTabId] = useState('zip');
+  const [tabId, setTabId] = useRecoilState(adminTabIdState);
 
   const changeTab = (event: SyntheticEvent, newTabId: string) => setTabId(newTabId);
 
@@ -45,5 +46,10 @@ const MLSPinAdmin = () => {
 };
 
 MLSPinAdmin.displayName = displayName(namespace('MLSPinAdmin'));
+
+const adminTabIdState = atom({
+  key: `${MLSPinAdmin.displayName}--tabId`,
+  default: 'zip',
+});
 
 export { MLSPinAdmin };

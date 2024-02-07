@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Alert } from '@mui/material';
 
 import { searchAgents } from '../../search/search-agents';
@@ -9,9 +8,10 @@ import { AgentsSearchResults } from './search-results';
 import { AgentSearchResultType, AgentSearchType } from '../../search/types';
 import { displayName } from '../../utils';
 import namespace from './namespace';
+import { atom, useRecoilState } from 'recoil';
 
 const MLSPinAgents = () => {
-  const [data, setData] = useState<AgentSearchResultType[] | null>(null);
+  const [data, setData] = useRecoilState(agentsSearchDataState);
 
   const onSubmit = async (criteria: AgentSearchType): Promise<void> => {
     const matches: AgentSearchResultType[] = await searchAgents(criteria);
@@ -43,5 +43,10 @@ const MLSPinAgents = () => {
 };
 
 MLSPinAgents.displayName = displayName(namespace('MLSPinAgents'));
+
+const agentsSearchDataState = atom<AgentSearchResultType[] | null>({
+  key: `${MLSPinAgents.displayName}--data`,
+  default: null,
+});
 
 export { MLSPinAgents };

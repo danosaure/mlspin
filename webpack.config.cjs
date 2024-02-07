@@ -62,6 +62,15 @@ module.exports = {
   },
   optimization: {
     minimize: process.env.NODE_ENV !== 'development',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        }
+      }
+    }
   },
   plugins: [
     new copyWebpackPlugin({
