@@ -1,29 +1,38 @@
 import { Check as CheckIcon, Close as CloseIcon, ModeEdit as ModeEditIcon } from '@mui/icons-material';
 import { Alert, Button, ButtonGroup, Stack, TextField, Typography } from '@mui/material';
 import { ChangeEvent, useState } from 'react';
-import { sortAlpha } from '../../../utils';
+import { displayName, sortAlpha } from '../../../utils';
+import namespace from './namespace';
+import { atom, useRecoilState } from 'recoil';
 
 export type NeighborhoodCellType = {
+  id: string;
   value: string[] | undefined;
   save: (values: string[]) => Promise<void>;
 };
 
-const AdminZipLookupNeighborhoodCell = ({ value, save }: NeighborhoodCellType) => {
+const AdminZipLookupNeighborhoodCell = ({ id, value, save }: NeighborhoodCellType) => {
   const v: string = Array.isArray(value) ? value.sort(sortAlpha).join(', ') : '';
 
-  const [editMode, setEditMode] = useState(false);
+  const [editModes, setEditModes] = useRecoilState(neighborhoodCellEditState);
   const [errorMessage, setErrorMessage] = useState('');
   const [fieldValue, setFieldValue] = useState(v);
   const [preEditValue, setPreEditValue] = useState(v);
 
   const editField = () => {
-    setEditMode(true);
+    setEditModes({
+      ...editModes,
+      [id]: true,
+    });
     setErrorMessage('');
   };
 
   const cancelEdit = () => {
     setFieldValue(preEditValue);
-    setEditMode(false);
+    setEditModes({
+      ...editModes,
+      [id]: false,
+    });
   };
 
   const editValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +58,10 @@ const AdminZipLookupNeighborhoodCell = ({ value, save }: NeighborhoodCellType) =
       const newValue = neighborhoods.join(', ');
       setFieldValue(newValue);
       setPreEditValue(newValue);
-      setEditMode(false);
+      setEditModes({
+        ...editModes,
+        [id]: false,
+      });
     } else {
       setErrorMessage('Cannot be empty');
     }
@@ -64,7 +76,7 @@ const AdminZipLookupNeighborhoodCell = ({ value, save }: NeighborhoodCellType) =
     </>
   );
 
-  if (editMode) {
+  if (editModes[id]) {
     let statusContent = null;
 
     if (errorMessage) {
@@ -109,6 +121,11 @@ const AdminZipLookupNeighborhoodCell = ({ value, save }: NeighborhoodCellType) =
   );
 };
 
-AdminZipLookupNeighborhoodCell.displayName = 'AdminZipLookupNeighborhoodCell';
+AdminZipLookupNeighborhoodCell.displayName = displayName(namespace('AdminZipLookupNeighborhoodCell'));
+
+const neighborhoodCellEditState = atom<Record<string, boolean>>({
+  key: `${AdminZipLookupNeighborhoodCell.displayName}--edit`,
+  default: {},
+});
 
 export { AdminZipLookupNeighborhoodCell };

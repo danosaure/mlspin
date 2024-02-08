@@ -1,15 +1,18 @@
-import { useState, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { Button, Stack, TextField } from '@mui/material';
 import { OfficeSearchType } from '../../../search/types';
+import { displayName } from '../../../utils';
+import namespace from './namespace';
+import { atom, useRecoilState } from 'recoil';
 
 export type OfficesSearchFormProps = {
   onSubmit: ({ name, city, zip }: OfficeSearchType) => void;
 };
 
 const OfficesSearchForm = ({ onSubmit }: OfficesSearchFormProps) => {
-  const [name, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [zip, setZip] = useState('');
+  const [name, setName] = useRecoilState(officesSearchFormNameState);
+  const [city, setCity] = useRecoilState(officesSearchFormCityState);
+  const [zip, setZip] = useRecoilState(officesSearchFormZipState);
 
   const nameChanged = (e: ChangeEvent<HTMLInputElement>) => setName(e.target.value);
   const cityChanged = (e: ChangeEvent<HTMLInputElement>) => setCity(e.target.value);
@@ -45,6 +48,21 @@ const OfficesSearchForm = ({ onSubmit }: OfficesSearchFormProps) => {
   );
 };
 
-OfficesSearchForm.displayName = 'OfficesSearchForm';
+OfficesSearchForm.displayName = displayName(namespace('OfficesSearchForm'));
+
+const officesSearchFormNameState = atom<string>({
+  key: `${OfficesSearchForm.displayName}--name`,
+  default: '',
+});
+
+const officesSearchFormCityState = atom<string>({
+  key: `${OfficesSearchForm.displayName}--city`,
+  default: '',
+});
+
+const officesSearchFormZipState = atom<string>({
+  key: `${OfficesSearchForm.displayName}--zip`,
+  default: '',
+});
 
 export { OfficesSearchForm };

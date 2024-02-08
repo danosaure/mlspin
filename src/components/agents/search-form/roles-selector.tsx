@@ -2,6 +2,8 @@ import { FormControl, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeE
 import { Theme, useTheme } from '@mui/material/styles';
 import classnames from 'classnames';
 import { AgentSearchRolesType } from '../../../search/types';
+import { displayName } from '../../../utils';
+import namespace from './namespace';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -63,6 +65,6 @@ const AgentsSearchFormRolesSelector = ({ className, roles, rolesChanged }: Roles
   );
 };
 
-AgentsSearchFormRolesSelector.displayName = 'AgentsSearchFormRolesSelector';
+AgentsSearchFormRolesSelector.displayName = displayName(namespace('AgentsSearchFormRolesSelector'));
 
 export { AgentsSearchFormRolesSelector };

@@ -1,6 +1,8 @@
 import { styled } from '@mui/material';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
-export default styled('input')({
+const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
   clipPath: 'inset(50%)',
   height: 1,
@@ -11,3 +13,7 @@ export default styled('input')({
   whiteSpace: 'nowrap',
   width: 1,
 });
+
+VisuallyHiddenInput.displayName = displayName(namespace('VisuallyHiddenInput'));
+
+export { VisuallyHiddenInput };

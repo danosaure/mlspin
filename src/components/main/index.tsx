@@ -1,4 +1,4 @@
-import { useState, SyntheticEvent } from 'react';
+import { SyntheticEvent } from 'react';
 import { AdminPanelSettings as AdminPanelSettingsIcon, Business as BusinessIcon, Person as PersonIcon } from '@mui/icons-material';
 import { Box, Tab, Tabs } from '@mui/material';
 
@@ -8,9 +8,12 @@ import { Offices } from '../offices';
 import { TabPanel } from '../tab-panel';
 
 import { a11yProps } from './utils';
+import { displayName } from '../../utils';
+import namespace from './namespace';
+import { atom, useRecoilState } from 'recoil';
 
 const MLSPinMain = () => {
-  const [tabId, setTabId] = useState('agents');
+  const [tabId, setTabId] = useRecoilState(mainTabIdState);
 
   const changeTab = (event: SyntheticEvent, newTabId: string) => setTabId(newTabId);
 
@@ -38,6 +41,11 @@ const MLSPinMain = () => {
   );
 };
 
-MLSPinMain.displayName = 'MLSPinMain';
+MLSPinMain.displayName = displayName(namespace('MLSPinMain'));
+
+const mainTabIdState = atom({
+  key: `${MLSPinMain.displayName}--tabId`,
+  default: 'agents',
+});
 
 export { MLSPinMain };

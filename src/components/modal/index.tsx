@@ -1,6 +1,8 @@
 import classnames from 'classnames';
 import { ReactNode } from 'react';
 import { Box, Modal, Typography } from '@mui/material';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 export type MLSPinModalProps = {
   open: boolean;
@@ -31,6 +33,6 @@ const MLSPinModal = ({ className, open, title, onClose, wide, tall, big, childre
   );
 };
 
-MLSPinModal.displayName = 'MLSPinModal';
+MLSPinModal.displayName = displayName(namespace('MLSPinModal'));
 
 export { MLSPinModal };

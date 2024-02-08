@@ -1,7 +1,9 @@
 import { importMLS } from '../../import';
+import { displayName } from '../../utils';
 import { MainPanel } from '../main-panel';
 import { useSnackbars } from '../snackbars';
 import { AdminGenericImporterForm } from './generic-importer-form';
+import namespace from './namespace';
 
 const MLSPinImporter = () => {
   const { setSnack } = useSnackbars();
@@ -20,6 +22,7 @@ const MLSPinImporter = () => {
   return (
     <MainPanel className="dano--importer" title="Data importer">
       <AdminGenericImporterForm
+        id={MLSPinImporter.displayName}
         className="dano--importer--form"
         saveContent={saveContent}
         placeholder="Paste in the output from the bookmarklet."
@@ -28,6 +31,6 @@ const MLSPinImporter = () => {
   );
 };
 
-MLSPinImporter.displayName = 'MLSPinImporter';
+MLSPinImporter.displayName = displayName(namespace('MLSPinImporter'));
 
 export { MLSPinImporter };

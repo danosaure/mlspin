@@ -12,9 +12,10 @@ const assets3rdToCopy = [
   ['@mui/material/umd', 'material-ui.production.min.js'],
   ['react/umd', 'react.production.min.js'],
   ['react-dom/umd', 'react-dom.production.min.js'],
-].map(([context, from]) => ({
+  ['recoil/umd', 'index.min.js', 'recoil.min.js'],
+].map(([context, from, toName]) => ({
   from,
-  to: path.join(assets3rdDest),
+  to: path.join(assets3rdDest, toName || from),
   context: path.join(nodeModulesSrc, context),
 }));
 
@@ -34,6 +35,7 @@ module.exports = {
     react: 'React',
     'react-dom': 'ReactDOM',
     '@mui/material': 'MaterialUI',
+    recoil: 'Recoil',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -60,6 +62,15 @@ module.exports = {
   },
   optimization: {
     minimize: process.env.NODE_ENV !== 'development',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        }
+      }
+    }
   },
   plugins: [
     new copyWebpackPlugin({

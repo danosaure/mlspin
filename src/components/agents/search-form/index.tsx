@@ -1,19 +1,22 @@
 import { Button, SelectChangeEvent, Stack, TextField } from '@mui/material';
-import { useState, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 
 import { AgentsSearchFormRolesSelector } from './roles-selector';
 import { AgentSearchRolesType, AgentSearchType } from '../../../search/types';
+import { atom, useRecoilState } from 'recoil';
+import { displayName } from '../../../utils';
+import namespace from './namespace';
 
 export type AgentsSearchFormProps = {
   onSubmit: (criteria: AgentSearchType) => void;
 };
 
 const AgentsSearchForm = ({ onSubmit }: AgentsSearchFormProps) => {
-  const [name, setName] = useState('');
-  const [office, setOffice] = useState('');
-  const [city, setCity] = useState('');
-  const [zip, setZip] = useState('');
-  const [roles, setRoles] = useState<AgentSearchRolesType[]>([]);
+  const [name, setName] = useRecoilState(agentsSearchFormNameState);
+  const [office, setOffice] = useRecoilState(agentsSearchFormOfficeState);
+  const [city, setCity] = useRecoilState(agentsSearchFormCityState);
+  const [zip, setZip] = useRecoilState(agentsSearchFormZipState);
+  const [roles, setRoles] = useRecoilState(agentsSearchFormRolesState);
 
   const rolesChanged = ({ target: { value } }: SelectChangeEvent<typeof roles>) =>
     setRoles((typeof value === 'string' ? value.split(',') : value) as AgentSearchRolesType[]);
@@ -60,6 +63,31 @@ const AgentsSearchForm = ({ onSubmit }: AgentsSearchFormProps) => {
   );
 };
 
-AgentsSearchForm.displayName = 'AgentsSearchForm';
+AgentsSearchForm.displayName = displayName(namespace('AgentsSearchForm'));
+
+const agentsSearchFormNameState = atom({
+  key: `${AgentsSearchForm.displayName}--name`,
+  default: '',
+});
+
+const agentsSearchFormOfficeState = atom({
+  key: `${AgentsSearchForm.displayName}--office`,
+  default: '',
+});
+
+const agentsSearchFormCityState = atom({
+  key: `${AgentsSearchForm.displayName}--city`,
+  default: '',
+});
+
+const agentsSearchFormZipState = atom({
+  key: `${AgentsSearchForm.displayName}--zip`,
+  default: '',
+});
+
+const agentsSearchFormRolesState = atom({
+  key: `${AgentsSearchForm.displayName}--roles`,
+  default: [] as AgentSearchRolesType[],
+});
 
 export { AgentsSearchForm };

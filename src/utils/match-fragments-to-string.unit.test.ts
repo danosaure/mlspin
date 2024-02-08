@@ -1,8 +1,10 @@
 import { expect } from 'chai';
+import path from 'path';
 
+import namespace from './namespace';
 import { matchFragmentsToString } from './match-fragments-to-string';
 
-describe(__filename, () => {
+describe(namespace(path.basename(__filename)), () => {
   it('matches when no fragments', () => {
     expect(matchFragmentsToString('', [])).to.be.true();
     expect(matchFragmentsToString('foo', [])).to.be.true();

@@ -1,6 +1,8 @@
 import { Alert, Snackbar, Stack } from '@mui/material';
 import { MLSPinSnackbarsType } from './types';
 import classnames from 'classnames';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 export interface SnackbarsProps {
   className?: string;
@@ -29,6 +31,6 @@ const Snackbars = ({ className, snackbarClosed, snack }: SnackbarsProps) => {
   ) : null;
 };
 
-Snackbars.displayName = 'Snackbars';
+Snackbars.displayName = displayName(namespace('Snackbars'));
 
 export { Snackbars };

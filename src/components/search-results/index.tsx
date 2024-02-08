@@ -1,5 +1,7 @@
 import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid';
 import { Box } from '@mui/material';
+import { displayName } from '../../utils';
+import namespace from './namespace';
 
 export interface SearchResultsProps {
   className?: string;
@@ -30,6 +32,6 @@ const SearchResults = ({ className, columns, rows }: SearchResultsProps) => (
   </Box>
 );
 
-SearchResults.displayName = 'SearchResults';
+SearchResults.displayName = displayName(namespace('SearchResults'));
 
 export { SearchResults };

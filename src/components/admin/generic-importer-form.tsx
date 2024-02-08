@@ -1,26 +1,36 @@
 import { Button, Stack, TextField } from '@mui/material';
 import classnames from 'classnames';
-import { useState, ChangeEventHandler } from 'react';
+import { ChangeEventHandler } from 'react';
+import { displayName } from '../../utils';
+import namespace from './namespace';
+import { atom, useRecoilState } from 'recoil';
 
 export type GenericImporterFormProps = {
+  id: string;
   className?: string;
   disabled?: boolean;
   placeholder?: string;
   saveContent: (content: string) => Promise<void>;
 };
 
-const AdminGenericImporterForm = ({ className, disabled, placeholder, saveContent }: GenericImporterFormProps) => {
-  const [content, setContent] = useState('');
+const AdminGenericImporterForm = ({ id, className, disabled, placeholder, saveContent }: GenericImporterFormProps) => {
+  const [contents, setContents] = useRecoilState(genericImporterFormState);
 
   const contentChanged: ChangeEventHandler<HTMLInputElement> = (event) => {
-    setContent(event.target.value || '');
+    setContents({
+      ...contents,
+      [id]: event.target.value || '',
+    });
   };
 
   const clearContent = () => {
-    setContent('');
+    setContents({
+      ...contents,
+      [id]: '',
+    });
   };
 
-  const importContent = () => saveContent(content);
+  const importContent = () => saveContent(contents[id]);
 
   const classNames = classnames('dano--generic-importer-form', {
     [className || '']: className,
@@ -35,16 +45,16 @@ const AdminGenericImporterForm = ({ className, disabled, placeholder, saveConten
         rows={10}
         fullWidth
         onChange={contentChanged}
-        value={content}
+        value={contents[id]}
         placeholder={placeholder}
         disabled={disabled}
       />
 
       <Stack className="dano-importer-buttons" spacing={2} direction="row">
-        <Button onClick={importContent} disabled={!content || disabled} variant="contained">
+        <Button onClick={importContent} disabled={!contents[id] || disabled} variant="contained">
           Import
         </Button>
-        <Button onClick={clearContent} disabled={!content || disabled} variant="outlined">
+        <Button onClick={clearContent} disabled={!contents[id] || disabled} variant="outlined">
           Clear
         </Button>
       </Stack>
@@ -52,6 +62,11 @@ const AdminGenericImporterForm = ({ className, disabled, placeholder, saveConten
   );
 };
 
-AdminGenericImporterForm.displayName = 'AdminGenericImporterForm';
+AdminGenericImporterForm.displayName = displayName(namespace('AdminGenericImporterForm'));
+
+const genericImporterFormState = atom<Record<string, string>>({
+  key: `${AdminGenericImporterForm.displayName}--content`,
+  default: {},
+});
 
 export { AdminGenericImporterForm };

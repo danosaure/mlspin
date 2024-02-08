@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Alert, CircularProgress, Stack, Typography } from '@mui/material';
 
 import { AdminZipLookupSearchResults, ZipLookupSearchResultsType } from './search-results';
@@ -6,9 +6,12 @@ import { MainPanel } from '../../main-panel';
 import ZipLookup from '../../../models/zip-lookup';
 import { ZipLookupType } from '../../../models/types';
 import { searchZipLookup } from '../../../search/search-zip-lookups';
+import { displayName } from '../../../utils';
+import namespace from './namespace';
+import { atom, useRecoilState } from 'recoil';
 
 const AdminZipLookup = () => {
-  const [data, setData] = useState<Record<string, ZipLookupType>>({});
+  const [data, setData] = useRecoilState(zipLookupDataState);
 
   const save = async (id: string, neighborhoods: string[]) => {
     await ZipLookup.updateNeighborhoods(id, neighborhoods);
@@ -54,6 +57,11 @@ const AdminZipLookup = () => {
   );
 };
 
-AdminZipLookup.displayName = 'AdminZipLookup';
+AdminZipLookup.displayName = displayName(namespace('AdminZipLookup'));
+
+const zipLookupDataState = atom({
+  key: `${AdminZipLookup.displayName}--data`,
+  default: {} as Record<string, ZipLookupType>,
+});
 
 export { AdminZipLookup };

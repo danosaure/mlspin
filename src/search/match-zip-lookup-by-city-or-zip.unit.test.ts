@@ -1,9 +1,12 @@
 import { expect } from 'chai';
+import path from 'path';
+
+import namespace from './namespace';
 
 import { ZipLookupType } from '../models/types';
 import { matchZipLookupByCityOrZip } from './match-zip-lookup-by-city-or-zip';
 
-describe(__filename, () => {
+describe(namespace(path.basename(__filename)), () => {
   const ZIP_LOOKUP: ZipLookupType = { id: '90210', city: 'Some City', neighborhoods: ['Some', 'Neighborhood'] };
 
   it('matches when no criteria', () => {
