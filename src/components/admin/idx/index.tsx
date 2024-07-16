@@ -16,6 +16,13 @@ const AdminIDX = () => {
     setSnack('success', 'IDX file uploaded');
   };
 
+  const onReferenceTableLoaded = async (result: UploadedIDXFileType) => {
+    setSnack('warning', 'Loading Reference Table...');
+    // TODO Import data of file.
+    console.log('idx file=', result);
+    setSnack('success', 'Reference Table uploaded');
+  };
+
   return (
     <TableContainer>
       <Table>
@@ -24,6 +31,18 @@ const AdminIDX = () => {
             <TableCell size="small">Internet Data Exchange files</TableCell>
             <TableCell>
               <IDXFileUploaderButton label="Upload IDX file" onloadend={onIDXFileLoaded} />
+            </TableCell>
+          </TableRow>
+
+          <TableRow>
+            <TableCell size="small">
+              <div>Reference Tables:</div>
+              <div>Counties: DATE</div>
+              <div>Towns: DATE</div>
+              <div>Areas: DATE</div>
+            </TableCell>
+            <TableCell>
+              <IDXFileUploaderButton label="Upload Reference Table" onloadend={onReferenceTableLoaded} />
             </TableCell>
           </TableRow>
         </TableBody>
