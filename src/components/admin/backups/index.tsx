@@ -23,7 +23,7 @@ const AdminBackups = () => {
     setSnack('warning', 'Loading backup file to restore...');
     const persistence = new Persistence();
     await persistence.restoreBackup(result);
-    setSnack('succes', 'Backup file restored.');
+    setSnack('success', 'Backup file restored.');
   };
 
   const onerror = (message: string) => {
