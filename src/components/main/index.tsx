@@ -12,8 +12,8 @@ import { a11yProps } from './utils';
 import { countersState } from '../../states';
 import { displayName } from '../../utils';
 import namespace from './namespace';
-import countTotalAgents from './count-total-agents';
-import countTotalOffices from './count-total-offices';
+import { countTotalAgents } from './count-total-agents';
+import { countTotalOffices } from './count-total-offices';
 
 const MLSPinMain = () => {
   const [tabId, setTabId] = useRecoilState(mainTabIdState);

@@ -15,4 +15,4 @@ const countTotalOffices = async (): Promise<number> => {
   return count;
 };
 
-export default countTotalOffices;
+export { countTotalOffices };
