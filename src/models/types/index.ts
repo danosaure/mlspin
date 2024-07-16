@@ -13,6 +13,7 @@ export { PersistenceBaseType } from './persistence-base-type';
 export { PersistenceHistoryActionType } from './persistence-history-action-type';
 export { PersistenceHistoryJsonType } from './persistence-history-json-type';
 export { PersistenceHistoryType } from './persistence-history-type';
+export { UploadedFileType } from './uploaded-file-type';
 export { UserPreferenceType } from './user-preference-type';
 export { USPSType } from './usps-type';
 export { ZipLookupJsonType } from './zip-lookup-json-type';

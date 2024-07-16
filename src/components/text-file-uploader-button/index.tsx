@@ -1,9 +1,11 @@
 import { Button } from '@mui/material';
 import classnames from 'classnames';
 import { ChangeEvent, ChangeEventHandler } from 'react';
-import { VisuallyHiddenInput } from './visually-hidden-input';
-import { displayName } from '../../utils';
+
 import namespace from './namespace';
+import { VisuallyHiddenInput } from './visually-hidden-input';
+import { logUploadedFile } from '../../import';
+import { displayName } from '../../utils';
 
 export type FileUploadMimeType = 'application/json' | 'text/plain';
 
@@ -63,6 +65,9 @@ const TextFileUploaderButton = ({
 
       fileReader.onloadend = async () => {
         const content: string = fileReader.result as string;
+
+        await logUploadedFile(file.name, file.size, file.type);
+
         await onloadend({
           lastModified: file.lastModified,
           name: file.name,
