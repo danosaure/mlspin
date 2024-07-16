@@ -8,7 +8,7 @@ const cleanValue = (s: string) => (MATCHING_QUOTES.test(s) ? s.substring(1, s.le
 export const parseCSV = (content: string, separator?: string): CSVParsedType[] => {
   const results: CSVParsedType[] = [];
 
-  const lines = content.trim().split('\n');
+  const lines = content.trim().replace(/\r\n/, '\n').split('\n');
 
   if (lines.length > 1) {
     const headers = lines[0].split(separator || SEPARATOR);

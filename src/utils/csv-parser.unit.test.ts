@@ -12,6 +12,16 @@ describe(namespace(path.basename(__filename)), () => {
     expect(parsed).to.deep.equal([]);
   });
 
+  it('handles \\r\\n line separator', () => {
+    const parsed = parseCSV('H1;H2\r\nv1;v2\r\n');
+    expect(parsed).to.deep.equal([
+      {
+        H1: 'v1',
+        H2: 'v2',
+      },
+    ]);
+  });
+
   describe('No separator params', () => {
     it('Basic use', () => {
       const parsed: CSVParsedType[] = parseCSV('H1;H2\nv1;v2');
@@ -61,7 +71,7 @@ describe(namespace(path.basename(__filename)), () => {
       expect(parsed).to.deep.equal([
         {
           H1: 'v1;v2',
-          H2: '',
+          H2: undefined,
         },
       ]);
     });
