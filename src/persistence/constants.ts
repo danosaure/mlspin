@@ -1,2 +1,2 @@
 export const DB_NAME = 'dano-mlspin';
-export const DB_VERSION = 11;
+export const DB_VERSION = 12;
