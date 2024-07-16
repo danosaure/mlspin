@@ -6,7 +6,7 @@ import { useSnackbars } from '../../snackbars';
 import { displayName } from '../../../utils';
 import { IDXFileUploaderButton } from '../../idx-file-uploader-button';
 import type { UploadedIDXFileType } from '../../idx-file-uploader-button';
-import { importIDXReference } from '../../../import/idx';
+import { importIDXListings, importIDXReference } from '../../../import/idx';
 import { useRecoilState } from 'recoil';
 import { lastUploadedByFilenameState } from '../../../states';
 import { useEffect } from 'react';
@@ -27,15 +27,49 @@ const AdminIDX = () => {
 
   const onIDXFileLoaded = async (result: UploadedIDXFileType) => {
     setSnack('warning', 'Loading IDX file...');
-    // TODO Import data of file.
-    console.log('idx file=', result);
+    await importIDXListings(result.name, result.content);
     setSnack('success', 'IDX file uploaded');
+
+    switch (result.name) {
+      case 'idx_sf.txt':
+        setUploadedSFDate('');
+        break;
+      case 'idx_cc.txt':
+        setUploadedCCDate('');
+        break;
+      case 'idx_sf_sld.txt':
+        setUploadedSFSoldDate('');
+        break;
+      case 'idx_cc_sld.txt':
+        setUploadedCCSoldDate('');
+        break;
+      default:
+        break;
+    }
   };
 
   const onReferenceTableLoaded = async (result: UploadedIDXFileType) => {
     setSnack('warning', 'Loading Reference Table...');
     await importIDXReference(result.name, result.content);
     setSnack('success', 'Reference Table uploaded');
+
+    switch (result.name) {
+      case 'counties.txt':
+        setUploadedCountiesDate('');
+        break;
+      case 'areas.txt':
+        console.log("setUploadedAreasDate('')");
+        setUploadedAreasDate('');
+        break;
+      case 'towns.txt':
+        setUploadedTownsDate('');
+        break;
+      case 'field_reference.txt':
+        setUploadedFieldReferenceDate('');
+        break;
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
@@ -94,8 +128,8 @@ const AdminIDX = () => {
               <div>Reference Tables:</div>
               <ul>
                 <li>Counties: {uploadedCountiesDate}</li>
-                <li>Towns: {uploadedAreasDate}</li>
-                <li>Areas: {uploadedTownsDate}</li>
+                <li>Towns: {uploadedTownsDate}</li>
+                <li>Areas: {uploadedAreasDate}</li>
                 <li>Field Reference: {uploadedFieldReferenceDate}</li>
               </ul>
             </TableCell>

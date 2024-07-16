@@ -1,5 +1,6 @@
 export { default as Agent } from './agent';
 export { IDXFieldReference } from './idx-field-reference';
+export { IDXListing } from './idx-listing';
 export { IDXReferenceArea } from './idx-reference-area';
 export { IDXReferenceCounty } from './idx-reference-county';
 export { IDXReferenceTown } from './idx-reference-town';
