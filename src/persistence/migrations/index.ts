@@ -8,6 +8,7 @@ import migration007 from './007-idx-reference-tables';
 import migration008 from './008-update-idx-field-reference-index';
 import migration009 from './009-update-idx-field-reference-index';
 import migration010 from './010-update-idx-field-reference-pk';
+import migration011 from './011-adding-file-upload-log';
 import MigrationType from './migration-type';
 
 const migrations: Record<string, MigrationType> = {
@@ -21,6 +22,7 @@ const migrations: Record<string, MigrationType> = {
   8: migration008,
   9: migration009,
   10: migration010,
+  11: migration011,
 };
 
 export default migrations;
