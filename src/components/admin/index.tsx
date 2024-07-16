@@ -8,6 +8,7 @@ import { Box, Stack, Tab, Tabs, Typography } from '@mui/material';
 import { SyntheticEvent } from 'react';
 
 import { AdminBackups } from './backups';
+import { AdminIDX } from './idx';
 import { MLSPinImporter } from './mlspin-importer';
 import { AdminZipLookup } from './zip-lookup';
 import { a11yProps } from '../main/utils';
@@ -45,7 +46,7 @@ const MLSPinAdmin = () => {
       </TabPanel>
 
       <TabPanel tabId="idx" selectedTabId={tabId}>
-        TODO...
+        <AdminIDX />
       </TabPanel>
 
       <TabPanel tabId="backups" selectedTabId={tabId}>
