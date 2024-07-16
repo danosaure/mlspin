@@ -5,6 +5,7 @@ import { useSnackbars } from '../../snackbars';
 import { displayName } from '../../../utils';
 import { IDXFileUploaderButton } from '../../idx-file-uploader-button';
 import type { UploadedIDXFileType } from '../../idx-file-uploader-button';
+import { importIDXReference } from '../../../import/idx';
 
 const AdminIDX = () => {
   const { setSnack } = useSnackbars();
@@ -18,8 +19,7 @@ const AdminIDX = () => {
 
   const onReferenceTableLoaded = async (result: UploadedIDXFileType) => {
     setSnack('warning', 'Loading Reference Table...');
-    // TODO Import data of file.
-    console.log('idx file=', result);
+    await importIDXReference(result.name, result.content);
     setSnack('success', 'Reference Table uploaded');
   };
 

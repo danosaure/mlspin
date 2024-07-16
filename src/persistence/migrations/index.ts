@@ -6,6 +6,8 @@ import migration005 from './005-adding-agent-office-role';
 import migration006 from './006-deprecated-indices';
 import migration007 from './007-idx-reference-tables';
 import migration008 from './008-update-idx-field-reference-index';
+import migration009 from './009-update-idx-field-reference-index';
+import migration010 from './010-update-idx-field-reference-pk';
 import MigrationType from './migration-type';
 
 const migrations: Record<string, MigrationType> = {
@@ -17,6 +19,8 @@ const migrations: Record<string, MigrationType> = {
   6: migration006,
   7: migration007,
   8: migration008,
+  9: migration009,
+  10: migration010,
 };
 
 export default migrations;
