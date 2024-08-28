@@ -7,7 +7,7 @@ const importIDXListings = async (filename: string, content: CSVParsedType[]): Pr
   const persistence = new Persistence();
   await persistence.open();
   const transaction = await persistence.transaction([IDXListing.STORE], 'readwrite');
-  const objectStore = transaction.stores[IDXListing.STORE];
+  const objectStore: IDBObjectStore = transaction.stores[IDXListing.STORE];
 
   // TODO: Remove old data
 

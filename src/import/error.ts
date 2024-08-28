@@ -6,3 +6,5 @@ export default class MLSPinImportError extends MLSPinError {
     this.name = 'MLSPinImportError';
   }
 }
+
+export { MLSPinImportError };
